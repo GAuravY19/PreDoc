@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% if title %}
+            <title>{{ title }}</title>
+        {% else %}
+            <title> Welcome to Predoc </title>
+        {% endif %}
+
+        <link rel='stylesheet' href={{url_for('static', filename='layout.css')}}>
+        <!--<link rel='stylesheet' href={{url_for('static', filename='home.css')}}>-->
+        <link rel='stylesheet' href={{url_for('static', filename='register.css')}}>
+        <!--<link rel='stylesheet' href={{url_for('static', filename='login.css')}}>-->
+        <!--<link rel='stylesheet' href={{url_for('static', filename='profile.css')}}>-->
+        <!--<link rel='stylesheet' href={{url_for('static', filename='edit.css')}}>-->
+
+    </head>
+    <body>
+        <!-- Navbar starts -->
+        <nav class="nav-color nav-box nav-flex">
+            <div class="nav-div-head nav-flex">
+                    <img class="nav-img" src={{url_for('static', filename='logo/brand_logo.png')}}>
+                    <p class="nav-title"> Predoc </p>
+            </div>
+
+            <div class="nav-sections">
+                <a href={{url_for('home')}} class="nav-sections-text"> Home </a>
+                <a href="#" class="nav-sections-text"> Generate Report </a>
+                <a href="#" class="nav-sections-text"> Downloads </a>
+            </div>
+
+            <div class="nav-endsection">
+                <span class="button-white"><a class="button-white-text" href={{url_for('login')}} class=""> Sign In </a></span>
+                <button class="button-black"><a class="button-black-text" href={{url_for('register')}} class=""> Register </a></button>
+            </div>
+        </nav>
+
+        <!-- Navbar ends -->
+
+        <!-- {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %} -->
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="about-me">
+            <div class="name">
+                <p class="text-name">Gaurav Yadav</p>
+            </div>
+            <div class="email">
+                <a class="text-name-s" href="">Email</a>
+            </div>
+            <div class="linkedin">
+                <a class="text-name-s" href="">Linkedin</a>
+            </div>
+            <div class="github">
+                <a class="text-name-s" href="">Github</a>
+            </div>
+            <div class="instagram">
+                <a class="text-name-s" href="">Instagram</a>
+            </div>
+        </footer>
+
+
+    </body>
+</html>
