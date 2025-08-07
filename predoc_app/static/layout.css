@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@400..800&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(235, 234, 234);
+}
+
+.nav-color{
+    background-color: white;
+    border: 0 0 5px 0 solid white;
+}
+
+.nav-box{
+    height: 60px;
+    position: relative;
+}
+
+.nav-div-head{
+    height: 40px;
+    position: relative;
+    padding: 10px 0 0 30px;
+}
+
+.nav-img{
+    height: 40px;
+    width: 40px;
+    /* border-radius: 20px; */
+}
+
+
+.nav-title{
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    color: rgb(17, 56, 89);
+    padding-left: 3%;
+    padding-top: 3%;
+
+}
+
+.nav-flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-sections{
+    height: 40px;
+    width: 380px;
+    justify-content: space-evenly;
+    padding-top: 2.1%;
+    padding-left: 1%;
+}
+
+.nav-sections-text{
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 15px;
+    color: black;
+    padding-left: 3%;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+.nav-endsection{
+    height: 40px;
+    width: 200px;
+    justify-content: space-evenly;
+    padding-top: 10px;
+    margin-left: 35%;
+}
+
+.button-white{
+    height: 40px;
+    width: 70px;
+    background-color: white;
+    padding-right: 3%;
+}
+
+.button-white-text{
+    color: black;
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 16.5px;
+    font-style: normal;
+}
+
+.button-black{
+    height: 40px;
+    width: 90px;
+    border-radius: 10px;
+    background-color: black;
+    border: 3px solid white;
+}
+
+.button-black-text{
+    color: white;
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 18px;
+    font-style: normal;
+}
+
+.about-me{
+    background-color: black;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+}
+
+.text-name-s{
+    color: white;
+    font-family: "Tinos";
+    font-size: 18px;
+}
+
+.name{
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.email{
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.linkedin{
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.github{
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.instagram{
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.text-name{
+    color: white;
+    font-family: "Tinos";
+    font-size: 30px;
+}
+
+footer{
+    margin-top: auto;
+}
