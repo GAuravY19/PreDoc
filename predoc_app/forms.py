@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField, PasswordField, SubmitField, BooleanField
+from wtforms import IntegerField, StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TextAreaField, SelectMultipleField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
 class RegistrationForm(FlaskForm):
@@ -15,7 +15,54 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    email = StringField("Email: ",
+                        validators=[DataRequired(), Email()])
+    password = PasswordField("Password: ",
+                             validators=[DataRequired(), Length(min=10)])
+    submit = SubmitField('Login')
+
+
+class PersonalDetailsForm(FlaskForm):
+    heights = ['3ft 0in', '3ft 1in', '3ft 2in', '3ft 3in', '3ft 4in', '3ft 5in', '3ft 6in', '3ft 7in',
+               '3ft 8in', '3ft 9in', '3ft 10in', '3ft 11in', '4ft 0in', '4ft 1in', '4ft 2in',
+               '4ft 3in', '4ft 4in', '4ft 5in', '4ft 6in', '4ft 7in', '4ft 8in', '4ft 9in', '4ft 10in',
+               '4ft 11in', '5ft 0in', '5ft 1in', '5ft 2in', '5ft 3in', '5ft 4in', '5ft 5in',
+               '5ft 6in', '5ft 7in', '5ft 8in', '5ft 9in', '5ft 10in', '5ft 11in', '6ft 0in', '6ft 1in',
+               '6ft 2in', '6ft 3in', '6ft 4in', '6ft 5in', '6ft 6in', '6ft 7in', '6ft 8in',
+               '6ft 9in', '6ft 10in', '6ft 11in', '7ft 0in', '7ft 1in', '7ft 2in', '7ft 3in', '7ft 4in',
+               '7ft 5in', '7ft 6in', '7ft 7in', '7ft 8in', '7ft 9in', '7ft 10in', '7ft 11in']
+
+    full_name = StringField("Full Name: ",
+                            validators=[DataRequired()])
+    dob = DateField("Date of Birth: ", format='%Y-%m-%d',
+                    validators=[DataRequired()])
+    gender = StringField("Gender: ",
+                         validators=[DataRequired()])
+    contact_number = StringField("Contact Number: ",
+                                 validators=[DataRequired(), Length(min=10,max=10)])
+    address = TextAreaField('Address: ',
+                            validators=[DataRequired()])
+    blood_group = StringField('Blood Group: ',
+                              validators=[DataRequired()])
+    height = SelectField('Height: ', choices=heights,
+                         validators=[DataRequired()])
+    weight = IntegerField("Weight (in Kg): ",
+                          validators=[DataRequired()])
+
+
+class LifestyleForm(FlaskForm):
     pass
 
-class DetailsForm(FlaskForm):
+
+class MedicalHistoryForm(FlaskForm):
     pass
+
+
+class AllergiesForm(FlaskForm):
+    pass
+
+
+class CurrentMedicationForm(FlaskForm):
+    pass
+
+
