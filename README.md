@@ -30,8 +30,7 @@ Captures demographic and basic health details.
 - `blood_group`
 - `height_cm`
 - `weight_kg`
-- `bmi (optional)`
-- `emergency_contact`
+- `bmi`
 
 
 #### 3. Lifestyle Table
@@ -44,7 +43,7 @@ Stores day-to-day lifestyle factors that influence health.
 - `exercise_frequency (None/Weekly/Daily)`
 - `sleep_hours`
 - `diet_pattern (Veg/Non-Veg/Vegan/etc.)`
-- `mental_health_status (Normal/Anxious/Depressed/etc.)`
+
 
 
 #### 4. Medical_History Table
@@ -58,6 +57,7 @@ Keeps track of past illnesses, chronic conditions, and surgeries.
 - `epilepsy`
 - `mental_health_conditions (Depression/Anxiety/etc.)`
 - `past_surgeries (text)`
+- `past_surgeries_type (text)`
 - `family_history (text)`
 
 
