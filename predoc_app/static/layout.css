@@ -10,6 +10,10 @@ html{
     height: 100%;
 }
 
+.hamburger{
+    display: none;
+}
+
 body{
     min-height: 100%;
     display: flex;
@@ -84,14 +88,14 @@ a{
     width: 200px;
     justify-content: space-evenly;
     padding-top: 10px;
-    margin-left: 35%;
+    margin-left: 46%;
 }
 
 .button-white{
     height: 40px;
     width: 70px;
     background-color: white;
-    padding-right: 3%;
+    padding-right: 5%;
 }
 
 .button-white-text{
