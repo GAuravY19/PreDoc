@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="login-box">
+    <legend class='legend-text'> Sign In! </legend>
+
+    <div class="signup-options">
+        <button class="google-signup">
+            <img src={{url_for("static", filename = 'images/signupLogo/google.png')}} alt="">
+            <a href="#">Continue with Google</a>
+        </button>
+        <button class="microsoft-signup">
+            <img src={{url_for("static", filename = 'images/signupLogo/microsoft.png')}} alt="">
+            <a href="#">Continue with Microsoft</a>
+        </button>
+    </div>
+
+    <hr class='separator-line'></hr>
+
+    <form method='POST' action="">
+        {{form.hidden_tag() }}
+        <div class="form-element">
+            {{ form.email.label(class='formlabel')}}
+            {{ form.email(class='form-input') }}
+        </div>
+
+        <div class="form-element">
+            {{ form.password.label(class='formlabel') }}
+            {{ form.password(class='form-input') }}
+        </div>
+
+        <div class="form-element-remember">
+            {{ form.remember(class='form-input-checkbox') }}
+            {{ form.remember.label(class='formlabel-remember') }}
+        </div>
+
+        <div class="form-submit">
+            {{ form.submit(class='submit-button') }}
+        </div>
+    </form>
+
+    <div class="need">
+        <p> Don't have account ? <a href={{url_for('register')}}> Sign Up </a></p>
+    </div>
+</div>
+
+{% endblock %}
