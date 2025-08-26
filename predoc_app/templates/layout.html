@@ -8,22 +8,31 @@
         {% endif %}
 
         <link rel='stylesheet' href={{url_for('static', filename='layout.css')}}>
-        <!--<link rel='stylesheet' href={{url_for('static', filename='home.css')}}>-->
-        <link rel='stylesheet' href={{url_for('static', filename='register.css')}}>
-        <!--<link rel='stylesheet' href={{url_for('static', filename='login.css')}}>-->
+        <link rel='stylesheet' href={{url_for('static', filename='layout_resp.css')}}>
+        <link rel='stylesheet' href={{url_for('static', filename='home.css')}}>
+        <link rel='stylesheet' href={{url_for('static', filename=css_file)}}>
+        <link rel='stylesheet' href={{url_for('static', filename=css_file)}}>
         <!--<link rel='stylesheet' href={{url_for('static', filename='profile.css')}}>-->
         <!--<link rel='stylesheet' href={{url_for('static', filename='edit.css')}}>-->
+
+        <script type="text/javascript" src={{url_for('static', filename = 'js/layout.js')}}>
+
+        </script>
 
     </head>
     <body>
         <!-- Navbar starts -->
         <nav class="nav-color nav-box nav-flex">
             <div class="nav-div-head nav-flex">
-                    <img class="nav-img" src={{url_for('static', filename='logo/brand_logo.png')}}>
-                    <p class="nav-title"> Predoc </p>
+                <img class="nav-img" src={{url_for('static', filename='images/logo/brand_logo.png')}}>
+                <p class="nav-title"> Predoc </p>
             </div>
 
-            <div class="nav-sections">
+            <div class='hamburger' >
+                <img onclick="togglemenu()" src={{url_for('static', filename='images/logo/menus.png')}}>
+            </div>
+
+            <div class="nav-sections nav-sections-h">
                 <a href={{url_for('home')}} class="nav-sections-text"> Home </a>
                 <a href="#" class="nav-sections-text"> Generate Report </a>
                 <a href="#" class="nav-sections-text"> Downloads </a>
@@ -38,16 +47,16 @@
         <!-- Navbar ends -->
 
         <!-- {% with messages = get_flashed_messages(with_categories = true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="">
+            {{ message }}
+            </div>
+            {% endfor %}
             {% endif %}
-        {% endwith %} -->
+            {% endwith %} -->
 
-        {% block content %}
+            {% block content %}
         {% endblock %}
 
         <footer class="about-me">
@@ -69,5 +78,7 @@
         </footer>
 
 
+
+
     </body>
-</html>
+    </html>
