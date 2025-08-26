@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.login-box{
+    height: 67vh;
+    width: 55vw;
+    background-color: white;
+    margin-left: 300px;
+    margin-top: 60px;
+    border: 2px solid black;
+    border-radius: 40px;
+}
+
+.form-element-remember{
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    margin-left: 24%;
+    margin-top: -2%;
+}
+
+.formlabel-remember{
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.need p{
+    padding-left: 5%;
+}
+
+.need a{
+    color: blue;
+}
+
+.nav-endsection{
+    display: none;
+}
+
+.register-box{
+    height: 90vh;
+    width: 55vw;
+    background-color: white;
+    margin-left: 300px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border: 2px solid black;
+    border-radius: 40px;
+}
+
+.legend-text{
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    padding-top: 15px;
+    padding-left: 43%;
+}
+
+.signup-options{
+    height: 10vh;
+    width: 20vw;
+    margin-left: 33%;
+    margin-top:3%;
+}
+
+.google-signup{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    width: 250px;
+    border: 2px solid rgb(201, 249, 195);
+    border-radius: 30px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.microsoft-signup{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    width: 250px;
+    border-radius: 30px;
+    border: 2px solid rgb(201, 249, 195);
+    background-color: white;
+}
+
+.google-signup img{
+    padding-right: 10px;
+}
+
+.google-signup a{
+    color: black;
+}
+
+.microsoft-signup a{
+    color: black;
+}
+
+.microsoft-signup img{
+    padding-right: 10px;
+}
+
+.separator-line{
+    margin-top: 6%;
+    width: 70%;
+    border: 2px solid gray;
+    margin-left: 100px;
+}
+
+form{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-element{
+    height: 10vh;
+    width: 30vw;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    margin-left: 170px;
+    margin-bottom: 2%;
+}
+
+.formlabel{
+    font-family: 'Red Hat Display';
+    font-size: 20px;
+    padding: 8px;
+}
+
+.form-input{
+    height: 7vh;
+    min-height: 4vh;
+    width: auto;
+    border-radius: 10px;
+    padding-left: 4px;
+}
+
+.invalid-feedback{
+    color: red;
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.submit-button{
+    height: 50px;
+    width: 120px;
+    border-radius: 10px;
+    /* background-color: black; */
+    color: white;
+    border: 3px solid white;
+    background-color: rgb(72, 234, 72);
+    font-family: 'Red Hat Display';
+    font-size: 20px;
+}
+
+.submit-button:hover{
+    cursor: pointer;
+}
+
+.form-submit{
+    margin-left: 43%;
+    margin-top: 20px;
+}
+
