@@ -46,33 +46,34 @@
 
         <!-- Navbar ends -->
 
-        <!-- {% with messages = get_flashed_messages(with_categories = true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="">
-            {{ message }}
-            </div>
-            {% endfor %}
+        {% with messages = get_flashed_messages(with_categories = true)%}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class='alert'>
+                        <p class={{category}}>{{ message }}</p>
+                    </div>
+                {% endfor %}
             {% endif %}
-            {% endwith %} -->
+        {% endwith %}
 
-            {% block content %}
+
+        {% block content %}
         {% endblock %}
 
         <footer class="about-me">
             <div class="name">
                 <p class="text-name">Gaurav Yadav</p>
             </div>
-            <div class="email">
+            <div class="account">
                 <a class="text-name-s" href="">Email</a>
             </div>
-            <div class="linkedin">
+            <div class="account">
                 <a class="text-name-s" href="">Linkedin</a>
             </div>
-            <div class="github">
+            <div class="account">
                 <a class="text-name-s" href="">Github</a>
             </div>
-            <div class="instagram">
+            <div class="account">
                 <a class="text-name-s" href="">Instagram</a>
             </div>
         </footer>
