@@ -24,21 +24,36 @@ def home():
 def start_home():
     return "<h1> Start Home </h1>"
 
+
+
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
     form = RegistrationForm()
+
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        curr.execute(f'''INSERT INTO users (username, email, password_hash)
-                        VALUES (%s, %s, %s);''', (form.username.data, form.email.data, hashed_pw,))
-        conn.commit()
-        redirect(url_for('login'))
+        flash(f'Account created for {form.username.data}!', 'success')
+
+        return redirect(url_for('login'))
+
     return render_template('register.html', form=form, css_file = 'register.css')
 
-@app.route("/login")
+
+
+@app.route("/login", methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
+
+    if form.validate_on_submit():
+        if form.email.data == 'gaurav@gmail.com' and form.password.data == 'gaurav1234':
+            flash('You have been logged in!', 'success')
+            return redirect('home')
+
+        else:
+            flash('Login unsuccessful! check username and password', 'danger')
     return render_template('login.html', form = form, css_file = 'login.css')
+
+
 
 @app.route('/profile')
 def profile():
