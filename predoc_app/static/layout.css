@@ -141,22 +141,22 @@ a{
     padding-left: 20px;
 }
 
-.email{
+.account{
     padding-top: 30px;
     padding-left: 30px;
 }
 
-.linkedin{
+.account{
     padding-top: 30px;
     padding-left: 30px;
 }
 
-.github{
+.account{
     padding-top: 30px;
     padding-left: 30px;
 }
 
-.instagram{
+.account{
     padding-top: 30px;
     padding-left: 30px;
 }
@@ -169,4 +169,28 @@ a{
 
 footer{
     margin-top: auto;
+}
+
+.alert{
+    width: fit-content;
+    height: 4vh;
+    color: black;
+    background-color: rgb(197, 233, 238);
+    border: 2px solid rgb(89, 182, 228);
+    border-radius: 10px;
+    margin-left: 23%;
+    margin-top: 2%;
+    margin-bottom: -3%;
+}
+
+.alert p {
+    font-size: 17px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+
+}
+
+.danger{
+    color: red;
 }
