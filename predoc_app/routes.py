@@ -1,19 +1,9 @@
-from flask import render_template, flash, redirect, url_for
-from .forms import RegistrationForm, LoginForm
-from dotenv import load_dotenv
-import os
-import psycopg2
-from predoc_app import app, bcrypt
+from flask import render_template, flash, redirect, url_for, request
+from .forms import RegistrationForm, LoginForm, PersonalDetailsForm
+from predoc_app import app, bcrypt, curr, conn, db
+from .model import User
+from flask_login import login_user, current_user, logout_user, login_required
 
-load_dotenv()
-
-conn = psycopg2.connect(host = os.getenv("host"),
-                        dbname = os.getenv('db_name'),
-                        user = os.getenv('user'),
-                        password = os.getenv('password'),
-                        port = os.getenv('port'))
-
-curr = conn.cursor()
 
 @app.route('/')
 @app.route('/home')
@@ -28,11 +18,20 @@ def start_home():
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
     form = RegistrationForm()
 
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        flash(f'Account created for {form.username.data}!', 'success')
+
+        user = User(username = form.username.data,
+                    email = form.email.data, password_hash = hashed_pw)
+
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created. You can now login!', 'success')
 
         return redirect(url_for('login'))
 
@@ -42,23 +41,58 @@ def register():
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
     form = LoginForm()
 
     if form.validate_on_submit():
-        if form.email.data == 'gaurav@gmail.com' and form.password.data == 'gaurav1234':
-            flash('You have been logged in!', 'success')
-            return redirect('home')
+        user = User.query.filter_by(email=form.email.data).first()
+
+        if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+
+            if next_page:
+                return redirect(next_page) if next_page else redirect(url_for('home'))
 
         else:
             flash('Login unsuccessful! check username and password', 'danger')
     return render_template('login.html', form = form, css_file = 'login.css')
 
 
+@app.route('/personal_details')
+@login_required
+def personal_details():
+    form = PersonalDetailsForm()
+
+    return render_template('personal_details.html', form=form)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/profile')
+@login_required
 def profile():
-    return "<h1> profile Page </h1>"
+    return render_template('profile.html')
 
 @app.route("/logout")
+@login_required
 def logout():
-    return "<h1> Logout page </h1>"
+    logout_user()
+    return redirect(url_for('home'))
