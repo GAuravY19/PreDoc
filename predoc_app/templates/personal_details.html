@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        <legend class="legend-text"> Update Your Personal Details </legend>
+        <hr class="separator-line">
+
+        <div class="form-element">
+            {{ form.full_name.label(class='form-label')}} <br>
+            {{ form.full_name(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{ form.dob.label(class='form-label')}} <br>
+            {{form.dob(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.gender.label(class='form-label')}}
+            {{form.gender(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.country_code.label(class='form-label')}}
+            {{form.country_code(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.contact_number.label(class='form-label')}}
+            {{form.contact_number(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.address.label(class='form-label')}}
+            {{form.address(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.blood_group.label(class='form-label')}}
+            {{form.blood_group(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.height.label(class='form-label')}}
+            {{form.height(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.weight.label(class='form-label')}}
+            {{form.weight(class='form-input')}}
+        </div>
+
+        <div class="form-element">
+            {{form.submit(class='submit-button')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
