@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.form-holder{
+    background-color: white;
+    width: max-content;
+    height: auto;
+    padding: 2%;
+    border-radius: 10px;
+    border: 2px solid rgb(196, 193, 193);
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-bottom: 5%;
+}
+
+.separator-line{
+    /* margin-top: 2%; */
+    width: 70%;
+    border: 2px solid gray;
+    margin-left: 14%;
+}
+
+.legend-text{
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.form-element{
+    padding-top: 30px;
+}
+
+.form-label{
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.form-input{
+    margin-top: 5px;
+    margin-left: 10px;
+    height: 30px;
+    width: 90%;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.submit-button{
+    height: auto;
+    width: max-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(100, 232, 100);
+    font-size: 18px;
+    border: 2px solid rgb(75, 249, 45);
+    margin-left: 12px;
+}
+
+
