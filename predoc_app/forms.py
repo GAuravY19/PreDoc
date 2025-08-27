@@ -3,6 +3,7 @@ from wtforms import IntegerField, StringField, PasswordField, \
     SubmitField, BooleanField, SelectField, DateField, \
     TextAreaField, SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from predoc_app import conn, curr
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username: ',
@@ -14,6 +15,22 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password: ',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
+
+
+    def validate_username(self, username):
+        curr.execute('SELECT username FROM users WHERE username = %s', (username.data,))
+        result = curr.fetchone()
+
+        if result:
+            raise ValidationError('Username already exists.')
+
+
+    def validate_email(self, email):
+        curr.execute('SELECT email FROM users WHERE email = %s', (email.data,))
+        result = curr.fetchone()
+
+        if result:
+            raise ValidationError('Email already exists.')
 
 
 class LoginForm(FlaskForm):
@@ -35,12 +52,16 @@ class PersonalDetailsForm(FlaskForm):
                '6ft 9in', '6ft 10in', '6ft 11in', '7ft 0in', '7ft 1in', '7ft 2in', '7ft 3in', '7ft 4in',
                '7ft 5in', '7ft 6in', '7ft 7in', '7ft 8in', '7ft 9in', '7ft 10in', '7ft 11in']
 
+    country_code_list = ['+1', "+86", '+81', '+49', '+91', '+44', '+33', '+39', '+1', '+55']
+
     full_name = StringField("Full Name: ",
                             validators=[DataRequired()])
     dob = DateField("Date of Birth: ", format='%Y-%m-%d',
                     validators=[DataRequired()])
     gender = StringField("Gender: ",
                          validators=[DataRequired()])
+    country_code = SelectField('Country Code: ', choices=country_code_list,
+                               validators=[DataRequired()])
     contact_number = StringField("Contact Number: ",
                                  validators=[DataRequired(), Length(min=10,max=10)])
     address = TextAreaField('Address: ',
@@ -51,7 +72,7 @@ class PersonalDetailsForm(FlaskForm):
                          validators=[DataRequired()])
     weight = IntegerField("Weight (in Kg): ",
                           validators=[DataRequired()])
-
+    submit = SubmitField('Update')
 
 class LifestyleForm(FlaskForm):
     smoking_choice = SelectField('Smoking: ', choices=['Yes', 'No'],
