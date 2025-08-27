@@ -3,3 +3,4 @@ flask_wtf >= 1.2.2
 psycopg2-binary
 python-dotenv
 Flask-Bcrypt
+flask_sqlalchemy
