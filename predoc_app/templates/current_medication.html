@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        <legend class="legend-text"> Update Your Personal Details </legend>
+        <hr class="separator">
+
+        <div class="form-content">
+            {{ form.medication.label(class='form-label')}} <br>
+            {{ form.medication(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{ form.drug_name.label(class='form-label')}} <br>
+            {{form.drug_name(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.dosage.label(class='form-label')}}
+            {{form.dosage(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.frequency.label(class='form-label')}}
+            {{form.frequency(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.start_date.label(class='form-label')}}
+            {{form.start_date(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.end_date.label(class='form-label')}}
+            {{form.end_date(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.update(class='submit-button')}}
+            {{form.add_more(class='submit-button')}}
+            {{form.next(class='submit-button')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

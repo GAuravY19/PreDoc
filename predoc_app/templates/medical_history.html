@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        <legend class="legend-text"> Update Your Personal Details </legend>
+        <hr class="separator">
+
+        <div class="form-content">
+            {{ form.diabetes.label(class='form-label')}} <br>
+            {{ form.diabetes(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{ form.hypertension.label(class='form-label')}} <br>
+            {{form.hypertension(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.cardiac_disease.label(class='form-label')}}
+            {{form.cardiac_disease(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.respiratory_disease.label(class='form-label')}}
+            {{form.respiratory_disease(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.epilepsy.label(class='form-label')}}
+            {{form.epilepsy(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.mental_health_condition.label(class='form-label')}}
+            {{form.mental_health_condition(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.past_surgeries.label(class='form-label')}}
+            {{form.past_surgeries(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.past_surgeries_type.label(class='form-label')}}
+            {{form.past_surgeries_type(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.family_history.label(class='form-label')}}
+            {{form.family_history(class='form-checkbox')}}
+        </div>
+
+        <div class="form-content">
+            {{form.submit(class='submit-button')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

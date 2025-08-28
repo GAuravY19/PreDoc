@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        <legend class="legend-text"> Update Your Lifestyle Details </legend>
+        <hr class="separator">
+
+        <div class="form-content">
+            {{ form.smoking_choice.label(class='form-label')}} <br>
+            {{ form.smoking_choice(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{ form.alcohol_use.label(class='form-label')}} <br>
+            {{form.alcohol_use(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.substance_use.label(class='form-label')}}
+            {{form.substance_use(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.exercise.label(class='form-label')}}
+            {{form.exercise(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.sleep_hours.label(class='form-label')}}
+            {{form.sleep_hours(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.diet_pattern.label(class='form-label')}}
+            {{form.diet_pattern(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.submit(class='submit-button')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

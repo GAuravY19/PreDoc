@@ -1,1 +1,27 @@
-<h1> Profile Page </h1>
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<div class="main-profile-box">
+    <div class="basic-details">
+        <div class="profile-pic">
+            <img src={{url_for('static', filename = 'images/signupLogo/google.png')}}>
+        </div>
+        <div class="details">
+            <span class="text-content">Name: <p><u>Gaurav Yadav</u></p></span>
+            <span class="text-content">Username: <p><u>TestUser</u></p></span>
+            <span class="text-content">Email: <p><u>Test@outlook.com</u></p></span>
+        </div>
+    </div>
+
+    <div class="medical-details">
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

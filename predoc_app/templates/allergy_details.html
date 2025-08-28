@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        <legend class="legend-text"> Update Your Personal Details </legend>
+        <hr class="separator">
+
+        <div class="form-content">
+            {{ form.allergy_status.label(class='form-label')}} <br>
+            {{ form.allergy_status(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{ form.allergy_type.label(class='form-label')}} <br>
+            {{form.allergy_type(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.allergy_name.label(class='form-label')}}
+            {{form.allergy_name(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.allergy_reaction.label(class='form-label')}}
+            {{form.allergy_reaction(class='form-input')}}
+        </div>
+
+        <div class="form-content">
+            {{form.update(class='submit-button')}}
+            {{form.add_more(class='submit-button')}}
+            {{form.next(class='submit-button')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
