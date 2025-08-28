@@ -179,3 +179,10 @@ footer{
 .danger{
     color: red;
 }
+
+
+.invalid-feedback{
+    color: red;
+    font-size: 15px;
+    padding-top: 5px;
+}

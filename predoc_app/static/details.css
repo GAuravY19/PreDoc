@@ -39,21 +39,24 @@
     padding-top: 30px;
 }
 
-.form-label{
+.form-header{
     font-family: "Sansation", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 10px;
 }
 
-.form-input{
+.textarea { resize: horizontal; }
+
+.input{
     margin-top: 5px;
     margin-left: 10px;
     height: 30px;
     width: 90%;
     border: 2px solid gray;
     border-radius: 10px;
+    padding-left: 4px;
 }
 
 .submit-button{
