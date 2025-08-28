@@ -4,52 +4,149 @@
 
 <div class="form-holder">
     <form method="POST" action="">
+        {{ form.hidden_tag()}}
         <legend class="legend-text"> Update Your Personal Details </legend>
         <hr class="separator">
 
         <div class="form-content">
-            {{ form.full_name.label(class='form-label')}} <br>
-            {{ form.full_name(class='form-input')}}
+            {{ form.full_name.label(class='form-header')}} <br>
+
+            {% if form.full_name.errors %}
+                {{ form.full_name(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.full_name.errors %}
+                        <p> {{error}} </p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.full_name(class='input')}}
+            {% endif %}
         </div>
 
         <div class="form-content">
-            {{ form.dob.label(class='form-label')}} <br>
-            {{form.dob(class='form-input')}}
+            {{ form.dob.label(class='form-header')}} <br>
+
+            {% if form.dob.errors %}
+                {{ form.dob(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.dob.errors %}
+                        <p> {{error}} </p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.dob(class='input')}}
+            {% endif %}
         </div>
 
         <div class="form-content">
-            {{form.gender.label(class='form-label')}}
-            {{form.gender(class='form-input')}}
+            {{ form.gender.label(class='form-header')}} <br>
+
+            {% if form.gender.errors %}
+                {{ form.gender(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.gender.errors %}
+                        <p> {{error}} </p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.gender(class='input')}}
+            {% endif %}
         </div>
 
         <div class="form-content">
-            {{form.country_code.label(class='form-label')}}
-            {{form.country_code(class='form-input')}}
+            {{ form.country_code.label(class='form-header')}} <br>
+
+            {% if form.country_code.errors %}
+                {{ form.country_code(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.country_code.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.country_code(class='input')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.contact_number.label(class='form-label')}}
-            {{form.contact_number(class='form-input')}}
+            {{ form.contact_number.label(class='form-header')}} <br>
+
+            {% if form.contact_number.errors %}
+                {{ form.contact_number(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.contact_number.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.contact_number(class='input')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.address.label(class='form-label')}}
-            {{form.address(class='form-input')}}
+            {{ form.address.label(class='form-header')}} <br>
+
+            {% if form.address.errors %}
+                {{ form.address(class='input textarea')}}
+                <div class="invalid-feedback">
+                    {% for error in form.address.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.address(class='input textarea')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.blood_group.label(class='form-label')}}
-            {{form.blood_group(class='form-input')}}
+            {{ form.blood_group.label(class='form-header')}} <br>
+
+            {% if form.blood_group.errors %}
+                {{ form.blood_group(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.blood_group.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.blood_group(class='input')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.height.label(class='form-label')}}
-            {{form.height(class='form-input')}}
+            {{ form.height.label(class='form-header')}} <br>
+
+            {% if form.height.errors %}
+                {{ form.height(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.height.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.height(class='input')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.weight.label(class='form-label')}}
-            {{form.weight(class='form-input')}}
+            {{ form.weight.label(class='form-header')}} <br>
+
+            {% if form.weight.errors %}
+                {{ form.weight(class='input')}}
+                <div class="invalid-feedback">
+                    {% for error in form.weight.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.weight(class='input')}}
+            {% endif %}
+
         </div>
 
         <div class="form-content">

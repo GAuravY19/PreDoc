@@ -4,52 +4,152 @@
 
 <div class="form-holder">
     <form method="POST" action="">
+        {{form.hidden_tag()}}
         <legend class="legend-text"> Update Your Personal Details </legend>
         <hr class="separator">
 
         <div class="form-content">
-            {{ form.diabetes.label(class='form-label')}} <br>
-            {{ form.diabetes(class='form-input')}}
+            {{ form.diabetes.label(class='form-header') }} <br>
+
+            {% if form.diabetes.errors %}
+                {{ form.diabetes(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.diabetes.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.diabetes(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{ form.hypertension.label(class='form-label')}} <br>
-            {{form.hypertension(class='form-input')}}
+            {{ form.hypertension.label(class='form-header') }} <br>
+
+            {% if form.hypertension.errors %}
+                {{ form.hypertension(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.hypertension.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.hypertension(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.cardiac_disease.label(class='form-label')}}
-            {{form.cardiac_disease(class='form-input')}}
+            {{ form.cardiac_disease.label(class='form-header') }} <br>
+
+            {% if form.cardiac_disease.errors %}
+                {{ form.cardiac_disease(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.cardiac_disease.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.cardiac_disease(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.respiratory_disease.label(class='form-label')}}
-            {{form.respiratory_disease(class='form-input')}}
+            {{ form.respiratory_disease.label(class='form-header') }} <br>
+
+            {% if form.respiratory_disease.errors %}
+                {{ form.respiratory_disease(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.respiratory_disease.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.respiratory_disease(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.epilepsy.label(class='form-label')}}
-            {{form.epilepsy(class='form-input')}}
+            {{ form.epilepsy.label(class='form-header') }} <br>
+
+            {% if form.epilepsy.errors %}
+                {{ form.epilepsy(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.epilepsy.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.epilepsy(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.mental_health_condition.label(class='form-label')}}
-            {{form.mental_health_condition(class='form-input')}}
+            {{ form.mental_health_condition.label(class='form-header') }} <br>
+
+            {% if form.mental_health_condition.errors %}
+                {{ form.mental_health_condition(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.mental_health_condition.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.mental_health_condition(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.past_surgeries.label(class='form-label')}}
-            {{form.past_surgeries(class='form-input')}}
+            {{ form.past_surgeries.label(class='form-header') }} <br>
+
+            {% if form.past_surgeries.errors %}
+                {{ form.past_surgeries(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.past_surgeries.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.past_surgeries(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.past_surgeries_type.label(class='form-label')}}
-            {{form.past_surgeries_type(class='form-input')}}
+            {{ form.past_surgeries_type.label(class='form-header') }} <br>
+
+            {% if form.past_surgeries_type.errors %}
+                {{ form.past_surgeries_type(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.past_surgeries_type.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.past_surgeries_type(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.family_history.label(class='form-label')}}
-            {{form.family_history(class='form-checkbox')}}
+            {{ form.family_history.label(class='form-header') }} <br>
+
+            {% if form.family_history.errors %}
+                {{ form.family_history(class='form-checkbox') }}
+                <div class="invalid-feedback">
+                    {% for error in form.family_history.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.family_history(class='form-checkbox') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">

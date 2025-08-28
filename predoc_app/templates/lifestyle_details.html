@@ -4,37 +4,105 @@
 
 <div class="form-holder">
     <form method="POST" action="">
+        {{form.hidden_tag()}}
+
         <legend class="legend-text"> Update Your Lifestyle Details </legend>
         <hr class="separator">
 
         <div class="form-content">
-            {{ form.smoking_choice.label(class='form-label')}} <br>
-            {{ form.smoking_choice(class='form-input')}}
+            {{ form.smoking_choice.label(class='form-header') }} <br>
+
+            {% if form.smoking_choice.errors %}
+                {{ form.smoking_choice(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.smoking_choice.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.smoking_choice(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{ form.alcohol_use.label(class='form-label')}} <br>
-            {{form.alcohol_use(class='form-input')}}
+            {{ form.alcohol_use.label(class='form-header') }} <br>
+
+            {% if form.alcohol_use.errors %}
+                {{ form.alcohol_use(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.alcohol_use.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.alcohol_use(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.substance_use.label(class='form-label')}}
-            {{form.substance_use(class='form-input')}}
+            {{ form.substance_use.label(class='form-header') }} <br>
+
+            {% if form.substance_use.errors %}
+                {{ form.substance_use(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.substance_use.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.substance_use(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.exercise.label(class='form-label')}}
-            {{form.exercise(class='form-input')}}
+            {{ form.exercise.label(class='form-header') }} <br>
+
+            {% if form.exercise.errors %}
+                {{ form.exercise(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.exercise.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.exercise(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.sleep_hours.label(class='form-label')}}
-            {{form.sleep_hours(class='form-input')}}
+            {{ form.sleep_hours.label(class='form-header') }} <br>
+
+            {% if form.sleep_hours.errors %}
+                {{ form.sleep_hours(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.sleep_hours.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.sleep_hours(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
-            {{form.diet_pattern.label(class='form-label')}}
-            {{form.diet_pattern(class='form-input')}}
+            {{ form.diet_pattern.label(class='form-header') }} <br>
+
+            {% if form.diet_pattern.errors %}
+                {{ form.diet_pattern(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.diet_pattern.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.diet_pattern(class='input') }}
+            {% endif %}
+
         </div>
 
         <div class="form-content">
