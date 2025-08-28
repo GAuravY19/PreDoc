@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main-profile-box{
+    height: 50vh;
+    /* background-color: red; */
+    width: 75%;
+    margin-left: 12%;
+    margin-top: 6%;
+    border: 3px solid rgb(191, 190, 190);
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px silver;
+    background-color: rgb(216, 238, 253);
+}
+
+.basic-details{
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-pic img{
+    height: 200px;
+    width: 200px;
+    margin-left: 20%;
+    margin-top: 10%;
+    border-radius: 80px;
+    border: 3px solid rgb(0, 166, 255);
+
+}
+
+.details{
+    height: max-content;
+    width: max-content;
+    margin-left: 10%;
+    margin-top: 3%;
+    /* border: 5px solid beige; */
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 15px 10px;
+}
+
+
+.text-content p{
+    font-size: 20px;
+    margin: 3px 0 13px 5px;
+}
+
+
+
+
+
+
+
+
