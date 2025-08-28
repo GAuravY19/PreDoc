@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users(
 	email VARCHAR NOT NULL UNIQUE,
 	password_hash VARCHAR NOT NULL,
 	created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
-); 
+);
 
 INSERT INTO users(username, email, password_hash) VALUES ('testuser', 'test@gmail.com', 'test1234');
 
@@ -15,7 +15,7 @@ SELECT * FROM users;
 CREATE TABLE IF NOT EXISTS personal_details(
 	personal_id VARCHAR PRIMARY KEY,
 	user_id INTEGER NOT NULL,
-	full_name VARCHAR(100) NOT NULL, 
+	full_name VARCHAR(100) NOT NULL,
 	date_of_birth DATE NOT NULL,
 	gender CHAR(1) NOT NULL,
 	contact_country_code VARCHAR(10) NOT NULL,
@@ -74,19 +74,19 @@ INSERT INTO lifestyle (
 
 SELECT * FROM lifestyle;
 
--- creating medical history table 
+-- creating medical history table
 CREATE TABLE IF NOT EXISTS medical_history(
 	medical_id VARCHAR PRIMARY KEY,
 	user_id INTEGER NOT NULL,
 	diabetes VARCHAR(100) NOT NULL,
 	hypertension VARCHAR(100) NOT NULL,
-	cardiac_disease VARCHAR(100) NOT NULL, 
-	respiratory_disease VARCHAR(100) NOT NULL, 
+	cardiac_disease VARCHAR(100) NOT NULL,
+	respiratory_disease VARCHAR(100) NOT NULL,
 	epilepsy VARCHAR(100) NOT NULL,
 	mental_health_condition VARCHAR(100) NOT NULL,
 	past_surgeries BOOLEAN NOT NULL,
-	past_surgeries_type TEXT NOT NULL, 
-	family_history TEXT NOT NULL, 
+	past_surgeries_type TEXT NOT NULL,
+	family_history TEXT NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
@@ -110,7 +110,7 @@ INSERT INTO medical_history (
 SELECT * FROM medical_history;
 
 
--- Creating allergies table 
+-- Creating allergies table
 CREATE TABLE IF NOT EXISTS allergies(
 	allergy_id VARCHAR PRIMARY KEY,
 	user_id INTEGER NOT NULL,
@@ -159,6 +159,11 @@ INSERT INTO current_medication_details (
 );
 
 SELECT * FROM current_medication_details;
+
+ALTER TABLE users
+ADD profile_photo VARCHAR;
+
+SELECT * FROM users;
 
 
 
