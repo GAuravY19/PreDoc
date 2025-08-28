@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, PasswordField, \
     SubmitField, BooleanField, SelectField, DateField, \
     TextAreaField, SelectMultipleField, widgets
-from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, Optional
 from predoc_app import conn, curr
 
 class RegistrationForm(FlaskForm):
@@ -60,15 +60,15 @@ class PersonalDetailsForm(FlaskForm):
                     validators=[DataRequired()])
     gender = StringField("Gender: ",
                          validators=[DataRequired()])
-    country_code = SelectField('Country Code: ', choices=country_code_list,
+    country_code = SelectField('Country Code: ', choices=[(code, code) for code in country_code_list],
                                validators=[DataRequired()])
     contact_number = StringField("Contact Number: ",
-                                 validators=[DataRequired(), Length(min=10,max=10)])
-    address = TextAreaField('Address: ',
+                                 validators=[DataRequired()])
+    address = StringField('Address: ',
                             validators=[DataRequired()])
     blood_group = StringField('Blood Group: ',
                               validators=[DataRequired()])
-    height = SelectField('Height: ', choices=heights,
+    height = SelectField('Height: ', choices=[(height, height) for height in heights],
                          validators=[DataRequired()])
     weight = IntegerField("Weight (in Kg): ",
                           validators=[DataRequired()])
@@ -109,21 +109,21 @@ class MedicalHistoryForm(FlaskForm):
                          'Pneumonia', 'Lung Cancer', 'Tuberculosis (TB)', 'Occupational respiratory diseases',
                          'Pulmonary Fibrosis', 'Cystic Fibrosis', 'No']
 
-    diabetes = SelectField("Diabetes: ", choices=diabetes_types,
+    diabetes = SelectField("Diabetes: ", choices=[(diab, diab) for diab in diabetes_types],
                            validators=[DataRequired()])
-    hypertension = SelectField('Hypertension: ', choices=hypertension_types,
+    hypertension = SelectField('Hypertension: ', choices=[(tension, tension) for tension in hypertension_types],
                                validators=[DataRequired()])
-    cardiac_disease = SelectField('Any Cardiac disease: ', choices=cardiac_disease_types,
+    cardiac_disease = SelectField('Any Cardiac disease: ', choices=[(cardiac, cardiac) for cardiac in cardiac_disease_types],
                                   validators=[DataRequired()])
-    respiratory_disease = SelectField('Any Respiratory disease: ', choices=respiratory_types,
+    respiratory_disease = SelectField('Any Respiratory disease: ', choices=[(respiratory, respiratory) for respiratory in respiratory_types],
                                       validators=[DataRequired()])
     epilepsy = SelectField("Epilepsy: ", choices=['Yes', 'No'],
                            validators=[DataRequired()])
-    mental_health_condition = TextAreaField('Any Mental Health conditions: ',
+    mental_health_condition = StringField('Any Mental Health conditions: ',
                                             validators=[DataRequired()])
     past_surgeries = SelectField('Any Past Surgeries: ', choices=['Yes', 'No'],
                                  validators=[DataRequired()])
-    past_surgeries_type = TextAreaField('If yes, which surgery you had: ')
+    past_surgeries_type = StringField('If yes, which surgery you had: ')
 
     family_history = SelectMultipleField('Family History of Diseases: ', choices=[
         ('diabetes', 'Diabetes'),
@@ -154,11 +154,19 @@ class AllergiesForm(FlaskForm):
 
     allergy_status = SelectField('Any kind of allergy: ', choices=['Yes', 'No'],
                                  validators=[DataRequired()])
-    allergy_type = SelectMultipleField('Type of allergy: ', choices=allergy_type_options)
-    allergy_name = SelectMultipleField("Allergy Name: ", choices=allergy_name_options)
-    allergy_reaction = TextAreaField('What is the allergy reaction: ')
 
-    update = SubmitField('Update')
+
+    allergy_type = SelectMultipleField('Type of allergy: ', choices=[(allergy, allergy) for allergy in allergy_type_options]\
+                                        , option_widget=widgets.CheckboxInput(),
+                                        widget=widgets.ListWidget(prefix_label=False))
+
+
+    allergy_name = SelectMultipleField("Allergy Name: ", choices=[(name, name) for name in allergy_name_options],
+                                       option_widget=widgets.CheckboxInput(),
+                                        widget=widgets.ListWidget(prefix_label=False))
+
+    allergy_reaction = StringField('What is the allergy reaction: ')
+
     add_more = SubmitField('Add More')
     next = SubmitField('Next')
 
@@ -166,12 +174,13 @@ class AllergiesForm(FlaskForm):
 class CurrentMedicationForm(FlaskForm):
     medication = SelectField('Any medications undergoing: ', choices=['Yes', 'No'],
                              validators=[DataRequired()])
-    drug_name = TextAreaField('Which medicines are you taking: ')
-    dosage = TextAreaField('What is the dosage of each Drug: ')
-    frequency = TextAreaField('What is the frequency of intake of each drug: ')
-    start_date = DateField("Start date: ", format='%Y-%m-%d')
-    end_date = DateField('When will the prescription end: ', format='%Y-%m-%d')
+    drug_name = StringField('Which medicines are you taking: ')
+    dosage = StringField('What is the dosage of each Drug: ')
+    frequency = StringField('What is the frequency of intake of each drug: ')
+    start_date = DateField("Start date: ", format='%Y-%m-%d',
+                        validators=[Optional()])
+    end_date = DateField('When will the prescription end: ', format='%Y-%m-%d',
+                        validators=[Optional()])
 
-    update = SubmitField('Update')
     add_more = SubmitField('Add More')
     next = SubmitField('Next')
