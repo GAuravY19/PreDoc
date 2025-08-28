@@ -20,7 +20,7 @@
     margin-bottom: 5%;
 }
 
-.separator-line{
+.separator{
     /* margin-top: 2%; */
     width: 70%;
     border: 2px solid gray;
@@ -35,7 +35,7 @@
     padding-bottom: 10px;
 }
 
-.form-element{
+.form-content{
     padding-top: 30px;
 }
 
@@ -66,6 +66,16 @@
     font-size: 18px;
     border: 2px solid rgb(75, 249, 45);
     margin-left: 12px;
+}
+
+.form-checkbox{
+    /* background-color: red; */
+    height: auto;
+    padding: 10px;
+    margin-left: 10px;
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
