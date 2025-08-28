@@ -74,6 +74,8 @@ class PersonalDetailsForm(FlaskForm):
                           validators=[DataRequired()])
     submit = SubmitField('Update')
 
+
+
 class LifestyleForm(FlaskForm):
     smoking_choice = SelectField('Smoking: ', choices=['Yes', 'No'],
                                  validators=[DataRequired()])
@@ -87,6 +89,8 @@ class LifestyleForm(FlaskForm):
                                validators=[DataRequired()])
     diet_pattern = SelectField('What type of diet pattern you follow: ', choices=['Veg', 'Non-Veg', 'Vegan'],
                                validators=[DataRequired()])
+    submit = SubmitField('Update')
+
 
 
 class MedicalHistoryForm(FlaskForm):
@@ -132,6 +136,9 @@ class MedicalHistoryForm(FlaskForm):
     ], option_widget=widgets.CheckboxInput(),
     widget=widgets.ListWidget(prefix_label=False))
 
+    submit = SubmitField('Update')
+
+
 
 class AllergiesForm(FlaskForm):
     allergy_type_options = ['Food allergies', 'Drug (medication) allergies', 'Insect allergies',
@@ -151,6 +158,10 @@ class AllergiesForm(FlaskForm):
     allergy_name = SelectMultipleField("Allergy Name: ", choices=allergy_name_options)
     allergy_reaction = TextAreaField('What is the allergy reaction: ')
 
+    update = SubmitField('Update')
+    add_more = SubmitField('Add More')
+    next = SubmitField('Next')
+
 
 class CurrentMedicationForm(FlaskForm):
     medication = SelectField('Any medications undergoing: ', choices=['Yes', 'No'],
@@ -161,4 +172,6 @@ class CurrentMedicationForm(FlaskForm):
     start_date = DateField("Start date: ", format='%Y-%m-%d')
     end_date = DateField('When will the prescription end: ', format='%Y-%m-%d')
 
-
+    update = SubmitField('Update')
+    add_more = SubmitField('Add More')
+    next = SubmitField('Next')
