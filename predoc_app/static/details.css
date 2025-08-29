@@ -16,8 +16,11 @@
     border-radius: 10px;
     border: 2px solid rgb(196, 193, 193);
     margin-top: 5%;
-    margin-left: 20%;
+    /* margin-left: 20%; */
     margin-bottom: 5%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .separator{

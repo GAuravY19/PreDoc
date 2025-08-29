@@ -18,7 +18,7 @@ body{
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: rgb(235, 234, 234);
+    background-color: #f9f9f9;
 }
 
 .nav-color{
@@ -83,19 +83,31 @@ a{
     text-decoration: none;
 }
 
-.nav-endsection{
+/* .nav-endsection{
     height: 40px;
     width: 200px;
-    justify-content: space-evenly;
     padding-top: 10px;
-    margin-left: 46%;
+    margin-left: max(46%, 44%);
+} */
+
+.nav-endsection {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-left: auto;
+    height: auto;
+    min-width: 150px;
+    width: fit-content;
 }
+
 
 .button-white{
     height: 40px;
     width: 70px;
     background-color: white;
     padding-right: 5%;
+    border: none;
 }
 
 .button-white-text{
@@ -157,22 +169,20 @@ footer{
 }
 
 .alert{
-    width: fit-content;
-    height: 4vh;
+    width: max-content;
+    height: fit-content;
     color: black;
     background-color: rgb(197, 233, 238);
     border: 2px solid rgb(89, 182, 228);
     border-radius: 10px;
-    margin-left: 23%;
-    margin-top: 2%;
-    margin-bottom: -3%;
+    margin: 0 auto -3% auto;
+    padding: 10px;
 }
 
 .alert p {
     font-size: 17px;
     padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 5px;
+    text-align: center;
 
 }
 
