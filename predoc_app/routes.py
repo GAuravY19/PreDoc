@@ -1,11 +1,16 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, abort, send_file
 from .forms import RegistrationForm, LoginForm, PersonalDetailsForm, \
-                    LifestyleForm, MedicalHistoryForm, AllergiesForm, CurrentMedicationForm
+                    LifestyleForm, MedicalHistoryForm, AllergiesForm, \
+                        CurrentMedicationForm, UpdateProfilePhoto
 from predoc_app import app, bcrypt, curr, conn, db
 from .model import User
 from flask_login import login_user, current_user, logout_user, login_required
 from .utils import generate_primary_key_personal_details, gender_code, height_converter, calculate_bmi,\
                     clear_country_code_input
+import os
+import io
+import pdfkit
+import secrets
 
 
 @app.route('/')
@@ -62,7 +67,7 @@ def login():
 
         else:
             flash('Login unsuccessful! check username and password', 'danger')
-    return render_template('login.html', form = form, css_file = 'login.css')
+    return render_template('login.html', form = form, css_file = 'register.css')
 
 
 @app.route('/personal-details', methods = ['GET', 'POST'])
@@ -76,7 +81,7 @@ def personal_details():
     if form.validate_on_submit():
 
         curr.execute('''INSERT INTO personal_details (personal_id, user_id, full_name, date_of_birth, gender, contact_country_code, contact_number, address, blood_group, height_cm, weight_kg, bmi)
-                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);''', (generate_primary_key_personal_details(conn, curr),
+                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);''', (generate_primary_key_personal_details('personal_details',conn, curr),
                                                                             user_id, form.full_name.data,form.dob.data,
                                                                             gender_code(form.gender.data), clear_country_code_input(form.country_code.data),
                                                                             str(form.contact_number.data), str(form.address.data),
@@ -169,7 +174,6 @@ def allergy_details():
     return render_template('allergy_details.html', form = form)
 
 
-
 @app.route('/current-medication-details', methods = ['GET', 'POST'])
 @login_required
 def current_medication_details():
@@ -186,7 +190,6 @@ def current_medication_details():
                          form.drug_name.data,form.dosage.data, form.frequency.data,form.start_date.data, form.end_date.data,))
 
             conn.commit()
-
             return redirect(url_for('current_medication_details'))
 
         elif form.next.data:
@@ -195,24 +198,129 @@ def current_medication_details():
                          form.drug_name.data,form.dosage.data, form.frequency.data,form.start_date.data, form.end_date.data,))
 
             conn.commit()
-            return redirect(url_for('profile'))
+            return redirect(url_for('generate_medical_report'))
 
 
     return render_template('current_medication.html', form=form)
 
 
-
-
-@app.route('/profile')
+@app.route("/generate_medical_report")
 @login_required
-def profile():
+def generate_medical_report():
     if current_user.is_authenticated:
         user_id = current_user.user_id
+
+    curr.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
+    users = curr.fetchone()
+
+    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at', (user_id,))
+    personal = curr.fetchone()
+
+    curr.execute('SELECT * FROM lifestyle WHERE user_id = %s ORDER BY created_at', (user_id,))
+    lifestyle = curr.fetchone()
+
+    curr.execute('SELECT * FROM medical_history WHERE user_id = %s ORDER BY created_at', (user_id,))
+    medical = curr.fetchone()
+
+    curr.execute('SELECT * FROM allergies WHERE user_id = %s ORDER BY created_at', (user_id,))
+    allergies = curr.fetchall()
+
+    curr.execute('SELECT * FROM current_medication_details WHERE user_id = %s ORDER BY created_at', (user_id,))
+    current_medication = curr.fetchall()
+
+    print("Allergies", allergies)
+    print('Current Medications', current_medication)
+
+    html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
+                                   medical=medical, allergies=allergies, current_medication=current_medication)
+
+    path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+    pdf_bytes = pdfkit.from_string(html_content, False, configuration=config)
+
+    curr.execute('INSERT INTO report(report_id, user_id, file_path) VALUES(%s, %s, %s)', (generate_primary_key_personal_details('report', conn, curr),
+                                                                                          user_id, pdf_bytes))
+
+    conn.commit()
+    flash("Check downloads! Your Report is available there.")
+    return redirect(url_for('profile'))
+
+
+
+
+@app.route('/profile', methods = ['GET', 'POST'])
+@login_required
+def profile():
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    form = UpdateProfilePhoto()
+
+    if form.validate_on_submit():
+        if form.picture.data:
+            random_hex = secrets.token_hex(8)
+            _, f_ext = os.path.splitext(form.picture.data.filename)
+            picture_fn = random_hex + f_ext
+            picture_path = os.path.join(app.root_path, 'static/images/profile_pics', picture_fn)
+            form.picture.data.save(picture_path)
+            picture_file = picture_fn
+            current_user.profile_photo = picture_file
+
+            return redirect(url_for('profile'))
+
 
     curr.execute('SELECT date_of_birth, blood_group, height_cm, weight_kg FROM personal_details WHERE user_id = %s', (user_id,))
     user_details = curr.fetchone()
 
-    return render_template('profile.html', user_details=user_details)
+    image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
+
+    return render_template('profile.html', user_details=user_details,
+                           image_file=image_file, form=form)
+
+
+@app.route('/generate_report')
+@login_required
+def generate_report():
+
+    return redirect(url_for('personal_details'))
+
+
+@app.route('/downloads')
+@login_required
+def make_downloads():
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    curr.execute('SELECT report_id, file_path, created_at FROM report WHERE user_id = %s ORDER BY created_at', (user_id,))
+    file_paths = curr.fetchall()
+
+    return render_template('downloads.html', file_paths=file_paths, css_file = 'downloads.css')
+
+
+@app.route("/download/<string:report_id>")
+def download(report_id):
+
+    curr.execute("SELECT file_path FROM report WHERE report_id = %s", (report_id,))
+    row = curr.fetchone()
+
+    curr.close()
+    conn.close()
+
+    if not row:
+        abort(404, "Report not found")
+
+    pdf_bytes = row[0]   # BYTEA column comes as bytes in Python
+
+    # Return as downloadable file
+    return send_file(
+        io.BytesIO(pdf_bytes),
+        as_attachment=True,
+        download_name=f"{report_id}.pdf",
+        mimetype="application/pdf"
+    )
+
 
 @app.route("/logout")
 @login_required
