@@ -17,6 +17,9 @@ def generate_primary_key_personal_details(tablename, conn, curr):
     elif tablename == 'current_medication_details':
         primary_key = f'CM{count[0]+1}'
 
+    elif tablename == 'report':
+        primary_key = f'RP{count[0]+1}'
+
     return primary_key
 
 
