@@ -6,7 +6,28 @@
 <div class="main-profile-box">
     <div class="basic-details">
         <div class="profile-pic">
-            <img src={{url_for('static', filename = 'images/signupLogo/google.png')}}>
+            <img src={{image_file}}>
+                <form method='POST' action= '' enctype="multipart/form-data">
+                    {{form.hidden_tag() }}
+                    <div class="form-element space">
+                        {{ form.picture.label(class='form-header') }}<br>
+
+                        {% if form.picture.errors %}
+                        {{ form.picture(class='space') }}
+                            <div class="invalid-feedback">
+                                {% for error in form.picture.errors %}
+                                    <p> {{error}} </p>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.picture(class='space') }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-submit">
+                        {{ form.submit(class='submit-button space-button') }}
+                    </div>
+                </form>
         </div>
         <div class="details">
             <span class="text-content">Name: <p><u>Gaurav Yadav</u></p></span>
