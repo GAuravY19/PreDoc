@@ -13,7 +13,6 @@
         <link rel='stylesheet' href={{url_for('static', filename=css_file)}}>
         <link rel='stylesheet' href={{url_for('static', filename='details.css')}}>
         <link rel='stylesheet' href={{url_for('static', filename='profile.css')}}>
-        <!--<link rel='stylesheet' href={{url_for('static', filename='edit.css')}}>-->
 
         <script type="text/javascript" src={{url_for('static', filename = 'js/layout.js')}}>
 
@@ -34,18 +33,18 @@
 
             <div class="nav-sections nav-sections-h">
                 <a href={{url_for('home')}} class="nav-sections-text"> Home </a>
-                <a href="#" class="nav-sections-text"> Generate Report </a>
-                <a href="#" class="nav-sections-text"> Downloads </a>
+                <a href={{url_for('generate_report')}} class="nav-sections-text"> Generate Report </a>
+                <a href={{url_for('make_downloads')}} class="nav-sections-text"> Downloads </a>
             </div>
 
             {% if current_user.is_authenticated %}
             <div class="nav-endsection">
-                <span class="button-white"><a class="button-white-text" href={{url_for('profile')}}> Profile </a></span>
+                <button class="button-white"><a class="button-white-text" href={{url_for('profile')}}> Profile </a></button>
                 <button class="button-black"><a class="button-black-text" href={{url_for('logout')}}> Logout </a></button>
             </div>
             {% else %}
             <div class="nav-endsection">
-                <span class="button-white"><a class="button-white-text" href={{url_for('login')}}> Sign In </a></span>
+                <button class="button-white"><a class="button-white-text" href={{url_for('login')}}> Sign In </a></button>
                 <button class="button-black"><a class="button-black-text" href={{url_for('register')}}> Register </a></button>
             </div>
             {% endif %}
@@ -75,14 +74,14 @@
                 <a class="text-name-s" href="">Email</a>
             </div>
             <div class="account">
-                <a class="text-name-s" href="">Linkedin</a>
+                <a class="text-name-s" href="https://www.linkedin.com/in/gaurav-s-yadav/">Linkedin</a>
             </div>
             <div class="account">
-                <a class="text-name-s" href="">Github</a>
+                <a class="text-name-s" href="https://github.com/GAuravY19">Github</a>
             </div>
-            <div class="account">
+            <!--<div class="account">
                 <a class="text-name-s" href="">Instagram</a>
-            </div>
+            </div>-->
         </footer>
 
 
