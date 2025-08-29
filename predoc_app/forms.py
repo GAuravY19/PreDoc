@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import IntegerField, StringField, PasswordField, \
     SubmitField, BooleanField, SelectField, DateField, \
     TextAreaField, SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, Optional
 from predoc_app import conn, curr
+from .model import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username: ',
@@ -18,16 +20,14 @@ class RegistrationForm(FlaskForm):
 
 
     def validate_username(self, username):
-        curr.execute('SELECT username FROM users WHERE username = %s', (username.data,))
-        result = curr.fetchone()
+        user = User.query.filter_by(username=username.data).first()
 
-        if result:
+        if user:
             raise ValidationError('Username already exists.')
 
 
     def validate_email(self, email):
-        curr.execute('SELECT email FROM users WHERE email = %s', (email.data,))
-        result = curr.fetchone()
+        result = User.query.filter_by(email = email.data).first()
 
         if result:
             raise ValidationError('Email already exists.')
@@ -103,7 +103,7 @@ class MedicalHistoryForm(FlaskForm):
                           'Malignant Hypertension', 'White Coat Hypertension', 'Masked Hypertension', 'Hypertensive Emergency/Urgency', 'No']
 
     cardiac_disease_types = ['Coronary Artery Disease', 'Heart Failure', 'Arrhythmias', 'Heart Valve Problems',
-                             'Cardiomyopathy', 'Congenital Heart Disease', 'Pericardial Disease', 'Rheumatic Heart Disease']
+                             'Cardiomyopathy', 'Congenital Heart Disease', 'Pericardial Disease', 'Rheumatic Heart Disease', 'No']
 
     respiratory_types = ['Asthma', 'Chronic Obstructive Pulmonary Disease (COPD)', 'Bronchitis',
                          'Pneumonia', 'Lung Cancer', 'Tuberculosis (TB)', 'Occupational respiratory diseases',
@@ -184,3 +184,8 @@ class CurrentMedicationForm(FlaskForm):
 
     add_more = SubmitField('Add More')
     next = SubmitField('Next')
+
+
+class UpdateProfilePhoto(FlaskForm):
+    picture = FileField('Update Profile photo', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    submit = SubmitField('Update')
