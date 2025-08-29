@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PreDoc Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h2>PreDoc Patient Report</h2>
+
+    <h3>Patient Details</h3>
+    <table>
+        <tr><th>Name</th><td>{{personal[2]}}</td></tr>
+        <tr><th>DOB</th><td>{{personal[3]}}</td></tr>
+        <tr><th>Gender</th><td>{{personal[4]}}</td></tr>
+        <tr><th>Contact</th><td>{{personal[5]}} {{personal[6]}}</td></tr>
+      	<tr><th>Blood Group</th><td>{{personal[8]}}</td></tr>
+      	<tr><th>Height</th><td>{{personal[9]}}</td></tr>
+      	<tr><th>Weight</th><td>{{personal[10]}}</td></tr>
+      	<tr><th>BMI</th><td>{{personal[11]}}</td></tr>
+    </table>
+
+    <h3>Lifestyle</h3>
+    <table>
+        <tr><th>Smoking</th><td>{{lifestyle[2]}}</td></tr>
+        <tr><th>Alcohol</th><td>{{lifestyle[3]}}</td></tr>
+        <tr><th>Substance Use</th><td>{{ lifestyle[4] }}</td></tr>
+        <tr><th>Exercise Frequency</th><td>{{ lifestyle[5]}}</td></tr>
+        <tr><th>Sleep Hours</th><td>{{ lifestyle[6]}}</td></tr>
+        <tr><th>Diet Patterns</th><td>{{ lifestyle[7]}}</td></tr>
+    </table>
+
+    <h3>Medical History</h3>
+    <table>
+        <tr><th>Diabetes</th><td>{{ medical[2] }}</td></tr>
+        <tr><th>Hypertension</th><td>{{ medical[3] }}</td></tr>
+        <tr><th>Cardiac Disease</th><td>{{ medical[4] }}</td></tr>
+        <tr><th>Respiratory Disease</th><td>{{ medical[5] }}</td></tr>
+        <tr><th>Epilepsy</th><td>{{ medical[6] }}</td></tr>
+        <tr><th>Mental Health Conditions</th><td>{{ medical[7] }}</td></tr>
+        <tr><th>Past Surgeries Types</th><td>{{ medical[9] }}</td></tr>
+        <tr><th>Family History</th><td>{{ medical[10] }}</td></tr>
+
+    </table>
+
+    <h3>Allergies</h3>
+    {% if allergies[0][2] %}
+    <ul>
+        {% for allergy in allergies %}
+        <li> Allergy Type: {{allergy[3]}} </li>
+        <li> Allergy Name: {{allergy[4]}} </li>
+        <li> Allergy Reaction: {{allergy[5]}} </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p> No allergy </p>
+    {% endif %}
+
+    <h3>Current Medication</h3>
+
+    {% if current_medication[0][2]%}
+    <ul>
+        {% for medication in current_medication %}
+        <li> Drug Name: {{medication[3]}} </li>
+        <li> Dosage: {{medication[4]}} </li>
+        <li> Frequency: {{medication[5]}} </li>
+        <li> Start Date: {{medication[6]}} </li>
+        <li> End Date: {{medication[7]}} </li>
+
+        {% endfor %}
+    </ul>
+
+    {% else %}
+    <p> No Medication Undergoing </p>
+    {% endif %}
+
+
+</body>
+</html>
