@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),\
                             nullable=False, server_default=db.func.now())
+    profile_photo = db.Column(db.String, nullable=False, default='default.jpg')
 
     def get_id(self):
         return str(self.user_id)
