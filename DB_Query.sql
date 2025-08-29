@@ -165,6 +165,64 @@ ADD profile_photo VARCHAR;
 
 SELECT * FROM users;
 
+CREATE TABLE IF NOT EXISTS report(
+	report_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	file_path VARCHAR NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
+INSERT INTO report (report_id, user_id, file_path, created_at) VALUES
+('RPT001', 101, '/reports/101_blood_test.pdf', '2025-08-28 10:15:00+05:30'),
+('RPT002', 101, '/reports/101_xray_chest.pdf', '2025-08-28 10:20:00+05:30'),
+('RPT003', 102, '/reports/102_urine_test.pdf', '2025-08-27 09:45:00+05:30'),
+('RPT004', 103, '/reports/103_ecg.pdf', '2025-08-26 14:30:00+05:30'),
+('RPT005', 104, '/reports/104_mri_brain.pdf', '2025-08-25 16:00:00+05:30');
+
+
+SELECT * FROM report;
+
+ALTER TABLE personal_details
+ADD COLUMN created_at TIMESTAMPTZ;
+
+ALTER TABLE personal_details
+ALTER COLUMN created_at
+SET DEFAULT NOW();
+
+SELECT * FROM personal_details;
+
+ALTER TABLE current_medication_details
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+SELECT * FROM current_medication_details;
+
+ALTER TABLE lifestyle
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+SELECT * FROM lifestyle;
+
+ALTER TABLE medical_history
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+SELECT * FROM medical_history;
+
+ALTER TABLE allergies
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+SELECT * FROM allergies;
+
+DROP TABLE report;
+
+
+CREATE TABLE IF NOT EXISTS report(
+	report_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	file_path BYTEA NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
+SELECT * FROM report;
+
 
 
 
