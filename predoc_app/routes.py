@@ -271,7 +271,7 @@ def profile():
             return redirect(url_for('profile'))
 
 
-    curr.execute('SELECT full_name, date_of_birth, blood_group, height_cm, weight_kg FROM personal_details WHERE user_id = %s', (user_id,))
+    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at LIMIT 1', (user_id,))
     user_details = curr.fetchone()
 
     image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
