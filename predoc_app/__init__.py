@@ -17,7 +17,7 @@ port = os.getenv('DB_PORT')
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{host}/{dbname}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_INTERNAL')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
