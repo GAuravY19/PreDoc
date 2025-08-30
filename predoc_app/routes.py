@@ -60,9 +60,9 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
 
-            if next_page:
+            if request.args.get('next'):
+                next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('home'))
 
         else:
@@ -269,7 +269,7 @@ def profile():
             return redirect(url_for('profile'))
 
 
-    curr.execute('SELECT date_of_birth, blood_group, height_cm, weight_kg FROM personal_details WHERE user_id = %s', (user_id,))
+    curr.execute('SELECT full_name, date_of_birth, blood_group, height_cm, weight_kg FROM personal_details WHERE user_id = %s', (user_id,))
     user_details = curr.fetchone()
 
     image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
