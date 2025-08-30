@@ -12,6 +12,23 @@ import io
 import pdfkit
 import secrets
 
+from dotenv import load_dotenv
+import psycopg2
+
+load_dotenv()
+
+host = os.getenv('DB_HOST')
+dbname = os.getenv('DB_NAME')
+user = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+port = os.getenv('DB_PORT')
+
+conn = psycopg2.connect(host = host,
+                        dbname = dbname,
+                        user = user,
+                        password = password,
+                        port = port)
+
 
 @app.route('/')
 @app.route('/home')
@@ -31,6 +48,8 @@ def register():
         return redirect(url_for('home'))
 
     form = RegistrationForm()
+
+    curr = conn.cursor()
 
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -55,6 +74,8 @@ def login():
 
     form = LoginForm()
 
+    curr = conn.cursor()
+
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
@@ -76,6 +97,8 @@ def login():
 @login_required
 def personal_details():
     form = PersonalDetailsForm()
+
+    curr = conn.cursor()
 
     if current_user.is_authenticated:
         user_id = current_user.user_id
@@ -101,6 +124,8 @@ def personal_details():
 def lifestyle_details():
     form = LifestyleForm()
 
+    curr = conn.cursor()
+
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
@@ -122,6 +147,8 @@ def lifestyle_details():
 @login_required
 def medical_details():
     form = MedicalHistoryForm()
+
+    curr = conn.cursor()
 
     if current_user.is_authenticated:
         user_id = current_user.user_id
@@ -147,6 +174,8 @@ def medical_details():
 @login_required
 def allergy_details():
     form = AllergiesForm()
+
+    curr = conn.cursor()
 
     if current_user.is_authenticated:
         user_id = current_user.user_id
@@ -181,6 +210,8 @@ def allergy_details():
 def current_medication_details():
     form = CurrentMedicationForm()
 
+    curr = conn.cursor()
+
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
@@ -211,6 +242,8 @@ def current_medication_details():
 def generate_medical_report():
     if current_user.is_authenticated:
         user_id = current_user.user_id
+
+    curr = conn.cursor()
 
     curr.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     users = curr.fetchone()
@@ -253,6 +286,8 @@ def generate_medical_report():
 @login_required
 def profile():
 
+    curr = conn.cursor()
+
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
@@ -293,6 +328,8 @@ def make_downloads():
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
+    curr = conn.cursor()
+
     curr.execute('SELECT report_id, file_path, created_at FROM report WHERE user_id = %s ORDER BY created_at', (user_id,))
     file_paths = curr.fetchall()
 
@@ -301,6 +338,8 @@ def make_downloads():
 
 @app.route("/download/<string:report_id>")
 def download(report_id):
+
+    curr = conn.cursor()
 
     curr.execute("SELECT file_path FROM report WHERE report_id = %s", (report_id,))
     row = curr.fetchone()
