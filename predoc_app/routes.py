@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request, abort, sen
 from .forms import RegistrationForm, LoginForm, PersonalDetailsForm, \
                     LifestyleForm, MedicalHistoryForm, AllergiesForm, \
                         CurrentMedicationForm, UpdateProfilePhoto
-from predoc_app import app, bcrypt, curr, conn, db
+from predoc_app import app, bcrypt, db
 from .model import User
 from flask_login import login_user, current_user, logout_user, login_required
 from .utils import generate_primary_key_personal_details, gender_code, height_converter, calculate_bmi,\
