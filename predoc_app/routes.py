@@ -228,13 +228,11 @@ def generate_medical_report():
     curr.execute('SELECT * FROM current_medication_details WHERE user_id = %s ORDER BY created_at', (user_id,))
     current_medication = curr.fetchall()
 
-    print("Allergies", allergies)
-    print('Current Medications', current_medication)
-
     html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
                                    medical=medical, allergies=allergies, current_medication=current_medication)
 
-    path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'
+    # path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'
+    path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
     pdf_bytes = pdfkit.from_string(html_content, False, configuration=config)
