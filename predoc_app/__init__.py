@@ -8,15 +8,15 @@ import psycopg2
 
 load_dotenv()
 
-host = os.getenv("host")
-dbname = os.getenv('db_name')
-user = os.getenv('user')
-password = os.getenv('password')
-port = os.getenv('port')
+host = os.getenv("DB_HOST")
+dbname = os.getenv('DB_NAME')
+user = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+port = os.getenv('DB_PORT')
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.getenv('secret_key')
+app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{host}/{dbname}'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
