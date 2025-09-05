@@ -2,9 +2,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import IntegerField, StringField, PasswordField, \
     SubmitField, BooleanField, SelectField, DateField, \
-    TextAreaField, SelectMultipleField, widgets
+    SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, Optional
-from predoc_app import conn, curr
 from .model import User
 
 class RegistrationForm(FlaskForm):
@@ -181,6 +180,38 @@ class CurrentMedicationForm(FlaskForm):
                         validators=[Optional()])
     end_date = DateField('When will the prescription end: ', format='%Y-%m-%d',
                         validators=[Optional()])
+
+    add_more = SubmitField('Add More')
+    next = SubmitField('Next')
+
+
+class AccidentsForms(FlaskForm):
+    accident_type_list = ['Road Accidents', 'Slips, Trips, and Falls', 'Workplace Accidents',
+                          'Medical Accidents', 'Home Accidents', 'Sports and Recreation', 'Natural Disasters',
+                          'Vehicle and Bicycle Accidents']
+
+    injured_body_part = ['Head', 'Chest', 'Abdomen', 'Spine', 'Limb', 'Eye', 'Other']
+
+    accident_problem = ['Pain', 'Stiffness', 'Weakness', 'Vision issues', 'Breathing issues', 'None']
+
+
+    any_accident = SelectField('Have you ever had any accident/injury that required medical attention?',
+                               choices=['Yes', 'No'], validators=[DataRequired()])
+
+    accident_date = DateField('Approximate date/year of accident')
+
+    accident_type = SelectField('Type of accident', choices=accident_type_list)
+
+    body_part_injured = SelectField('Main body part injured', choices=injured_body_part)
+
+    hospitalized = SelectField('Were you hospitalized?', choices=['Yes', 'No'])
+
+    any_surgey = SelectField('Any surgeries or implants from this accident?', choices=['Yes', 'No'])
+
+    lasting_problem = SelectField('Any lasting problems today due to this accident?', choices=accident_problem)
+
+    reports_available = SelectField('Do you have reports (X-ray, CT, MRI, ECG, Discharge Summary)?', choices=['Yes', 'No'])
+
 
     add_more = SubmitField('Add More')
     next = SubmitField('Next')
