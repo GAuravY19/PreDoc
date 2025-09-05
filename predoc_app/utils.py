@@ -1,3 +1,9 @@
+import os
+from dotenv import load_dotenv
+import psycopg2
+
+load_dotenv()
+
 def generate_primary_key_personal_details(tablename, conn, curr):
     curr.execute(f'SELECT COUNT(*) FROM {str(tablename)};')
     count = curr.fetchone()
@@ -49,3 +55,22 @@ def calculate_bmi(height_cm, weight_kg):
 
 def clear_country_code_input(value):
     return value.strip().strip("'")
+
+
+def connectDb():
+    host = os.getenv('DB_HOST')
+    dbname = os.getenv('DB_NAME')
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASSWORD')
+    port = os.getenv('DB_PORT')
+
+    conn = psycopg2.connect(host = host,
+                        dbname = dbname,
+                        user = user,
+                        password = password,
+                        port = port)
+
+    curr = conn.cursor()
+
+    return (conn, curr)
+
