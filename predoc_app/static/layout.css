@@ -29,12 +29,17 @@ body{
 .nav-box{
     height: 60px;
     position: relative;
+    border-bottom: 4px solid rgb(217, 214, 214);
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .nav-div-head{
     height: 40px;
-    position: relative;
     padding: 10px 0 0 30px;
+    display: flex;
+    flex-direction: row;
 }
 
 .nav-img{
@@ -43,17 +48,12 @@ body{
     /* border-radius: 20px; */
 }
 
-
 .nav-title{
-    font-family: "Anek Latin", sans-serif;
-    font-optical-sizing: auto;
-    font-size: 30px;
-    font-style: normal;
     font-weight: bold;
+    font-size: 30px;
     color: rgb(17, 56, 89);
     padding-left: 3%;
     padding-top: 3%;
-
 }
 
 .nav-flex{
@@ -62,33 +62,28 @@ body{
 }
 
 .nav-sections{
-    height: 40px;
-    width: 380px;
-    justify-content: space-evenly;
-    padding-top: 2.1%;
-    padding-left: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2%;
+    margin-top: 0.5%;
+    gap: 20px;
 }
 
-.nav-sections-text{
-    font-family: "Anek Latin", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 15px;
-    color: black;
-    padding-left: 3%;
-
+.headlines{
+    width: auto;
+    height: fit-content;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    color: rgb(17, 56, 89);
 }
 
-a{
-    text-decoration: none;
+.headlines:hover{
+    background-color: rgb(191, 163, 240);
+    color: white;
+    transition: all 0.5s ease;
 }
-
-/* .nav-endsection{
-    height: 40px;
-    width: 200px;
-    padding-top: 10px;
-    margin-left: max(46%, 44%);
-} */
 
 .nav-endsection {
     display: flex;
@@ -101,6 +96,9 @@ a{
     width: fit-content;
 }
 
+a{
+    text-decoration: none;
+}
 
 .button-white{
     height: 40px;
@@ -111,9 +109,7 @@ a{
 }
 
 .button-white-text{
-    color: black;
-    font-family: "Anek Latin", sans-serif;
-    font-optical-sizing: auto;
+    color: rgb(17, 56, 89);
     font-size: 16.5px;
     font-style: normal;
 }
@@ -128,45 +124,70 @@ a{
 
 .button-black-text{
     color: white;
-    font-family: "Anek Latin", sans-serif;
-    font-optical-sizing: auto;
     font-size: 18px;
     font-style: normal;
 }
 
-.about-me{
+footer{
+    margin-top: auto;
+    height: 7vh;
     background-color: black;
-    height: 10vh;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
-}
-
-.text-name-s{
+    gap: 20px;
     color: white;
-    font-family: "Tinos";
-    font-size: 18px;
 }
 
 .name{
-    padding-top: 20px;
+    font-size: 30px;
+    padding-top: 1rem;
     padding-left: 20px;
 }
 
-.account{
-    padding-top: 30px;
-    padding-left: 30px;
+.acc-links{
+    font-size: 18px;
+    padding-top: 1.7rem;
 }
 
-.text-name{
+.a-color{
     color: white;
-    font-family: "Tinos";
-    font-size: 30px;
 }
 
-footer{
-    margin-top: auto;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .alert{
     width: max-content;

@@ -22,7 +22,7 @@
     <body>
         <!-- Navbar starts -->
         <nav class="nav-color nav-box nav-flex">
-            <div class="nav-div-head nav-flex">
+            <div class="nav-div-head">
                 <img class="nav-img" src={{url_for('static', filename='images/logo/brand_logo.png')}}>
                 <p class="nav-title"> Predoc </p>
             </div>
@@ -31,10 +31,10 @@
                 <img onclick="togglemenu()" src={{url_for('static', filename='images/logo/menus.png')}}>
             </div>
 
-            <div class="nav-sections nav-sections-h">
-                <a href={{url_for('home')}} class="nav-sections-text"> Home </a>
-                <a href={{url_for('generate_report')}} class="nav-sections-text"> Generate Report </a>
-                <a href={{url_for('make_downloads')}} class="nav-sections-text"> Downloads </a>
+            <div class="nav-sections">
+                <a href={{url_for('home')}} class="headlines"> Home </a>
+                <a href={{url_for('generate_report')}} class="headlines"> Generate Report </a>
+                <a href={{url_for('make_downloads')}} class="headlines"> Downloads </a>
             </div>
 
             {% if current_user.is_authenticated %}
@@ -67,21 +67,10 @@
         {% endblock %}
 
         <footer class="about-me">
-            <div class="name">
-                <p class="text-name">Gaurav Yadav</p>
-            </div>
-            <div class="account">
-                <a class="text-name-s" href="">Email</a>
-            </div>
-            <div class="account">
-                <a class="text-name-s" href="https://www.linkedin.com/in/gaurav-s-yadav/">Linkedin</a>
-            </div>
-            <div class="account">
-                <a class="text-name-s" href="https://github.com/GAuravY19">Github</a>
-            </div>
-            <!--<div class="account">
-                <a class="text-name-s" href="">Instagram</a>
-            </div>-->
+            <p class="name">Gaurav Yadav</p>
+            <p class="acc-links"><a class='a-color' href="">Email</a></p>
+            <p class="acc-links"><a class='a-color' href="https://www.linkedin.com/in/gaurav-s-yadav/">Linkedin</a></p>
+            <p class="acc-links"><a class='a-color' href="https://github.com/GAuravY19">Github</a></p>
         </footer>
 
 
