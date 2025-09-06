@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 *{
     margin: 0;
@@ -14,149 +13,61 @@
 .register-box{
     height: max-content;
     width: max-content;
-    background-color: white;
-    margin-left: 30%;
+    background-color: rgba(255, 255, 255, 0.95);
+    margin-left: 35%;
     margin-top: 60px;
     margin-bottom: 60px;
-    border: 2px solid black;
-    border-radius: 40px;
-    padding: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .legend-text{
-    font-family: "Sansation", sans-serif;
-    font-weight: 400;
+    font-family: "Yrsa", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
     font-style: normal;
-    font-size: 30px;
-    padding-top: 15px;
     text-align: center;
-}
-
-.signup-options {
-    height: 10vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-}
-
-
-.google-signup {
-    display: flex;
-    flex-direction: row;
-    padding: 5px 30px;
-    justify-content: center;
-    align-items: center;
-    height: 6vh;
-    width: max-content;
-    border: 2px solid rgb(201, 249, 195);
-    border-radius: 30px;
-    margin: 0 auto 10px auto;
-    background-color: white;
-}
-
-
-.microsoft-signup {
-    display: flex;
-    flex-direction: row;
-    padding: 5px 30px;
-    justify-content: center;
-    align-items: center;
-    height: 6vh;
-    width: max-content;
-    border: 2px solid rgb(201, 249, 195);
-    border-radius: 30px;
-    margin: 0 auto 10px auto;
-    background-color: white;
-}
-
-
-.google-signup img{
-    padding-right: 10px;
-}
-
-.google-signup a{
-    color: black;
-}
-
-.microsoft-signup a{
-    color: black;
-}
-
-.microsoft-signup img{
-    padding-right: 10px;
-}
-
-.separator-line{
-    margin-top: 3%;
-    width: 70%;
-    border: 2px solid gray;
-    margin-left: 15%;
+    font-size: 45px;
+    padding-top: 5px;
 }
 
 form{
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.form-top-spacing{
+    margin-top: 15px;
+
 }
 
 .form-element{
-    height: 10vh;
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
+    height: max-content;
+    width: fit-content;
     margin-bottom: 2%;
-    padding: 0 50px;
-}
-
-.formlabel{
-    font-family: 'Red Hat Display';
-    font-size: 20px;
-    padding: 8px;
+    padding: 0 25px;
 }
 
 .form-input{
-    height: 7vh;
+    height: 6vh;
     min-height: 4vh;
-    width: auto;
+    width: 25vw;
     border-radius: 10px;
-    padding-left: 4px;
+    padding-left: 8px;
+    border: 2px solid rgb(218, 218, 218);
+    background-color: rgb(249, 250, 254);
+
 }
 
-
-.submit-button{
-    height: max-content;
-    width: max-content;
-    border-radius: 10px;
-    /* background-color: black; */
-    color: white;
-    border: 3px solid white;
-    background-color: rgb(72, 234, 72);
-    font-family: 'Red Hat Display';
-    font-size: 20px;
-    padding: 25px;
+input::placeholder {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 15px;
+  color: rgb(50, 55, 66);
 }
-
-.submit-button:hover{
-    cursor: pointer;
-}
-
-.form-submit{
-    margin-left: 40%;
-    margin-top: 20px;
-}
-
-.already p{
-    padding-left: 5%;
-    margin-top: 4%;
-}
-
-.already a{
-    color: blue;
-}
-
 
 .form-element-remember{
     height: 5vh;
@@ -171,18 +82,81 @@ form{
     padding-left: 5px;
 }
 
-.need p{
-    padding-left: 5%;
-}
-
-.need a{
-    color: blue;
-}
-
 .invalid-feedback{
     color: red;
     font-size: 15px;
     padding-top: 5px;
 }
+
+.google-signup {
+    height: 6vh;
+    min-height: 4vh;
+    width: 26vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid rgb(218, 218, 218);
+    background-color: rgb(249, 250, 254);
+    /* background-color: red; */
+    margin-bottom: 18px;
+}
+
+.google-signup img{
+    padding-right: 10px;
+}
+
+.google-signup a{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 15px;
+    color: rgb(50, 55, 66);
+}
+
+.separator-line{
+    margin-top: 3%;
+    width: 70%;
+    border: 2px solid gray;
+    margin-left: 15%;
+}
+
+.form-submit{
+    margin-top: -5%;
+}
+
+.submit-button{
+    height: 6vh;
+    min-height: 4vh;
+    width: 26vw;
+    border-radius: 10px;
+    padding-left: 8px;
+    border: 2px solid rgb(39, 13, 238);
+    background-color: rgb(21, 21, 250);
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 20px;
+    color: rgb(50, 55, 66);
+    font-weight: 600;
+    color: white;
+}
+
+.submit-box{
+    margin-left: 6%;
+    margin-bottom: 4%;
+}
+
+.already{
+    text-align: center;
+}
+
+.already a{
+    color: rgb(6, 6, 208);
+    font-weight: bold;
+    font-size: 18px;
+}
+
 
 

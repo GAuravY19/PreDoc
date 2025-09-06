@@ -18,7 +18,9 @@ body{
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    /* background-color: rgb(207, 222, 243); */
+    background: linear-gradient(to bottom, rgb(242, 243, 248), rgb(223, 231, 243));
 }
 
 .nav-color{
@@ -193,18 +195,19 @@ footer{
     width: max-content;
     height: fit-content;
     color: black;
-    background-color: rgb(197, 233, 238);
-    border: 2px solid rgb(89, 182, 228);
+    background-color: rgb(76, 163, 234);
+    border: 2px solid rgb(17, 56, 89);;
     border-radius: 10px;
-    margin: 0 auto -3% auto;
     padding: 10px;
 }
 
 .alert p {
+    font-family: "Anek Latin", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
     font-size: 17px;
     padding-left: 10px;
     text-align: center;
-
 }
 
 .danger{

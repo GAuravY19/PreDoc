@@ -7,13 +7,13 @@ from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationE
 from .model import User
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username: ',
+    username = StringField('Username',
                            validators=[DataRequired(), Length(min=6, max=10)])
-    email = StringField("Email: ",
+    email = StringField("Email",
                         validators=[DataRequired(), Email()])
-    password = PasswordField("Password: ",
+    password = PasswordField("Password",
                              validators=[DataRequired(), Length(min=10)])
-    confirm_password = PasswordField('Confirm Password: ',
+    confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
