@@ -1,0 +1,199 @@
+{% extends "layout.html" %}
+
+{%block content%}
+
+<div class="profile-box">
+    <div class="left-box">
+        <div class="element">
+            <img src={{url_for('static', filename='images/logo/brand_logo.png')}}>
+            <p class="element-title"> Predoc </p>
+        </div>
+        <div class="subelement top first">
+            <img src={{url_for('static', filename='images/logo/home.png')}}>
+            <p class="element-subtitle"> Home </p>
+            </div>
+        <div class="subelement top">
+            <img src={{url_for('static', filename='images/logo/plus.png')}}>
+            <p class="element-subtitle"> Generate Report </p>
+        </div>
+        <div class="subelement top">
+            <img src={{url_for('static', filename='images/logo/doc.png')}}>
+            <p class="element-subtitle"> Downloads </p>
+        </div>
+        <div class="subelement top">
+            <img src={{url_for('static', filename='images/logo/logout.png')}}>
+            <p class="element-subtitle"> Logout </p>
+        </div>
+    </div>
+
+
+    <div class="right-box">
+        <div class="profile-pic">
+            <img src={{image_file}}>
+            <form method='POST' action= '' enctype="multipart/form-data">
+                {{form.hidden_tag() }}
+
+                <div class="form-box">
+                    {{ form.picture.label(class='form-header element-subtitle') }}<br>
+
+                    {% if form.picture.errors %}
+                    {{ form.picture() }}
+                        <div class="invalid-feedback">
+                            {% for error in form.picture.errors %}
+                                <p> {{error}} </p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.picture() }}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <div class="profile-details">
+            <div class="element-title bottom">
+                <p> Gaurav Yadav </p>
+            </div>
+
+            <div class="email">
+                <p> gauravy1905@gmail.com </p>
+            </div>
+
+            <div class="profile-segment">
+                <div id="blood-height" class="profile-subcard">
+                    <div class="blood">
+                        <p class="title">Blood Group: </p>
+                        <p class="value">O+</p>
+                    </div>
+                    <div class="height">
+                        <p class="title">Height: </p>
+                        <p class="value">165 cm</p>
+                    </div>
+                </div>
+                <div id="date-weight" class="profile-subcard">
+                    <div class="date">
+                        <p class="title">Date-of-Birth: </p>
+                        <p class="value">165 cm</p>
+                    </div>
+                    <div class="weight">
+                        <p class="title">weight: </p>
+                        <p class="value">165 cm</p>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

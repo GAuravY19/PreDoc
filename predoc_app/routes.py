@@ -289,13 +289,16 @@ def profile():
             return redirect(url_for('profile'))
 
 
-    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at LIMIT 1', (user_id,))
-    user_details = curr.fetchone()
+    # curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at LIMIT 1', (user_id,))
+    # user_details = curr.fetchone()
 
     image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
 
-    return render_template('profile.html', user_details=user_details,
-                           image_file=image_file, form=form)
+    # return render_template('new_profile.html', user_details=user_details,
+    return render_template('new_profile.html',
+                           image_file=image_file, css_file = 'profile.css', form=form)
+
+    return render_template('new_profile.html', )
 
 
 @app.route('/generate_report')
