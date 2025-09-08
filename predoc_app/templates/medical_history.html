@@ -5,10 +5,10 @@
 <div class="form-holder">
     <form method="POST" action="">
         {{form.hidden_tag()}}
-        <legend class="legend-text"> Update Your Personal Details </legend>
+        <legend class="legend-text"> Update Your Medical History </legend>
         <hr class="separator">
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.diabetes.label(class='form-header') }} <br>
 
             {% if form.diabetes.errors %}
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.hypertension.label(class='form-header') }} <br>
 
             {% if form.hypertension.errors %}
@@ -40,7 +40,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.cardiac_disease.label(class='form-header') }} <br>
 
             {% if form.cardiac_disease.errors %}
@@ -56,7 +56,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.respiratory_disease.label(class='form-header') }} <br>
 
             {% if form.respiratory_disease.errors %}
@@ -72,7 +72,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.epilepsy.label(class='form-header') }} <br>
 
             {% if form.epilepsy.errors %}
@@ -88,23 +88,23 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.mental_health_condition.label(class='form-header') }} <br>
 
             {% if form.mental_health_condition.errors %}
-                {{ form.mental_health_condition(class='input') }}
+                {{ form.mental_health_condition(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.mental_health_condition.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.mental_health_condition(class='input') }}
+                {{ form.mental_health_condition(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.past_surgeries.label(class='form-header') }} <br>
 
             {% if form.past_surgeries.errors %}
@@ -120,23 +120,23 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.past_surgeries_type.label(class='form-header') }} <br>
 
             {% if form.past_surgeries_type.errors %}
-                {{ form.past_surgeries_type(class='input') }}
+                {{ form.past_surgeries_type(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.past_surgeries_type.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.past_surgeries_type(class='input') }}
+                {{ form.past_surgeries_type(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.family_history.label(class='form-header') }} <br>
 
             {% if form.family_history.errors %}

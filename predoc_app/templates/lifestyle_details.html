@@ -9,7 +9,7 @@
         <legend class="legend-text"> Update Your Lifestyle Details </legend>
         <hr class="separator">
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.smoking_choice.label(class='form-header') }} <br>
 
             {% if form.smoking_choice.errors %}
@@ -25,7 +25,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.alcohol_use.label(class='form-header') }} <br>
 
             {% if form.alcohol_use.errors %}
@@ -41,7 +41,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.substance_use.label(class='form-header') }} <br>
 
             {% if form.substance_use.errors %}
@@ -57,7 +57,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.exercise.label(class='form-header') }} <br>
 
             {% if form.exercise.errors %}
@@ -73,23 +73,23 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.sleep_hours.label(class='form-header') }} <br>
 
             {% if form.sleep_hours.errors %}
-                {{ form.sleep_hours(class='input') }}
+                {{ form.sleep_hours(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.sleep_hours.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.sleep_hours(class='input') }}
+                {{ form.sleep_hours(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.diet_pattern.label(class='form-header') }} <br>
 
             {% if form.diet_pattern.errors %}

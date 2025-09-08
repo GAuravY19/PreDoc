@@ -10,19 +10,19 @@
         </div>
         <div class="subelement top first">
             <img src={{url_for('static', filename='images/logo/home.png')}}>
-            <p class="element-subtitle"> Home </p>
+            <p class="element-subtitle"><a href={{url_for('home')}}> Home </a></p>
             </div>
         <div class="subelement top">
             <img src={{url_for('static', filename='images/logo/plus.png')}}>
-            <p class="element-subtitle"> Generate Report </p>
+            <p class="element-subtitle"> <a href={{url_for('generate_report')}}> Generate Report </a></p>
         </div>
         <div class="subelement top">
             <img src={{url_for('static', filename='images/logo/doc.png')}}>
-            <p class="element-subtitle"> Downloads </p>
+            <p class="element-subtitle"> <a href={{url_for('make_downloads')}}> Downloads </a></p>
         </div>
         <div class="subelement top">
             <img src={{url_for('static', filename='images/logo/logout.png')}}>
-            <p class="element-subtitle"> Logout </p>
+            <p class="element-subtitle"> <a href={{url_for('logout')}}> Logout </a></p>
         </div>
     </div>
 
@@ -44,7 +44,8 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.picture() }}
+                        <!--<button>{{ form.picture(class='file-upload') }}<button>-->
+                        {{ form.picture(class='file-upload') }}
                     {% endif %}
                 </div>
             </form>

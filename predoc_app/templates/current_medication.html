@@ -5,10 +5,10 @@
 <div class="form-holder">
     <form method="POST" action="">
         {{form.hidden_tag()}}
-        <legend class="legend-text"> Update Your Personal Details </legend>
+        <legend class="legend-text"> Add your medication details </legend>
         <hr class="separator">
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.medication.label(class='form-header') }} <br>
 
             {% if form.medication.errors %}
@@ -24,89 +24,89 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.drug_name.label(class='form-header') }} <br>
 
             {% if form.drug_name.errors %}
-                {{ form.drug_name(class=' input') }}
+                {{ form.drug_name(class=' input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.drug_name.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.drug_name(class=' input') }}
+                {{ form.drug_name(class=' input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.dosage.label(class='form-header') }} <br>
 
             {% if form.dosage.errors %}
-                {{ form.dosage(class='input') }}
+                {{ form.dosage(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.dosage.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.dosage(class='input') }}
+                {{ form.dosage(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.frequency.label(class='form-header') }} <br>
 
             {% if form.frequency.errors %}
-                {{ form.frequency(class=' input') }}
+                {{ form.frequency(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.frequency.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.frequency(class=' input') }}
+                {{ form.frequency(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.start_date.label(class='form-header') }} <br>
 
             {% if form.start_date.errors %}
-                {{ form.start_date(class='input') }}
+                {{ form.start_date(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.start_date.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.start_date(class='input') }}
+                {{ form.start_date(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.end_date.label(class='form-header') }} <br>
 
             {% if form.end_date.errors %}
-                {{ form.end_date(class='  input') }}
+                {{ form.end_date(class='  input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.end_date.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.end_date(class='  input') }}
+                {{ form.end_date(class='  input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
-            {{form.add_more(class='submit-button')}}
-            {{form.next(class='submit-button')}}
+        <div class="form-button">
+            {{form.add_more(class='add-button')}}
+            {{form.next(class='add-button new-shifts')}}
         </div>
 
     </form>

@@ -5,10 +5,10 @@
 <div class="form-holder">
     <form method="POST" action="">
         {{form.hidden_tag()}}
-        <legend class="legend-text"> Add Allergy Details </legend>
+        <legend class="legend-text"> Add your Allergy Details </legend>
         <hr class="separator">
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.allergy_status.label(class='form-header') }} <br>
 
             {% if form.allergy_status.errors %}
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.allergy_type.label(class='form-header') }} <br>
 
             {% if form.allergy_type.errors %}
@@ -40,7 +40,7 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.allergy_name.label(class='form-header') }} <br>
 
             {% if form.allergy_name.errors %}
@@ -56,25 +56,25 @@
 
         </div>
 
-        <div class="form-content">
+        <div class="form-content move-left">
             {{ form.allergy_reaction.label(class='form-header') }} <br>
 
             {% if form.allergy_reaction.errors %}
-                {{ form.allergy_reaction(class='input') }}
+                {{ form.allergy_reaction(class='input width-low') }}
                 <div class="invalid-feedback">
                     {% for error in form.allergy_reaction.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.allergy_reaction(class='input') }}
+                {{ form.allergy_reaction(class='input width-low') }}
             {% endif %}
 
         </div>
 
-        <div class="form-content">
-            {{form.add_more(class='submit-button')}}
-            {{form.next(class='submit-button')}}
+        <div class="form-button">
+            {{form.add_more(class='add-button')}}
+            {{form.next(class='add-button new-shifts')}}
         </div>
 
     </form>

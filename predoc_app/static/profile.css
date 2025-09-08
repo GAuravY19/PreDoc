@@ -88,6 +88,10 @@ footer{
     color: rgb(17, 56, 89);
 }
 
+.element-subtitle a{
+    color: rgb(17, 56, 89);
+}
+
 .profile-pic{
     margin-left: 8%;
     margin-top: 5%;
@@ -162,6 +166,16 @@ footer{
     margin-left: 5%;
 }
 
+/* .file-upload{
+    background-color: red;
+    margin-top: 10px;
+} */
+
+input[type='file']{
+    background-color: red;
+    height: 10vh;
+    width: 10%;
+}
 
 
 
