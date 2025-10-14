@@ -223,6 +223,40 @@ CREATE TABLE IF NOT EXISTS report(
 
 SELECT * FROM report;
 
+CREATE TABLE IF NOT EXISTS accidents (
+    accident_id VARCHAR PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    any_accident BOOLEAN NOT NULL,
+    accident_date DATE,
+    accident_type VARCHAR,
+    body_part_injured VARCHAR,
+    hospitalized BOOLEAN,
+    any_surgery BOOLEAN,
+    lasting_problem VARCHAR,
+    reports_available BOOLEAN,
+    created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO accidents (
+    accident_id,user_id, any_accident, accident_date, accident_type,
+    body_part_injured, hospitalized, any_surgery, lasting_problem, reports_available
+) VALUES (
+	'AI1',
+    1,
+    '2022-08-15',
+    'Road Accident',
+    'Left Leg',
+    TRUE,
+    FALSE,
+    'Occasional knee pain',
+    TRUE
+);
+
+select * from accidents;
 
 
+DROP TABLE allergies;
+DROP TABLE accidents;
+DROP TABLE current_medication_details;
 
