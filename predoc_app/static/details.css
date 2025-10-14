@@ -8,6 +8,7 @@
     margin: 0;
 }
 
+
 .form-holder{
     width: max-content;
     height: auto;
@@ -92,7 +93,7 @@ input::placeholder {
   color: rgb(50, 55, 66);
 }
 
-.submit-button{
+.submit-button-d{
     height: 6vh;
     min-height: 4vh;
     width: 26vw;
