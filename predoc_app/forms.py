@@ -140,29 +140,18 @@ class MedicalHistoryForm(FlaskForm):
 
 
 class AllergiesForm(FlaskForm):
-    allergy_type_options = ['Food allergies', 'Drug (medication) allergies', 'Insect allergies',
-                            'Pet allergies', 'Mold allergies', 'Pollen allergies', 'Latex allergies',
-                            'Skin allergies', 'Allergic asthma', 'Eye allergies (allergic conjunctivitis)',
-                            'Anaphylaxis']
-
-    allergy_name_options = ['Milk allergy', 'Egg allergy', 'Peanut allergy', 'Tree nut allergy (e.g., walnuts, almonds, cashews)',
-                    'Shellfish allergy (e.g., shrimp, lobster, crab)', 'Fish allergy', 'Soy allergy', 'Wheat allergy',
-                    'Sesame allergy', 'Pollen allergy', 'House dust mite allergy', 'Pet dander allergy (cats and dogs)',
-                    'Mold allergy', 'Insect allergy', 'Drug allergies (e.g., penicillin)', 'Latex allergy',
-                    'Nickel allergy (contact dermatitis from jewelry and metals)', 'Perfume/cosmetic allergies']
+    allergy_type_options = ['Food Allergy', 'Drug/Medication Allergy', 'Insect Allergy', "Pet Allergy",
+                            'Environmental Allergy', 'Latex Allergy', 'Skin Allergy', 'Respiratory Allergy / Asthma',
+                            'Skin allergies', 'Eye Allergy', 'Severe Reaction']
 
     allergy_status = SelectField('Any kind of allergy: ', choices=['Yes', 'No'],
                                  validators=[DataRequired()])
 
 
-    allergy_type = SelectMultipleField('Type of allergy: ', choices=[(allergy, allergy) for allergy in allergy_type_options]\
-                                        , option_widget=widgets.CheckboxInput(),
-                                        widget=widgets.ListWidget(prefix_label=False))
+    allergy_type = SelectField('Type of allergy: ', choices=[(allergy, allergy) for allergy in allergy_type_options])
 
 
-    allergy_name = SelectMultipleField("Allergy Name: ", choices=[(name, name) for name in allergy_name_options],
-                                       option_widget=widgets.CheckboxInput(),
-                                        widget=widgets.ListWidget(prefix_label=False))
+    allergy_triggers = StringField("What causes my allergy")
 
     allergy_reaction = StringField('What is the allergy reaction: ')
 
@@ -188,30 +177,35 @@ class CurrentMedicationForm(FlaskForm):
 class AccidentsForms(FlaskForm):
     accident_type_list = ['Road Accidents', 'Slips, Trips, and Falls', 'Workplace Accidents',
                           'Medical Accidents', 'Home Accidents', 'Sports and Recreation', 'Natural Disasters',
-                          'Vehicle and Bicycle Accidents']
+                          'Vehicle and Bicycle Accidents', 'No']
 
-    injured_body_part = ['Head', 'Chest', 'Abdomen', 'Spine', 'Limb', 'Eye', 'Other']
+    injured_body_part = ['Head', 'Chest', 'Abdomen', 'Spine', 'Limb', 'Eye', 'Other', 'None']
 
     accident_problem = ['Pain', 'Stiffness', 'Weakness', 'Vision issues', 'Breathing issues', 'None']
 
 
-    any_accident = SelectField('Have you ever had any accident/injury that required medical attention?',
+    any_accident = SelectField('Have you ever had a medical-treated injury/accident?',
                                choices=['Yes', 'No'], validators=[DataRequired()])
 
-    accident_date = DateField('Approximate date/year of accident')
+    accident_date = DateField('Approximate date/year of accident', format='%Y-%m-%d', validators=[Optional()])
 
-    accident_type = SelectField('Type of accident', choices=accident_type_list)
+    accident_type = SelectField('Type of accident', choices=[(acci_type, acci_type) for acci_type in accident_type_list],
+                                validators=[Optional()])
 
-    body_part_injured = SelectField('Main body part injured', choices=injured_body_part)
+    body_part_injured = SelectField('Main body part injured', choices=[(injury, injury) for injury in injured_body_part],
+                                validators=[Optional()])
 
-    hospitalized = SelectField('Were you hospitalized?', choices=['Yes', 'No'])
+    hospitalized = SelectField('Were you hospitalized?', choices=['Yes', 'No'],
+                                validators=[Optional()])
 
-    any_surgey = SelectField('Any surgeries or implants from this accident?', choices=['Yes', 'No'])
+    any_surgey = SelectField('Any surgery/implants from the accident?', choices=['Yes', 'No'],
+                                validators=[Optional()])
 
-    lasting_problem = SelectField('Any lasting problems today due to this accident?', choices=accident_problem)
+    lasting_problem = SelectField('Any current problems from this injury?', choices=[(accident, accident) for accident in accident_problem],
+                                validators=[Optional()])
 
-    reports_available = SelectField('Do you have reports (X-ray, CT, MRI, ECG, Discharge Summary)?', choices=['Yes', 'No'])
-
+    reports_available = SelectField('Do you have reports ?', choices=['Yes', 'No'],
+                                validators=[Optional()])
 
     add_more = SubmitField('Add More')
     next = SubmitField('Next')
@@ -220,3 +214,5 @@ class AccidentsForms(FlaskForm):
 class UpdateProfilePhoto(FlaskForm):
     picture = FileField('Update Profile photo', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Update')
+
+
