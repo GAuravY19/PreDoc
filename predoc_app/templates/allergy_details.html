@@ -28,30 +28,30 @@
             {{ form.allergy_type.label(class='form-header') }} <br>
 
             {% if form.allergy_type.errors %}
-                {{ form.allergy_type(class='form-checkbox') }}
+                {{ form.allergy_type(class='input') }}
                 <div class="invalid-feedback">
                     {% for error in form.allergy_type.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.allergy_type(class='form-checkbox') }}
+                {{ form.allergy_type(class='input') }}
             {% endif %}
 
         </div>
 
         <div class="form-content move-left">
-            {{ form.allergy_name.label(class='form-header') }} <br>
+            {{ form.allergy_triggers.label(class='form-header') }} <br>
 
-            {% if form.allergy_name.errors %}
-                {{ form.allergy_name(class='form-checkbox') }}
+            {% if form.allergy_triggers.errors %}
+                {{ form.allergy_triggers(class='input width-low') }}
                 <div class="invalid-feedback">
-                    {% for error in form.allergy_name.errors %}
+                    {% for error in form.allergy_triggers.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.allergy_name(class='form-checkbox') }}
+                {{ form.allergy_triggers(class='input width-low') }}
             {% endif %}
 
         </div>
