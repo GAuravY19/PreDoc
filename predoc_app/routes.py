@@ -11,6 +11,7 @@ import os
 import io
 import pdfkit
 import secrets
+import datetime
 
 
 @app.route('/')
@@ -192,7 +193,7 @@ def allergy_details():
 
         elif form.next.data:
             if form.allergy_status.data == 'Yes' and len(allergies_details) == 0:
-                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": True,
+                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": True, "created_at": datetime.datetime.now(),
                                           "allergy_details":[{"allergy_type":form.allergy_type.data, "allergy_name":form.allergy_triggers.data, "allergy_reaction":form.allergy_reaction.data}]})
 
             elif form.allergy_status.data == 'Yes' and len(allergies_details) > 0:
@@ -203,11 +204,11 @@ def allergy_details():
                 }
 
                 allergies_details.append(new_allergy)
-                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": True,
+                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": True,"created_at": datetime.datetime.now(),
                                           "allergy_details":allergies_details})
 
             else:
-                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": False})
+                db['allergy'].insert_one({"allergy_id":generate_primary_key_Mongo('allergy', db), "user_id":user_id, "allergyStatus": False,"created_at": datetime.datetime.now()})
 
             return redirect(url_for('current_medication_details'))
 
@@ -245,7 +246,7 @@ def current_medication_details():
         elif form.next.data:
             if form.medication.data == 'Yes' and len(current_medication) == 0:
                 db['medication'].insert_one({'medicationId':generate_primary_key_Mongo('medication', db), 'user_id': user_id,
-                                             'medicationStatus':True, 'medicationDetails':[{'medicineName': form.drug_name.data,
+                                             'medicationStatus':True,"created_at": datetime.datetime.now(), 'medicationDetails':[{'medicineName': form.drug_name.data,
                                              'dosage': form.dosage.data, 'frequency': form.frequency.data, 'start_date': form.start_date.data,
                                              'end_date': form.end_date.data}]})
 
@@ -260,11 +261,11 @@ def current_medication_details():
 
                 current_medication.append(medication_details)
                 db['medication'].insert_one({'medicationId':generate_primary_key_Mongo('medication', db), 'user_id': user_id,
-                                'medicationStatus':True,'medicationDetails':medication_details})
+                                'medicationStatus':True,"created_at": datetime.datetime.now(),'medicationDetails':medication_details})
 
             else:
                 db['medication'].insert_one({'medicationId':generate_primary_key_Mongo('medication', db), 'user_id': user_id,
-                                'medicationStatus':False})
+                                'medicationStatus':False, "created_at": datetime.datetime.now()})
             return redirect(url_for('accident_details'))
 
     return render_template('current_medication.html', form=form)
@@ -301,7 +302,7 @@ def accident_details():
         elif forms.next.data:
             if forms.any_accident.data == "Yes" and len(accident_details_list) == 0:
                 db['accidents'].insert_one({'accidentId': generate_primary_key_Mongo('accidents', db), 'user_id': user_id,
-                                            'accidentStatus': True, 'accidentdetails': [{
+                                            'accidentStatus': True,"created_at": datetime.datetime.now(), 'accidentdetails': [{
                                                                         'accidentDate':forms.accident_date.data,
                                                                         'type':forms.accident_type.data,
                                                                         'bodypartInjured':forms.body_part_injured.data,
@@ -325,11 +326,11 @@ def accident_details():
                 accident_details_list.append(accident_report)
 
                 db['accidents'].insert_one({'accidentId': generate_primary_key_Mongo('accidents', db), 'user_id': user_id,
-                                            'accidentStatus': True, 'accidentdetails': accident_details_list})
+                                            'accidentStatus': True,"created_at": datetime.datetime.now(), 'accidentdetails': accident_details_list})
 
             else:
                 db['accidents'].insert_one({'accidentId': generate_primary_key_Mongo('accidents', db), 'user_id': user_id,
-                                            'accidentStatus': False})
+                                            'accidentStatus': False, "created_at": datetime.datetime.now()})
 
             return redirect(url_for('generate_medical_report'))
 
@@ -347,6 +348,7 @@ def generate_medical_report():
         user_id = current_user.user_id
 
     conn, curr = connectDb()
+    db = connectMongoDB()
 
     curr.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     users = curr.fetchone()
@@ -360,17 +362,17 @@ def generate_medical_report():
     curr.execute('SELECT * FROM medical_history WHERE user_id = %s ORDER BY created_at', (user_id,))
     medical = curr.fetchone()
 
-    curr.execute('SELECT * FROM allergies WHERE user_id = %s ORDER BY created_at', (user_id,))
-    allergies = curr.fetchall()
+    allergy_data = db['allergy'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
+    allergy_data = list(allergy_data)
 
-    curr.execute('SELECT * FROM current_medication_details WHERE user_id = %s ORDER BY created_at', (user_id,))
-    current_medication = curr.fetchall()
+    current_medication_data = db['medication'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
+    current_medication_data = list(current_medication_data)
 
-    curr.execute('SELECT * FROM accidents WHERE user_id = %s ORDER BY created_at', (user_id,))
-    accidents = curr.fetchall()
+    accidents_data = db['accidents'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
+    accidents_data = list(accidents_data)
 
     html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
-                                   medical=medical, allergies=allergies, current_medication=current_medication, accidents=accidents)
+                                   medical=medical, allergies=allergy_data, current_medication=current_medication_data, accidents=accidents_data)
 
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'
     # path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
