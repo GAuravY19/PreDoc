@@ -28,7 +28,7 @@ def generate_primary_key_SQL(tablename, conn, curr):
 
 
 def generate_primary_key_Mongo(collectionName, db):
-    counting = db[collectionName].find().count() + 1
+    counting = db[collectionName].count_documents({}) + 1
 
     if collectionName == 'allergy':
         primary_key = f'AL{counting}'
@@ -37,7 +37,7 @@ def generate_primary_key_Mongo(collectionName, db):
         primary_key = f'MD{counting}'
 
     elif collectionName == 'accidents':
-        primary_key = f'MD{counting}'
+        primary_key = f'AC{counting}'
 
     return primary_key
 
