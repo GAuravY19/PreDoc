@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <legend class="legend-text"> Add your Accidents details </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.any_accident.label(class='form-header') }} <br>
+
+            {% if form.any_accident.errors %}
+                {{ form.any_accident(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.any_accident.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.any_accident(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.accident_date.label(class='form-header') }} <br>
+
+            {% if form.accident_date.errors %}
+                {{ form.accident_date(class=' input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.accident_date.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.accident_date(class=' input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.accident_type.label(class='form-header') }} <br>
+
+            {% if form.accident_type.errors %}
+                {{ form.accident_type(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.accident_type.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.accident_type(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.body_part_injured.label(class='form-header') }} <br>
+
+            {% if form.body_part_injured.errors %}
+                {{ form.body_part_injured(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.body_part_injured.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.body_part_injured(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.hospitalized.label(class='form-header') }} <br>
+
+            {% if form.hospitalized.errors %}
+                {{ form.hospitalized(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.hospitalized.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.hospitalized(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.any_surgey.label(class='form-header') }} <br>
+
+            {% if form.any_surgey.errors %}
+                {{ form.any_surgey(class='  input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.any_surgey.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.any_surgey(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.lasting_problem.label(class='form-header') }} <br>
+
+            {% if form.lasting_problem.errors %}
+                {{ form.lasting_problem(class='  input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.lasting_problem.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.lasting_problem(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.reports_available.label(class='form-header') }} <br>
+
+            {% if form.reports_available.errors %}
+                {{ form.reports_available(class='  input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.reports_available.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.reports_available(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-button">
+            {{form.add_more(class='add-button')}}
+            {{form.next(class='add-button new-shifts')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
