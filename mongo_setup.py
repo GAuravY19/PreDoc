@@ -7,7 +7,7 @@ db = client['predoc_no_sql_db']
 # Allergy Table
 validators_allergy = {
     "bsonType": "object",
-    "required": ["allergy_id", "user_id", "allergyStatus"],
+    "required": ["allergy_id", "user_id", "allergyStatus", 'created_at'],
     "properties": {
         "allergy_id": {
             "bsonType": "string",
@@ -20,6 +20,10 @@ validators_allergy = {
         "allergyStatus": {
             "bsonType": "bool",
             "description": "Should be Boolean and required"
+        },
+        "created_at":{
+            "bsonType": 'date',
+            "description": 'should be date, required'
         },
         "allergy_details": {
             "bsonType": "array",
@@ -56,7 +60,7 @@ db.create_collection(
 
 validators_medication = {
     "bsonType": "object",
-    "required": ["medicationId", "user_id","medicationStatus"],
+    "required": ["medicationId", "user_id","medicationStatus", 'created_at'],
     "properties": {
         "medicationId": {
             "bsonType": "string",
@@ -69,6 +73,10 @@ validators_medication = {
         "medicationStatus": {
             "bsonType": "bool",
             "description": "Should be Boolean and required"
+        },
+        "created_at":{
+            "bsonType": 'date',
+            "description": 'should be date, required'
         },
         "medicationDetails": {
             "bsonType": "array",
@@ -114,7 +122,7 @@ db.create_collection(
 
 validators_accidents = {
     "bsonType": "object",
-    "required": ["accidentId", "user_id","accidentStatus"],
+    "required": ["accidentId", "user_id","accidentStatus", 'created_at'],
     "properties": {
         "accidentId": {
             "bsonType": "string",
@@ -127,6 +135,10 @@ validators_accidents = {
         "accidentStatus": {
             "bsonType": "bool",
             "description": "Should be Boolean and required"
+        },
+        "created_at":{
+            "bsonType": 'date',
+            "description": 'should be date, required'
         },
         "accidentdetails": {
             "bsonType": "array",
@@ -177,3 +189,13 @@ db.create_collection(
 )
 
 
+
+
+# allergy_data = db['allergy'].find({'user_id': 9}).sort({"created_at": -1}).limit(1)
+# allergy_data = list(allergy_data)
+
+# for allergy in allergy_data[0]['allergy_details']:
+#     print(allergy['allergy_type'])
+#     print(allergy['allergy_name'])
+#     print(allergy['allergy_reaction'])
+#     # print(allergy)
