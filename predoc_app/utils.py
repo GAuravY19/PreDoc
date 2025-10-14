@@ -1,10 +1,11 @@
 import os
 from dotenv import load_dotenv
 import psycopg2
+from pymongo import MongoClient
 
 load_dotenv()
 
-def generate_primary_key_personal_details(tablename, conn, curr):
+def generate_primary_key_SQL(tablename, conn, curr):
     curr.execute(f'SELECT COUNT(*) FROM {str(tablename)};')
     count = curr.fetchone()
 
@@ -17,14 +18,26 @@ def generate_primary_key_personal_details(tablename, conn, curr):
     elif tablename == 'medical_history':
         primary_key = f'MD{count[0]+1}'
 
-    elif tablename == 'allergies':
-        primary_key = f'AL{count[0]+1}'
-
-    elif tablename == 'current_medication_details':
-        primary_key = f'CM{count[0]+1}'
-
     elif tablename == 'report':
         primary_key = f'RP{count[0]+1}'
+
+    elif tablename == 'accidents':
+        primary_key = f'AI{count[0]+1}'
+
+    return primary_key
+
+
+def generate_primary_key_Mongo(collectionName, db):
+    counting = db[collectionName].find().count() + 1
+
+    if collectionName == 'allergy':
+        primary_key = f'AL{counting}'
+
+    elif collectionName == 'medication':
+        primary_key = f'MD{counting}'
+
+    elif collectionName == 'accidents':
+        primary_key = f'MD{counting}'
 
     return primary_key
 
@@ -73,4 +86,9 @@ def connectDb():
     curr = conn.cursor()
 
     return (conn, curr)
+
+def connectMongoDB():
+    client = MongoClient('mongodb://localhost:27017')
+    db = client['predoc_no_sql_db']
+    return db
 
