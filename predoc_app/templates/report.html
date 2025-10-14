@@ -48,34 +48,52 @@
     </table>
 
     <h3>Allergies</h3>
-    {% if allergies[0][2] %}
     <ul>
-        {% for allergy in allergies %}
-        <li> Allergy Type: {{allergy[3]}} </li>
-        <li> Allergy Name: {{allergy[4]}} </li>
-        <li> Allergy Reaction: {{allergy[5]}} </li>
-        {% endfor %}
+        {%if allergies[0]['allergyStatus'] %}
+            {% for allergy in allergies[0]['allergy_details']%}
+                <li> Allergy Type: {{allergy['allergy_type']}} </li>
+                <li> Allergy Name: {{allergy['allergy_name']}} </li>
+                <li> Allergy Reaction: {{allergy['allergy_reaction']}} </li>
+                <br></br>
+            {% endfor %}
+        {% else %}
+            <p> No Allergies reported </p>
+        {% endif %}
     </ul>
-    {% else %}
-    <p> No allergy </p>
-    {% endif %}
 
     <h3>Current Medication</h3>
 
-    {% if current_medication[0][2]%}
     <ul>
-        {% for medication in current_medication %}
-        <li> Drug Name: {{medication[3]}} </li>
-        <li> Dosage: {{medication[4]}} </li>
-        <li> Frequency: {{medication[5]}} </li>
-        <li> Start Date: {{medication[6]}} </li>
-        <li> End Date: {{medication[7]}} </li>
-
-        {% endfor %}
+        {%if current_medication[0]['medicationStatus'] %}
+            {% for medicine in current_medication[0]['medicationDetails']%}
+                <li> Medicine Name: {{medicine['medicineName']}} </li>
+                <li> Dosage: {{medicine['dosage']}} </li>
+                <li> Frequency: {{medicine['frequency']}} </li>
+                <li> Medication Start Date: {{medicine['start_date']}} </li>
+                <li> Medication End Date: {{medicine['end_date']}} </li>
+                <br></br>
+            {% endfor %}
+        {% else %}
+            <p> No Medication Undergoing </p>
+        {% endif %}
     </ul>
 
+
+    <h3> Accident Details </h3>
+    <ul>
+    {%if accidents[0]['accidentStatus'] %}
+        {% for accident in accidents[0]['accidentdetails']%}
+            <li> Approx Accident Date: {{accident['accidentDate']}} </li>
+            <li> Accident Type: {{accident['type']}} </li>
+            <li> Injury Reported: {{accident['bodypartInjured']}} </li>
+            <li> Hospitalization: {{accident['Hospitalized']}} </li>
+            <li> Surgery: {{accident['Surgery']}} </li>
+            <li> Any ongoing problem: {{accident['CurrentProblems']}} </li>
+            <li> Reports available ?: {{accident['ReportStatus']}} </li>
+            <br></br>
+        {% endfor %}
     {% else %}
-    <p> No Medication Undergoing </p>
+        <p> No Accident Reported </p>
     {% endif %}
 
 
