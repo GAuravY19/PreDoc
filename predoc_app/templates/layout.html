@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         {% if title %}
             <title>{{ title }}</title>
         {% else %}
@@ -8,17 +10,16 @@
         {% endif %}
 
         <link rel='stylesheet' href={{url_for('static', filename='layout.css')}}>
-        <link rel='stylesheet' href={{url_for('static', filename='layout_resp.css')}}>
         <link rel='stylesheet' href={{url_for('static', filename='home.css')}}>
         <link rel='stylesheet' href={{url_for('static', filename=css_file)}}>
         <link rel='stylesheet' href={{url_for('static', filename='details.css')}}>
 
-        <script type="text/javascript" src={{url_for('static', filename = 'js/layout.js')}}>
-
-        </script>
 
     </head>
     <body>
+
+
+
         <!-- Navbar starts -->
         <nav class="nav-color nav-box nav-flex">
             <div class="nav-div-head">
@@ -26,14 +27,13 @@
                 <p class="nav-title"> Predoc </p>
             </div>
 
-            <div class='hamburger' >
-                <img onclick="togglemenu()" src={{url_for('static', filename='images/logo/menus.png')}}>
-            </div>
-
-            <div class="nav-sections">
-                <a href={{url_for('home')}} class="headlines"> Home </a>
-                <a href={{url_for('generate_report')}} class="headlines"> Generate Report </a>
-                <a href={{url_for('make_downloads')}} class="headlines"> Downloads </a>
+            <div id='navextend' class="nav-sections">
+                <div id='cross' class="cross">
+                    <img src={{url_for('static', filename='images/logo/close.png')}}>
+                </div>
+                <a aria-disabled="true" href={{url_for('home')}} class="headlines"> Home </a>
+                <a aria-disabled="true" href={{url_for('generate_report')}} class="headlines"> Generate Report </a>
+                <a aria-disabled="true" href={{url_for('make_downloads')}} class="headlines"> Downloads </a>
             </div>
 
             {% if current_user.is_authenticated %}
@@ -47,33 +47,35 @@
                 <button class="button-black"><a class="button-black-text" href={{url_for('register')}}> Register </a></button>
             </div>
             {% endif %}
+
+            <button class="hamburger" onclick='ShowingBurger()'>
+                <img id='hamburgerbtn' src={{url_for('static', filename='images/logo/menus.png')}}>
+            </button>
+
         </nav>
 
         <!-- Navbar ends -->
 
         {% with messages = get_flashed_messages(with_categories = true)%}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class='alert'>
-                        <p class={{category}}>{{ message }}</p>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class='alert'>
+            <p class={{category}}>{{ message }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
 
         {% block content %}
         {% endblock %}
 
-        <footer class="about-me">
+        <!--<footer class="about-me">
             <p class="name">Gaurav Yadav</p>
             <p class="acc-links"><a class='a-color' href="">Email</a></p>
             <p class="acc-links"><a class='a-color' href="https://www.linkedin.com/in/gaurav-s-yadav/">Linkedin</a></p>
             <p class="acc-links"><a class='a-color' href="https://github.com/GAuravY19">Github</a></p>
-        </footer>
-
-
-
-
-    </body>
-    </html>
+            </footer>-->
+        <script type="text/javascript" src={{url_for('static', filename = 'js/layout.js')}} defer></script>
+        </body>
+        </html>
