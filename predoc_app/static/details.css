@@ -160,4 +160,53 @@ input::placeholder {
     margin-left: 2.5%;
 }
 
+.hamburger{
+    display: none;
+}
 
+.cross{
+    display: none;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .form-holder{
+        width: 80%;
+        height: max-content;
+    }
+
+    .legend-text{
+        font-size: 25px;
+    }
+
+    .form-content{
+        padding-top: 30px;
+    }
+
+    .move-left{
+        margin-left: 8.3%;
+    }
+
+    .form-header{
+        font-size: 18px;
+        padding-left: 10px;
+    }
+
+    .input{
+        height: 5vh;
+        width: 85%;
+        margin-left: auto;
+    }
+
+    .submit-button-d{
+        width: 30vw;
+        margin-left: 30%;
+    }
+
+    .add-button{
+        width: 29vw;
+        margin-left: 9%;
+    }
+
+
+}
