@@ -77,3 +77,40 @@ button:hover{
 }
 
 
+@media only screen and (max-width: 500px) {
+    .box{
+        height: max-content;
+        width: 60vw;
+        margin-left: 10%;
+        margin-top: 30%;
+    }
+
+    .title{
+        font-size: 30px;
+        font-weight: 600;
+        color: rgb(2, 27, 48);
+        padding-bottom: 20px;
+        text-align: center;
+    }
+
+    .subtitle{
+        font-size: 25px;
+        padding-bottom: 20px;
+    }
+
+    .login{
+        height: max-content;
+        width: 100px;
+        font-size: 18px;
+        padding: 15px 25px;
+        border-radius: 15px;
+        border: 2px solid gray;
+    }
+
+    .login-options{
+        margin-left: 9%;
+    }
+}
+
+
+

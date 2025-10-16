@@ -12,13 +12,17 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh; /* fill full viewport and beyond */
+  min-height: 100vh;
   background: linear-gradient(to bottom, rgb(242, 243, 248), rgb(223, 231, 243));
-  background-attachment: fixed; /* makes it continuous even on scroll */
+  background-attachment: fixed;
 }
 
 
 .hamburger{
+    display: none;
+}
+
+.cross{
     display: none;
 }
 
@@ -180,4 +184,99 @@ footer{
     color: red;
     font-size: 15px;
     padding-top: 5px;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .nav-box{
+        height: 80px;
+        width: 100vw;
+    }
+
+    .nav-div-head{
+        padding: 10px 0 0 18px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .nav-img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .nav-endsection{
+        display: none;
+    }
+
+    .nav-div-head{
+        padding-top: 15px;
+    }
+
+    .nav-title{
+        font-weight: bold;
+        font-size: 35px;
+        color: rgb(17, 56, 89);
+        padding-left: 3%;
+        padding-top: 4%;
+    }
+
+    .nav-sections{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        width: 60%;
+        background-color: rgb(247, 243, 243);
+        right: -100%;
+        top: 0;
+        padding-top: 5%;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    }
+
+    .nav-sections .cross{
+        display: block;
+        margin-left: auto;
+        background:none;
+        border: none;
+        padding-top: 5px;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .nav-sections .cross img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .headlines{
+        right: 10%;
+        width: 100%;
+        font-size: 25px;
+        font-weight: 600;
+        margin-left: 30px;
+    }
+
+    .show{
+        opacity: 1;
+        right: 0;
+    }
+
+    .hamburger{
+        display: block;
+        margin-left: auto;
+        background:none;
+        border: none;
+        padding-top: 5px;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .hamburger img{
+        height: 50px;
+        width: 50px;
+    }
+
 }
