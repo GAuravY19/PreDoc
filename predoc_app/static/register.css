@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+.nav-sections{
+    display: none;
+}
+
 .nav-endsection{
     display: none;
 }
@@ -158,3 +162,54 @@ input::placeholder {
 
 
 
+@media only screen and (max-width: 500px) {
+    .register-box{
+        height: max-content;
+        width: 80vw;
+        margin-left: 7%;
+        padding: 10px;
+        margin-top: 8%;
+        border-radius: 20px;
+    }
+
+    .hamburger{
+        display: none;
+    }
+
+    .legend-text{
+        font-weight: 600;
+        font-style: normal;
+        text-align: center;
+        font-size: 50px;
+        padding-top: 5px;
+    }
+
+    .form-element{
+        height: max-content;
+        width: 80%;
+        margin-bottom: 2%;
+        align-items: center;
+    }
+
+    .form-input{
+        height: 5vh;
+        width: 100%;
+        margin-left: 5px;
+    }
+
+    .google-signup {
+        height: 5vh;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        margin-left: 11px;
+    }
+
+    .submit-button{
+        height: 6vh;
+        min-height: 4vh;
+        width: 30vw;
+        padding-left: 6px;
+        margin-left: 27%;
+    }
+}

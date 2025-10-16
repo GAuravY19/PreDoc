@@ -8,7 +8,6 @@
     <form class="form-top-spacing" method='POST' action= ''>
         {{form.hidden_tag() }}
         <div class="form-element">
-            <!--{{ form.username.label(class='formlabel') }}-->
 
             {% if form.username.errors %}
             {{ form.username(class='form-input', placeholder=form.username.label.text) }}
