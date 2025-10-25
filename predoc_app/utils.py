@@ -92,3 +92,39 @@ def connectMongoDB():
     db = client['predoc_no_sql_db']
     return db
 
+
+def generate_primary_key_dermat(tablename, conn, curr):
+    curr.execute(f'SELECT COUNT(*) FROM {str(tablename)};')
+    count = curr.fetchone()
+
+    if tablename == 'dermat_symptom_description':
+        primary_key = f'SD{count[0]+1}'
+
+    elif tablename == 'dermat_medical_lifestyle':
+        primary_key = f'ML{count[0]+1}'
+
+    elif tablename == 'dermat_severity':
+        primary_key = f'SD{count[0]+1}'
+
+    elif tablename == 'dermat_habits_hygiene':
+        primary_key = f'HD{count[0]+1}'
+
+    return primary_key
+
+def generate_primary_key_oral(tablename, conn, curr):
+    curr.execute(f'SELECT COUNT(*) FROM {str(tablename)};')
+    count = curr.fetchone()
+
+    if tablename == 'oral_symptom_description':
+        primary_key = f'SO{count[0]+1}'
+
+    elif tablename == 'oral_medical_lifestyle':
+        primary_key = f'MO{count[0]+1}'
+
+    elif tablename == 'oral_severity':
+        primary_key = f'SO{count[0]+1}'
+
+    elif tablename == 'oral_habits_hygiene':
+        primary_key = f'HO{count[0]+1}'
+
+    return primary_key
