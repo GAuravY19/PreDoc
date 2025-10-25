@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Medical & Lifestyle History </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.dental.label(class='form-header') }} <br>
+
+            {% if form.dental.errors %}
+                {{ form.dental(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.dental.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.dental(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.chronic.label(class='form-header') }} <br>
+
+            {% if form.chronic.errors %}
+                {{ form.chronic(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.chronic.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.chronic(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.medications.label(class='form-header') }} <br>
+
+            {% if form.medications.errors %}
+                {{ form.medications(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.medications.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.medications(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.family.label(class='form-header') }} <br>
+
+            {% if form.family.errors %}
+                {{ form.family(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.family.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.family(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.next(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

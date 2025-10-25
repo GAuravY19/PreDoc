@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Symptom Description </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.Symptoms.label(class='form-header') }} <br>
+
+            {% if form.Symptoms.errors %}
+                {{ form.Symptoms(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.Symptoms.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.Symptoms(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.areas.label(class='form-header') }} <br>
+
+            {% if form.areas.errors %}
+                {{ form.areas(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.areas.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.areas(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.startof_problem.label(class='form-header') }} <br>
+
+            {% if form.startof_problem.errors %}
+                {{ form.startof_problem(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.startof_problem.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.startof_problem(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.sensitivity.label(class='form-header') }} <br>
+
+            {% if form.sensitivity.errors %}
+                {{ form.sensitivity(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.sensitivity.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.sensitivity(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.smell.label(class='form-header') }} <br>
+
+            {% if form.smell.errors %}
+                {{ form.smell(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.smell.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.smell(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.next(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
