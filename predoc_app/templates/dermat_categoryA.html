@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Symptom Description </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.skin_issue.label(class='form-header') }} <br>
+
+            {% if form.skin_issue.errors %}
+                {{ form.skin_issue(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.skin_issue.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.skin_issue(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.affected_body_parts.label(class='form-header') }} <br>
+
+            {% if form.affected_body_parts.errors %}
+                {{ form.affected_body_parts(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.affected_body_parts.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.affected_body_parts(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.noticing_time.label(class='form-header') }} <br>
+
+            {% if form.noticing_time.errors %}
+                {{ form.noticing_time(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.noticing_time.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.noticing_time(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.area_affected.label(class='form-header') }} <br>
+
+            {% if form.area_affected.errors %}
+                {{ form.area_affected(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.area_affected.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.area_affected(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.fluid.label(class='form-header') }} <br>
+
+            {% if form.fluid.errors %}
+                {{ form.fluid(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.fluid.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.fluid(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.next(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

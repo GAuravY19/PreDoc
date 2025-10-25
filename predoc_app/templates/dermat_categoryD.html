@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Severity & Progression </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.sunscreen.label(class='form-header') }} <br>
+
+            {% if form.sunscreen.errors %}
+                {{ form.sunscreen(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.sunscreen.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.sunscreen(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.exposure.label(class='form-header') }} <br>
+
+            {% if form.exposure.errors %}
+                {{ form.exposure(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.exposure.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.exposure(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.bathing.label(class='form-header') }} <br>
+
+            {% if form.bathing.errors %}
+                {{ form.bathing(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.bathing.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.bathing(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.medications.label(class='form-header') }} <br>
+
+            {% if form.medications.errors %}
+                {{ form.medications(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.medications.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.medications(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.next(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}

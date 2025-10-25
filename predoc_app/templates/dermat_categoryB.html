@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Medical & Lifestyle History </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.condition.label(class='form-header') }} <br>
+
+            {% if form.condition.errors %}
+                {{ form.condition(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.condition.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.condition(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.allergies.label(class='form-header') }} <br>
+
+            {% if form.allergies.errors %}
+                {{ form.allergies(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.allergies.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.allergies(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.history.label(class='form-header') }} <br>
+
+            {% if form.history.errors %}
+                {{ form.history(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.history.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.history(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.family.label(class='form-header') }} <br>
+
+            {% if form.family.errors %}
+                {{ form.family(class='input') }}
+                <div class="invalid-feedback">
+                    {% for error in form.family.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.family(class='input') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content move-left">
+            {{ form.hormonal.label(class='form-header') }} <br>
+
+            {% if form.hormonal.errors %}
+                {{ form.hormonal(class='input width-low') }}
+                <div class="invalid-feedback">
+                    {% for error in form.hormonal.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.hormonal(class='input width-low') }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.next(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
