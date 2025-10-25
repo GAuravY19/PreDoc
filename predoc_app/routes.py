@@ -1,12 +1,18 @@
 from flask import render_template, flash, redirect, url_for, request, abort, send_file
 from .forms import RegistrationForm, LoginForm, PersonalDetailsForm, \
                     LifestyleForm, MedicalHistoryForm, AllergiesForm, \
-                        CurrentMedicationForm, UpdateProfilePhoto, AccidentsForms
+                    CurrentMedicationForm, UpdateAffectedPhoto, \
+                    AccidentsForms, ChooseDiseaseForm, DermatSymptomDescription, \
+                    Dermat_Severity_and_progression, Dermat_habits_and_hygiene, \
+                    Dermat_Medical_and_lifestyle_history, Oral_habits_and_hygiene, \
+                    Oral_Medical_and_lifestyle_history, Oral_Severity_and_progression, \
+                    OralSymptomDescription, UpdateProfilePhoto
 from predoc_app import app, bcrypt, db
 from .model import User
 from flask_login import login_user, current_user, logout_user, login_required
 from .utils import generate_primary_key_SQL, gender_code, height_converter, calculate_bmi,\
-                    clear_country_code_input, connectDb, connectMongoDB, generate_primary_key_Mongo
+                    clear_country_code_input, connectDb, connectMongoDB, generate_primary_key_Mongo, \
+                    generate_primary_key_dermat, generate_primary_key_oral
 import os
 import io
 import pdfkit
@@ -337,7 +343,209 @@ def accident_details():
     return render_template('accident.html', form = forms)
 
 
+@app.route('/disease')
+@login_required
+def choose_disease():
+    form = ChooseDiseaseForm()
 
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        if form.dermat:
+            return redirect(url_for('dermat_category_A'))
+
+        elif form.oral:
+            return redirect(url_for('oral_category_A'))
+
+    return render_template('disease.html', form=form, css_file = 'disease.css')
+
+
+@app.route('/dermat_category_A')
+@login_required
+def dermat_category_A():
+    form = DermatSymptomDescription()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO dermat_symptom_description (dermat_symptom_id, user_id, skin_issue, affected_body_parts, noticing_time, area_affected, fluid)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_symptom_description', conn, curr), user_id,
+                                                               form.skin_issue.data, form.affected_body_parts.data, form.noticing_time.data,
+                                                               form.area_affected.data, form.fluid.data,))
+
+        conn.commit()
+
+        return redirect(url_for('dermat_category_B'))
+
+    return render_template('dermat_categoryA.html', form = form)
+
+
+
+@app.route('/dermat_category_B')
+@login_required
+def dermat_category_B():
+    form = Dermat_Medical_and_lifestyle_history()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO dermat_medical_lifestyle (dermat_medical_id, user_id, conditions, allergies, history, families, hormonal)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_medical_lifestyle', conn, curr), user_id,
+                                                               form.condition.data, form.allergies.data, form.history.data,
+                                                               form.family.data, form.hormonal.data,))
+
+        conn.commit()
+
+        return redirect(url_for('dermat_category_C'))
+
+    return render_template('dermat_categoryB.html', form = form)
+
+
+@app.route('/dermat_category_C')
+@login_required
+def dermat_category_C():
+    form = Dermat_Severity_and_progression()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO dermat_severity (dermat_severity_id, user_id, scales, situation_worsening, hormonal, conditions)
+                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_severity', conn, curr), user_id,
+                                                               form.scale.data, form.situation_worsening.data, form.hormonal.data,
+                                                               form.conditions.data,))
+
+        conn.commit()
+
+        return redirect(url_for('dermat_category_D'))
+
+    return render_template('dermat_categoryC.html', form = form)
+
+
+@app.route('/dermat_category_D')
+@login_required
+def dermat_category_D():
+    form = Dermat_habits_and_hygiene()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO dermat_habits_hygiene (dermat_severity_id, user_id, scales, situation_worsening, hormonal, conditions)
+                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_habits_hygiene', conn, curr), user_id,
+                                                               form.sunscreen.data, form.exposure.data, form.bathing.data,
+                                                               form.medications.data,))
+
+        conn.commit()
+
+        return redirect(url_for('generate_medical_report'))
+
+    return render_template('dermat_categoryD.html', form = form)
+
+
+
+@app.route('/oral_category_A')
+@login_required
+def oral_category_A():
+    form = OralSymptomDescription()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO oral_symptom_description (oral_symptom_id, user_id, symptoms, areas, startof_problem, sensitivity, smell)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_symptom_description', conn, curr), user_id,
+                                                               form.Symptoms.data, form.areas.data, form.startof_problem.data,
+                                                               form.sensitivity.data, form.smell.data,))
+
+        conn.commit()
+
+        return redirect(url_for('oral_category_B'))
+
+    return render_template('oral_category_A.html', form=form)
+
+
+@app.route('/oral_category_B')
+@login_required
+def oral_category_B():
+    form = Oral_Medical_and_lifestyle_history()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO oral_medical_lifestyle (oral_medical_id, user_id, dental, chronic, medications, families)
+                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_medical_lifestyle', conn, curr), user_id,
+                                                               form.dental.data, form.chronic.data, form.medications.data,
+                                                               form.family.data,))
+
+        conn.commit()
+
+        return redirect(url_for('oral_category_C'))
+
+    return render_template('oral_category_B.html', form=form)
+
+
+@app.route('/oral_category_C')
+@login_required
+def oral_category_C():
+    form = Oral_Severity_and_progression()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO oral_severity (oral_severity_id, user_id, scales, pains, conditions, issues)
+                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_severity', conn, curr), user_id,
+                                                               form.scale.data, form.pain.data, form.condition.data,
+                                                               form.issues.data,))
+
+        conn.commit()
+
+        return redirect(url_for('oral_category_D'))
+
+
+    return render_template('oral_category_C.html', form=form)
+
+
+@app.route('/oral_category_D')
+@login_required
+def oral_category_D():
+    form = Oral_habits_and_hygiene()
+
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+    if form.validate_on_submit():
+        curr.execute('''INSERT INTO oral_habits_hygiene (oral_habits_id, user_id, brush, floss, sugary, last_checkup)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_habits_hygiene', conn, curr), user_id,
+                                                               form.brush.data, form.floss.data, form.sugary.data,
+                                                               form.last_checkup.data))
+
+        conn.commit()
+
+        return redirect(url_for('generate_medical_report'))
+
+    return render_template('oral_category_D.html', form=form)
 
 
 
