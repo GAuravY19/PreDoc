@@ -217,78 +217,79 @@ class ChooseDiseaseForm(FlaskForm):
 
 
 class DermatSymptomDescription(FlaskForm):
-    skin_issue = StringField('What skin issue are you experiencing?')
-    affected_body_parts = StringField('Which part(s) of your body are affected?')
-    noticing_time = StringField('When did you first notice it?')
-    area_affected = StringField('Is the affected area spreading or staying in one place?')
-    fluid = StringField('Do you see any scaling, pus, or fluid?')
+    skin_issue = StringField('What skin issue are you experiencing?', validators=[DataRequired()])
+    affected_body_parts = StringField('Which part(s) of your body are affected?', validators=[DataRequired()])
+    noticing_time = StringField('When did you first notice it?', validators=[DataRequired()])
+    area_affected = StringField('Is the affected area spreading or staying in one place?', validators=[DataRequired()])
+    fluid = StringField('Do you see any scaling, pus, or fluid?', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Dermat_Medical_and_lifestyle_history(FlaskForm):
-    condition = StringField('Did this condition appear after using a new product (soap, cream, detergent, etc.)?')
-    allergies = StringField('Do you have any known allergies?')
-    history = StringField('Any history of eczema, psoriasis, or fungal infections?')
-    family = StringField('Does anyone in your family have similar skin conditions?')
-    hormonal = StringField('Do you have hormonal issues, diabetes, or thyroid disorder?')
+    condition = StringField('Did this condition appear after using a new product (soap, cream, detergent, etc.)?', validators=[DataRequired()])
+    allergies = StringField('Do you have any known allergies?', validators=[DataRequired()])
+    history = StringField('Any history of eczema, psoriasis, or fungal infections?', validators=[DataRequired()])
+    family = StringField('Does anyone in your family have similar skin conditions?', validators=[DataRequired()])
+    hormonal = StringField('Do you have hormonal issues, diabetes, or thyroid disorder?', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Dermat_Severity_and_progression(FlaskForm):
-    scale = IntegerField('On a scale of 1–10, how severe is your itching or irritation?')
-    situation_worsening = StringField('How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?',choices=['Yes', 'No'])
-    hormonal = StringField('Describe any sensations you feel — for example, burning, tightness, tingling, or pain.')
-    conditions = StringField('How has the condition changed over time — is it improving, worsening, or staying the same?')
+    scale = IntegerField('On a scale of 1–10, how severe is your itching or irritation?', validators=[DataRequired()])
+    situation_worsening = StringField('How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?',choices=['Yes', 'No'], validators=[DataRequired()])
+    hormonal = StringField('Describe any sensations you feel — for example, burning, tightness, tingling, or pain.', validators=[DataRequired()])
+    conditions = StringField('How has the condition changed over time — is it improving, worsening, or staying the same?', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Dermat_habits_and_hygiene(FlaskForm):
-    sunscreen = StringField('How often do you use moisturizer or sunscreen?')
-    exposure = SelectField('Do you have prolonged sun or chemical exposure at work?', choices=['Yes', 'No'])
-    bathing = SelectField('Do you maintain daily skin hygiene (bathing, exfoliation, etc.)?', choices=['Yes', 'No'])
-    medications = TextAreaField('Please describe any creams, ointments, or medications you’re currently using for this condition (mention how long you’ve been using them).')
+    sunscreen = StringField('How often do you use moisturizer or sunscreen?', validators=[DataRequired()])
+    exposure = SelectField('Do you have prolonged sun or chemical exposure at work?', choices=['Yes', 'No'], validators=[DataRequired()])
+    bathing = SelectField('Do you maintain daily skin hygiene (bathing, exfoliation, etc.)?', choices=['Yes', 'No'], validators=[DataRequired()])
+    medications = TextAreaField('Please describe any creams, ointments, or medications you’re currently using for this condition (mention how long you’ve been using them).', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class OralSymptomDescription(FlaskForm):
-    Symptoms = StringField('What oral issue are you facing? (pain, bleeding gums, ulcers, discoloration, swelling, etc.)')
-    areas = StringField('Which area is affected? (tooth, gums, tongue, cheek, lips)')
-    startof_problem = StringField('When did the problem start?')
-    sensitivity = StringField('Is there pain or sensitivity while eating hot/cold food?')
-    smell = SelectField('Do you notice any bad smell or taste?', choices=['Yes', 'No'])
+    Symptoms = StringField('What oral issue are you facing? (pain, bleeding gums, ulcers, discoloration, swelling, etc.)', validators=[DataRequired()])
+    areas = StringField('Which area is affected? (tooth, gums, tongue, cheek, lips)', validators=[DataRequired()])
+    startof_problem = StringField('When did the problem start?', validators=[DataRequired()])
+    sensitivity = StringField('Is there pain or sensitivity while eating hot/cold food?', validators=[DataRequired()])
+    smell = SelectField('Do you notice any bad smell or taste?', choices=['Yes', 'No'], validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Oral_Medical_and_lifestyle_history(FlaskForm):
-    dental = StringField('Have you had any recent dental procedures (fillings, cleaning, extraction)?')
-    chronic = SelectField('Do you have any chronic condition?', choices=['Yes', 'No'])
-    medications = StringField('Are you taking any medication that causes dry mouth or swelling?')
-    family = StringField('Any family history of gum or tooth disease?')
+    dental = StringField('Have you had any recent dental procedures (fillings, cleaning, extraction)?', validators=[DataRequired()])
+    chronic = SelectField('Do you have any chronic condition?', choices=['Yes', 'No'], validators=[DataRequired()])
+    medications = StringField('Are you taking any medication that causes dry mouth or swelling?', validators=[DataRequired()])
+    family = StringField('Any family history of gum or tooth disease?', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Oral_Severity_and_progression(FlaskForm):
-    scale = IntegerField('On a scale of 1–10, how severe is your pain or discomfort?')
-    pain = StringField('Describe when the pain or irritation occurs most — for example, while chewing, after meals, or randomly.')
-    condition = StringField('How has the condition changed over time — is it improving, worsening, or staying about the same?')
-    issues = StringField('Describe any associated issues you notice, such as swelling, bleeding, or difficulty opening your mouth.')
+    scale = IntegerField('On a scale of 1–10, how severe is your pain or discomfort?', validators=[DataRequired()])
+    pain = StringField('Describe when the pain or irritation occurs most — for example, while chewing, after meals, or randomly.', validators=[DataRequired()])
+    condition = StringField('How has the condition changed over time — is it improving, worsening, or staying about the same?', validators=[DataRequired()])
+    issues = StringField('Describe any associated issues you notice, such as swelling, bleeding, or difficulty opening your mouth.', validators=[DataRequired()])
     next = SubmitField('Next')
 
 
 class Oral_habits_and_hygiene(FlaskForm):
-    brush = StringField('How often do you brush your teeth each day?')
-    floss = SelectField('Do you use floss or mouthwash regularly?', choices=['Yes', "No"])
-    sugary = StringField('How often do you consume sugary foods or drinks?')
-    last_checkup = StringField('When was your last dental checkup?')
+    brush = StringField('How often do you brush your teeth each day?', validators=[DataRequired()])
+    floss = SelectField('Do you use floss or mouthwash regularly?', choices=['Yes', "No"], validators=[DataRequired()])
+    sugary = StringField('How often do you consume sugary foods or drinks?', validators=[DataRequired()])
+    last_checkup = StringField('When was your last dental checkup?', validators=[DataRequired()])
     next = SubmitField('Next')
-
-
 
 
 class UpdateAffectedPhoto(FlaskForm):
     picture = FileField('Please upload a clear image of the affected area (use front camera, natural lighting if possible).', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Update')
 
+class UpdateProfilePhoto(FlaskForm):
+    picture = FileField('Please upload a clear image of the affected area (use front camera, natural lighting if possible).', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    submit = SubmitField('Update')
 
 
 
