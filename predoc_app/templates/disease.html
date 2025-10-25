@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class='box'>
+    <p class="title"> Select the health area you want to generate a report for </p>
+    <p class="subtitle"> Please choose the category that matches your current health concern. </p>
+    <p class="subtitle"> Our AI assistant will ask you guided questions and generate a summary report for your doctor. </p>
+    <div class="login-options ">
+        <button class="login shiftbutton"><a class="button-text" href={{url_for('dermat_category_A')}}> Dermatology Report </a></button>
+        <button class="login shiftbutton"><a class="button-text" href={{url_for('oral_category_A')}}> Oral Health Report </a></button>
+    </div>
+</div>
+
+{% endblock %}
