@@ -260,3 +260,91 @@ DROP TABLE allergies;
 DROP TABLE accidents;
 DROP TABLE current_medication_details;
 
+CREATE TABLE IF NOT EXISTS dermat_symptom_description(
+	dermat_symptom_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	skin_issue VARCHAR NOT NULL,
+	affected_body_parts VARCHAR NOT NULL,
+	noticing_time VARCHAR NOT NULL,
+	area_affected VARCHAR NOT NULL,
+	fluid VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS dermat_medical_lifestyle(
+	dermat_medical_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	conditions VARCHAR NOT NULL,
+	allergies VARCHAR NOT NULL,
+	history VARCHAR NOT NULL,
+	families VARCHAR NOT NULL,
+	hormonal VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS dermat_severity(
+	dermat_severity_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	scales VARCHAR NOT NULL,
+	situation_worsening VARCHAR NOT NULL,
+	hormonal VARCHAR NOT NULL,
+	conditions VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS dermat_habits_hygiene(
+	dermat_habits_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	sunscreen VARCHAR NOT NULL,
+	exposure VARCHAR NOT NULL,
+	bathing VARCHAR NOT NULL,
+	medications VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS oral_symptom_description(
+	oral_symptom_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	symptoms VARCHAR NOT NULL,
+	areas VARCHAR NOT NULL,
+	startof_problem VARCHAR NOT NULL,
+	sensitivity VARCHAR NOT NULL,
+	smell VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS oral_medical_lifestyle(
+	oral_medical_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	dental VARCHAR NOT NULL,
+	chronic VARCHAR NOT NULL,
+	medications VARCHAR NOT NULL,
+	families VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS oral_severity(
+	oral_severity_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	scales VARCHAR NOT NULL,
+	pains VARCHAR NOT NULL,
+	conditions VARCHAR NOT NULL,
+	issues VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS oral_habits_hygiene(
+	oral_habits_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	brush VARCHAR NOT NULL,
+	floss VARCHAR NOT NULL,
+	sugary VARCHAR NOT NULL,
+	last_checkup VARCHAR NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+
+
+
