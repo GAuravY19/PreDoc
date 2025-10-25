@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import IntegerField, StringField, PasswordField, \
     SubmitField, BooleanField, SelectField, DateField, \
-    SelectMultipleField, widgets
+    SelectMultipleField, widgets, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, Optional
 from .model import User
 
@@ -211,8 +211,90 @@ class AccidentsForms(FlaskForm):
     next = SubmitField('Next')
 
 
-class UpdateProfilePhoto(FlaskForm):
-    picture = FileField('Update Profile photo', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+class ChooseDiseaseForm(FlaskForm):
+    dermat = SubmitField('Dermat')
+    oral = SubmitField('Oral')
+
+
+class DermatSymptomDescription(FlaskForm):
+    skin_issue = StringField('What skin issue are you experiencing?')
+    affected_body_parts = StringField('Which part(s) of your body are affected?')
+    noticing_time = StringField('When did you first notice it?')
+    area_affected = StringField('Is the affected area spreading or staying in one place?')
+    fluid = StringField('Do you see any scaling, pus, or fluid?')
+    next = SubmitField('Next')
+
+
+class Dermat_Medical_and_lifestyle_history(FlaskForm):
+    condition = StringField('Did this condition appear after using a new product (soap, cream, detergent, etc.)?')
+    allergies = StringField('Do you have any known allergies?')
+    history = StringField('Any history of eczema, psoriasis, or fungal infections?')
+    family = StringField('Does anyone in your family have similar skin conditions?')
+    hormonal = StringField('Do you have hormonal issues, diabetes, or thyroid disorder?')
+    next = SubmitField('Next')
+
+
+class Dermat_Severity_and_progression(FlaskForm):
+    scale = IntegerField('On a scale of 1–10, how severe is your itching or irritation?')
+    situation_worsening = StringField('How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?',choices=['Yes', 'No'])
+    hormonal = StringField('Describe any sensations you feel — for example, burning, tightness, tingling, or pain.')
+    conditions = StringField('How has the condition changed over time — is it improving, worsening, or staying the same?')
+    next = SubmitField('Next')
+
+
+class Dermat_habits_and_hygiene(FlaskForm):
+    sunscreen = StringField('How often do you use moisturizer or sunscreen?')
+    exposure = SelectField('Do you have prolonged sun or chemical exposure at work?', choices=['Yes', 'No'])
+    bathing = SelectField('Do you maintain daily skin hygiene (bathing, exfoliation, etc.)?', choices=['Yes', 'No'])
+    medications = TextAreaField('Please describe any creams, ointments, or medications you’re currently using for this condition (mention how long you’ve been using them).')
+    next = SubmitField('Next')
+
+
+class OralSymptomDescription(FlaskForm):
+    Symptoms = StringField('What oral issue are you facing? (pain, bleeding gums, ulcers, discoloration, swelling, etc.)')
+    areas = StringField('Which area is affected? (tooth, gums, tongue, cheek, lips)')
+    startof_problem = StringField('When did the problem start?')
+    sensitivity = StringField('Is there pain or sensitivity while eating hot/cold food?')
+    smell = SelectField('Do you notice any bad smell or taste?', choices=['Yes', 'No'])
+    next = SubmitField('Next')
+
+
+class Oral_Medical_and_lifestyle_history(FlaskForm):
+    dental = StringField('Have you had any recent dental procedures (fillings, cleaning, extraction)?')
+    chronic = SelectField('Do you have any chronic condition?', choices=['Yes', 'No'])
+    medications = StringField('Are you taking any medication that causes dry mouth or swelling?')
+    family = StringField('Any family history of gum or tooth disease?')
+    next = SubmitField('Next')
+
+
+class Oral_Severity_and_progression(FlaskForm):
+    scale = IntegerField('On a scale of 1–10, how severe is your pain or discomfort?')
+    pain = StringField('Describe when the pain or irritation occurs most — for example, while chewing, after meals, or randomly.')
+    condition = StringField('How has the condition changed over time — is it improving, worsening, or staying about the same?')
+    issues = StringField('Describe any associated issues you notice, such as swelling, bleeding, or difficulty opening your mouth.')
+    next = SubmitField('Next')
+
+
+class Oral_habits_and_hygiene(FlaskForm):
+    brush = StringField('How often do you brush your teeth each day?')
+    floss = SelectField('Do you use floss or mouthwash regularly?', choices=['Yes', "No"])
+    sugary = StringField('How often do you consume sugary foods or drinks?')
+    last_checkup = StringField('When was your last dental checkup?')
+    next = SubmitField('Next')
+
+
+
+
+class UpdateAffectedPhoto(FlaskForm):
+    picture = FileField('Please upload a clear image of the affected area (use front camera, natural lighting if possible).', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Update')
+
+
+
+
+
+
+
+
 
 
