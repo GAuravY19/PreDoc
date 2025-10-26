@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="form-holder">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+
+        <legend class="legend-text"> Upload a Picture </legend>
+        <hr class="separator">
+
+        <div class="form-content move-left">
+            {{ form.picture.label(class='form-header') }} <br><br>
+            {% if form.picture.errors %}
+                {{ form.picture() }}
+                <div class="invalid-feedback">
+                    {% for error in form.picture.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.picture() }}
+            {% endif %}
+
+        </div>
+
+        <div class="form-content">
+            {{form.submit(class='submit-button-d')}}
+        </div>
+
+    </form>
+</div>
+
+
+
+</form>
+
+{% endblock %}
