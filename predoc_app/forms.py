@@ -236,7 +236,7 @@ class Dermat_Medical_and_lifestyle_history(FlaskForm):
 
 class Dermat_Severity_and_progression(FlaskForm):
     scale = IntegerField('On a scale of 1–10, how severe is your itching or irritation?', validators=[DataRequired()])
-    situation_worsening = StringField('How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?',choices=['Yes', 'No'], validators=[DataRequired()])
+    situation_worsening = StringField('How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?', validators=[DataRequired()])
     hormonal = StringField('Describe any sensations you feel — for example, burning, tightness, tingling, or pain.', validators=[DataRequired()])
     conditions = StringField('How has the condition changed over time — is it improving, worsening, or staying the same?', validators=[DataRequired()])
     next = SubmitField('Next')
@@ -284,7 +284,7 @@ class Oral_habits_and_hygiene(FlaskForm):
 
 
 class UpdateAffectedPhoto(FlaskForm):
-    picture = FileField('Please upload a clear image of the affected area (use front camera, natural lighting if possible).', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    picture = FileField('Please upload a clear image of the affected area.', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Update')
 
 class UpdateProfilePhoto(FlaskForm):
