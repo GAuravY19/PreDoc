@@ -183,11 +183,11 @@ INSERT INTO report (report_id, user_id, file_path, created_at) VALUES
 SELECT * FROM report;
 
 ALTER TABLE personal_details
-ADD COLUMN created_at TIMESTAMPTZ;
+ADD COLUMN created_at ;
+SET TIMESTAMPTZ DEFAULT NOW();
 
-ALTER TABLE personal_details
-ALTER COLUMN created_at
-SET DEFAULT NOW();
+-- ALTER TABLE personal_details
+-- ALTER COLUMN created_at
 
 SELECT * FROM personal_details;
 
@@ -343,6 +343,45 @@ CREATE TABLE IF NOT EXISTS oral_habits_hygiene(
 	last_checkup VARCHAR NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS image_db(
+	image_id VARCHAR PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	disease_section VARCHAR NOT NULL,
+	prediction VARCHAR NOT NULL,
+	img_binary_blob BYTEA NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+ALTER TABLE dermat_symptom_description
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE dermat_medical_lifestyle
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE dermat_severity
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE dermat_habits_hygiene
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE oral_symptom_description
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE oral_medical_lifestyle
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE oral_severity
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE oral_habits_hygiene
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
+ALTER TABLE image_db
+ADD COLUMN created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL;
+
 
 
 
