@@ -3,13 +3,86 @@
 {% block content %}
 
 <div class='box'>
-    <p class="title"> Home Page comming Soon!!! </p>
-    <p class="subtitle"> Predoc - Phase 1 done </p>
-    <p class="subtitle"> Login or Signup to try it </p>
+    <p class="title"> Predoc - Preconsultation report assistant </p>
+    <p class="subtitle"> - Predoc helps patients organize their medical details, symptoms, and lifestyle data into structured preconsultation reports. </p>
+    <p class="subtitle"> - So doctors can understand your health story faster, and focus more on accurate diagnosis than data collection. </p>
     <div class="login-options ">
         <button class="login shiftbutton"><a class="button-text-black" href={{url_for('login')}}> Sign In </a></button>
         <button class="login register"><a class="button-text" href={{url_for('register')}}> Register </a></button>
     </div>
+</div>
+
+<div class='box'>
+    <p class="title left"> The Problem </p>
+    <p class="subtitle black-font-color"> Visiting a doctor without proper preparation often leads to rushed, incomplete consultations.
+Patients forget key symptoms, struggle to recall medical history, or bring scattered reports from multiple labs and clinics.</p>
+    <p class="subtitle black-font-color"> Doctors, in turn, spend the first several minutes of each consultation trying to reconstruct the patient’s background — leaving less time for focused diagnosis or discussion.</p>
+    <p class="subtitle black-font-color"> This results in repeated tests, incomplete advice, and patient frustration — not because doctors aren’t skilled, but because the information isn’t presented clearly at the right time.</p>
+
+    <p class="title left"> The Predoc Solution </p>
+    <p class="subtitle black-font-color"> Predoc bridges this gap by acting as your preconsultation report assistant.
+It guides you step-by-step to record symptoms, medical history, lifestyle details, and ongoing medications — automatically structuring them into a clear, doctor-ready health summary. </p>
+    <p class="subtitle black-font-color"> Predoc doesn’t replace the doctor — it simply helps both sides begin the conversation better prepared.</p>
+</div>
+
+<div class='represent-img'>
+    <img src="{{url_for('static', filename='images/logo/home_page.png')}}">
+</div>
+
+<p class="title padding-above"> Key Features of Predoc </p>
+<p class="subtitle center-align"> Built to make your preconsultation smarter, simpler, and more structured. </p>
+
+
+<div class="cards">
+    <div class="card1">
+        <h3>Smart Health Data collected</h3>
+        <p class="subtitle"> Guided forms collected lifestyle, medication, symptoms data and more effortlessly.</p>
+    </div>
+
+    <div class="card1">
+        <h3>Instant Report Generation</h3>
+        <p class="subtitle"> Transforms user inputs into shareable health summaries for doctors. </p>
+    </div>
+
+    <div class="card1">
+        <h3>Disease Classification & Predictive Insights</h3>
+        <p class="subtitle"> Classifies dermatology and oral health images using CNN-based disease detection. </p>
+    </div>
+</div>
+
+<div class='box'>
+    <p class="title left "> How Predoc Works </p>
+</div>
+
+
+<div class='box bottom'>
+    <p class="title left "> The Mind Behind Predoc </p>
+
+    <div class="containers">
+        <img src="{{url_for('static', filename='images/profile_pics/mera.png')}}">
+        <div class="texts">
+            <p class="subtitle black-font-color"> Hi, I’m Gaurav Yadav, the creator of Predoc — Preconsultation Report Assistant. </p>
+            <p class="subtitle black-font-color"> I developed Predoc as part of my Data Science journey to solve a real problem I observed in healthcare — the gap between what patients explain and what doctors actually receive during consultations. </p>
+            <p class="subtitle black-font-color"> With a background in Data Science and AI, I wanted to create something that bridges this communication gap — where technology organizes information, and ML-CNN models are used for better health analysis and disease understanding. </p>
+            <p class="subtitle black-font-color"> Predoc was built from the belief that better conversations lead to better care. </p>
+        </div>
+    </div>
+
+    <div class="links">
+        <ul>
+            <li>
+                <a href="https://www.linkedin.com/in/gaurav-s-yadav" target="_blank" rel="noopener noreferrer">
+                    <img  class="logoimg" src="{{url_for('static', filename='images/profile_pics/linkedin.png')}}" alt="" srcset="">
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/GAuravY19" target="_blank" rel="noopener noreferrer">
+                    <img class="logoimg"  src="{{url_for('static', filename='images/profile_pics/github.png')}}" alt="" srcset="">
+                </a>
+            </li>
+        </ul>
+    </div>
+
 </div>
 
 {% endblock %}
