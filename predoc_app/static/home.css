@@ -10,10 +10,10 @@
 
 .box{
     height: max-content;
-    width: max-content;
+    width: 60%;
     padding: 40px;
-    margin-top: 10%;
-    margin-left: 27%;
+    margin-top: 4%;
+    margin-left: 17%;
     background-color: rgba(255, 255, 255, 0.907);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
     border-radius: 25px;
@@ -27,31 +27,38 @@
     font-weight: 600;
     color: rgb(2, 27, 48);
     padding-bottom: 20px;
+    text-align: center;
 }
 
 .subtitle{
     font-family: "Anek Latin", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-size: 27px;
-    font-weight: 600;
+    font-size: 18px;
     color: rgb(20, 75, 120);
-    text-align: center;
     padding-bottom: 20px;
+    margin-left: 2%;
 }
 
 .login-options{
     margin-left: 23%;
-    margin-top: 5%;
 }
 
 .login{
     height: max-content;
-    width: 150px;
+    width: 200px;
     font-size: 20px;
     padding: 15px 35px;
     border-radius: 15px;
     border: 2px solid gray;
+}
+
+.left{
+    text-align: left;
+}
+
+.black-font-color{
+    color: black;
 }
 
 .shiftbutton{
@@ -75,6 +82,108 @@
 button:hover{
     cursor: pointer;
 }
+
+.represent-img img{
+    height: 350px;
+    width: 350px;
+    margin-left: 35%;
+    margin-top: 2%;
+    border: 3px solid navy;
+}
+
+.padding-above{
+    padding-top: 20px;
+}
+
+.center-align{
+    text-align: center;
+}
+
+.cards{
+    height: max-content;
+    width: 60%;
+    padding: 40px;
+    margin-top: -2%;
+    margin-left: 26%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* background-color: rgba(255, 255, 255, 0.907); */
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40); */
+    /* border-radius: 25px; */
+}
+
+.card1{
+    height: 200px;
+    width: 180px;
+    /* background-color: rebeccapurple; */
+    background-color: rgba(255, 255, 255, 0.907);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
+    border-radius: 25px;
+}
+
+.card1 h3{
+    text-align: center;
+    padding: 10px 15px 0px 15px;
+}
+
+.card1 p{
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.bottom{
+    margin-bottom: 7%;
+}
+
+.containers{
+    display: flex;
+    flex-direction: row;
+}
+
+.containers img{
+    height: 250px;
+    width: 250;
+}
+
+.links{
+    margin-left: 40%;
+}
+
+.links ul{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.links ul li{
+    list-style-type: none;
+}
+
+.logoimg{
+    height: 50px;
+    width: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width: 500px) {
