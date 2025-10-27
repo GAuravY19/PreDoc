@@ -95,6 +95,84 @@
     {% else %}
         <p> No Accident Reported </p>
     {% endif %}
+    </ul>
+
+    {% if source == 'D'%}
+        <h2>Dermatology Report</h2>
+
+        <h3>Symptom Description</h3>
+        <table>
+            <tr><th>What skin issue are you experiencing?</th><td>{{ category_A[2] }}</td></tr>
+            <tr><th>Which part(s) of your body are affected?</th><td>{{ category_A[3] }}</td></tr>
+            <tr><th>When did you first notice it?</th><td>{{ category_A[4] }}</td></tr>
+            <tr><th>Is the affected area spreading or staying in one place?</th><td>{{ category_A[5] }}</td></tr>
+            <tr><th>Do you see any scaling, pus, or fluid?</th><td>{{ category_A[6] }}</td></tr>
+        </table>
+
+        <h3>Medical & Lifestyle History</h3>
+        <table>
+            <tr><th>Did this condition appear after using a new product (soap, cream, detergent, etc.)?</th><td>{{ category_B[2] }}</td></tr>
+            <tr><th>Which part(s) of your body are affected?</th><td>{{ category_B[3] }}</td></tr>
+            <tr><th>Any history of eczema, psoriasis, or fungal infections?</th><td>{{ category_B[4] }}</td></tr>
+            <tr><th>Does anyone in your family have similar skin conditions?</th><td>{{ category_B[5] }}</td></tr>
+            <tr><th>Do you have hormonal issues, diabetes, or thyroid disorder?</th><td>{{ category_B[6] }}</td></tr>
+        </table>
+
+        <h3>Severity & Progression</h3>
+        <table>
+            <tr><th>On a scale of 1–10, how severe is your itching or irritation?</th><td>{{ category_C[2] }}</td></tr>
+            <tr><th>How does the condition behave throughout the day (e.g., worse in morning/evening/after activity)?</th><td>{{ category_C[3] }}</td></tr>
+            <tr><th>Describe any sensations you feel — for example, burning, tightness, tingling, or pain.</th><td>{{ category_C[4] }}</td></tr>
+            <tr><th>How has the condition changed over time — is it improving, worsening, or staying the same?</th><td>{{ category_C[5] }}</td></tr>
+        </table>
+
+        <h3>Habits & Hygiene</h3>
+        <table>
+            <tr><th>How often do you use moisturizer or sunscreen?</th><td>{{ category_A[2] }}</td></tr>
+            <tr><th>Do you have prolonged sun or chemical exposure at work?</th><td>{{ category_A[3] }}</td></tr>
+            <tr><th>Do you maintain daily skin hygiene (bathing, exfoliation, etc.)?</th><td>{{ category_A[4] }}</td></tr>
+            <tr><th>Please describe any creams, ointments, or medications you’re currently using for this condition (mention how long you’ve been using them).</th><td>{{ category_A[5] }}</td></tr>
+        </table>
+
+    {% elif source == 'O'%}
+        <h2>Oral Health Report</h2>
+
+        <h3>Symptom Description</h3>
+        <table>
+            <tr><th>What oral issue are you facing? (pain, bleeding gums, ulcers, discoloration, swelling, etc.)</th><td>{{ category_A[2] }}</td></tr>
+            <tr><th>Which area is affected? (tooth, gums, tongue, cheek, lips)</th><td>{{ category_A[3] }}</td></tr>
+            <tr><th>When did the problem start?</th><td>{{ category_A[4] }}</td></tr>
+            <tr><th>Is there pain or sensitivity while eating hot/cold food?</th><td>{{ category_A[5] }}</td></tr>
+            <tr><th>Do you notice any bad smell or taste?</th><td>{{ category_A[6] }}</td></tr>
+        </table>
+
+        <h3>Medical & Lifestyle History</h3>
+        <table>
+            <tr><th>Have you had any recent dental procedures (fillings, cleaning, extraction)?</th><td>{{ category_B[2] }}</td></tr>
+            <tr><th>Do you have any chronic condition?</th><td>{{ category_B[3] }}</td></tr>
+            <tr><th>Are you taking any medication that causes dry mouth or swelling?</th><td>{{ category_B[4] }}</td></tr>
+            <tr><th>Any family history of gum or tooth disease?</th><td>{{ category_B[5] }}</td></tr>
+        </table>
+
+        <h3>Severity & Progression</h3>
+        <table>
+            <tr><th>On a scale of 1–10, how severe is your pain or discomfort?</th><td>{{ category_C[2] }}</td></tr>
+            <tr><th>Describe when the pain or irritation occurs most — for example, while chewing, after meals, or randomly.</th><td>{{ category_C[3] }}</td></tr>
+            <tr><th>How has the condition changed over time — is it improving, worsening, or staying about the same?</th><td>{{ category_C[4] }}</td></tr>
+            <tr><th>Describe any associated issues you notice, such as swelling, bleeding, or difficulty opening your mouth.</th><td>{{ category_C[5] }}</td></tr>
+        </table>
+
+        <h3>Habits & Hygiene</h3>
+        <table>
+            <tr><th>How often do you brush your teeth each day?</th><td>{{ category_A[2] }}</td></tr>
+            <tr><th>Do you use floss or mouthwash regularly?</th><td>{{ category_A[3] }}</td></tr>
+            <tr><th>How often do you consume sugary foods or drinks?</th><td>{{ category_A[4] }}</td></tr>
+            <tr><th>When was your last dental checkup?</th><td>{{ category_A[5] }}</td></tr>
+        </table>
+    {% endif %}
+
+    <p> Model Predicts it to be: {{predictions[3]}} </p>
+    <img src="data:image/*;base64,{{ image }}" height="300" width="300">
 
 
 </body>
