@@ -128,3 +128,10 @@ def generate_primary_key_oral(tablename, conn, curr):
         primary_key = f'HO{count[0]+1}'
 
     return primary_key
+
+
+def generate_primary_key_pictures(tablename, conn, curr):
+    curr.execute(f'SELECT COUNT(*) FROM {str(tablename)};')
+    count = curr.fetchone()
+
+    return f'IM{count[0]+1}'
