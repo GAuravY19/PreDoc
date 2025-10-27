@@ -12,12 +12,15 @@ from .model import User
 from flask_login import login_user, current_user, logout_user, login_required
 from .utils import generate_primary_key_SQL, gender_code, height_converter, calculate_bmi,\
                     clear_country_code_input, connectDb, connectMongoDB, generate_primary_key_Mongo, \
-                    generate_primary_key_dermat, generate_primary_key_oral
+                    generate_primary_key_dermat, generate_primary_key_oral, generate_primary_key_pictures
+from .make_predictions import make_predictions
 import os
 import io
 import pdfkit
 import secrets
 import datetime
+import base64
+import psycopg2
 
 
 @app.route('/')
@@ -26,11 +29,9 @@ def home():
     return render_template('home.html')
 
 
-
 @app.route('/start-home')
 def start_home():
     return "<h1> Start Home </h1>"
-
 
 
 @app.route("/register", methods = ['GET', 'POST'])
@@ -55,7 +56,6 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form, css_file = 'register.css')
-
 
 
 @app.route("/login", methods = ['GET', 'POST'])
@@ -84,9 +84,6 @@ def login():
     return render_template('login.html', form = form, css_file = 'register.css')
 
 
-
-
-
 @app.route('/personal-details', methods = ['GET', 'POST'])
 @login_required
 def personal_details():
@@ -113,9 +110,6 @@ def personal_details():
     return render_template('personal_details.html', form=form)
 
 
-
-
-
 @app.route('/lifestyle_details', methods = ['GET', 'POST'])
 @login_required
 def lifestyle_details():
@@ -138,9 +132,6 @@ def lifestyle_details():
         return redirect(url_for('medical_details'))
 
     return render_template('lifestyle_details.html', form=form)
-
-
-
 
 
 @app.route('/medical_details', methods = ['GET', 'POST'])
@@ -168,10 +159,6 @@ def medical_details():
         return redirect(url_for('allergy_details'))
 
     return render_template('medical_history.html', form = form)
-
-
-
-
 
 
 allergies_details = []
@@ -219,9 +206,6 @@ def allergy_details():
             return redirect(url_for('current_medication_details'))
 
     return render_template('allergy_details.html', form = form)
-
-
-
 
 
 current_medication = []
@@ -275,8 +259,6 @@ def current_medication_details():
             return redirect(url_for('accident_details'))
 
     return render_template('current_medication.html', form=form)
-
-
 
 
 accident_details_list = []
@@ -338,12 +320,12 @@ def accident_details():
                 db['accidents'].insert_one({'accidentId': generate_primary_key_Mongo('accidents', db), 'user_id': user_id,
                                             'accidentStatus': False, "created_at": datetime.datetime.now()})
 
-            return redirect(url_for('generate_medical_report'))
+            return redirect(url_for('choose_disease'))
 
     return render_template('accident.html', form = forms)
 
 
-@app.route('/disease')
+@app.route('/disease', methods=['GET', 'POST'])
 @login_required
 def choose_disease():
     form = ChooseDiseaseForm()
@@ -361,7 +343,7 @@ def choose_disease():
     return render_template('disease.html', form=form, css_file = 'disease.css')
 
 
-@app.route('/dermat_category_A')
+@app.route('/dermat_category_A', methods=['GET', 'POST'])
 @login_required
 def dermat_category_A():
     form = DermatSymptomDescription()
@@ -373,7 +355,7 @@ def dermat_category_A():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO dermat_symptom_description (dermat_symptom_id, user_id, skin_issue, affected_body_parts, noticing_time, area_affected, fluid)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_symptom_description', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_symptom_description', conn, curr), user_id,
                                                                form.skin_issue.data, form.affected_body_parts.data, form.noticing_time.data,
                                                                form.area_affected.data, form.fluid.data,))
 
@@ -384,8 +366,7 @@ def dermat_category_A():
     return render_template('dermat_categoryA.html', form = form)
 
 
-
-@app.route('/dermat_category_B')
+@app.route('/dermat_category_B', methods=['GET', 'POST'])
 @login_required
 def dermat_category_B():
     form = Dermat_Medical_and_lifestyle_history()
@@ -397,7 +378,7 @@ def dermat_category_B():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO dermat_medical_lifestyle (dermat_medical_id, user_id, conditions, allergies, history, families, hormonal)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_medical_lifestyle', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_medical_lifestyle', conn, curr), user_id,
                                                                form.condition.data, form.allergies.data, form.history.data,
                                                                form.family.data, form.hormonal.data,))
 
@@ -408,7 +389,7 @@ def dermat_category_B():
     return render_template('dermat_categoryB.html', form = form)
 
 
-@app.route('/dermat_category_C')
+@app.route('/dermat_category_C', methods=['GET', 'POST'])
 @login_required
 def dermat_category_C():
     form = Dermat_Severity_and_progression()
@@ -420,7 +401,7 @@ def dermat_category_C():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO dermat_severity (dermat_severity_id, user_id, scales, situation_worsening, hormonal, conditions)
-                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_severity', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_severity', conn, curr), user_id,
                                                                form.scale.data, form.situation_worsening.data, form.hormonal.data,
                                                                form.conditions.data,))
 
@@ -431,7 +412,7 @@ def dermat_category_C():
     return render_template('dermat_categoryC.html', form = form)
 
 
-@app.route('/dermat_category_D')
+@app.route('/dermat_category_D', methods=['GET', 'POST'])
 @login_required
 def dermat_category_D():
     form = Dermat_habits_and_hygiene()
@@ -442,20 +423,20 @@ def dermat_category_D():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
-        curr.execute('''INSERT INTO dermat_habits_hygiene (dermat_severity_id, user_id, scales, situation_worsening, hormonal, conditions)
-                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('dermat_habits_hygiene', conn, curr), user_id,
+        curr.execute('''INSERT INTO dermat_habits_hygiene (dermat_habits_id, user_id, sunscreen, exposure, bathing, medications)
+                     VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_habits_hygiene', conn, curr), user_id,
                                                                form.sunscreen.data, form.exposure.data, form.bathing.data,
                                                                form.medications.data,))
 
         conn.commit()
 
-        return redirect(url_for('generate_medical_report'))
+        return redirect(url_for('take_picture', source = 'D'))
 
     return render_template('dermat_categoryD.html', form = form)
 
 
 
-@app.route('/oral_category_A')
+@app.route('/oral_category_A', methods=['GET', 'POST'])
 @login_required
 def oral_category_A():
     form = OralSymptomDescription()
@@ -467,7 +448,7 @@ def oral_category_A():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO oral_symptom_description (oral_symptom_id, user_id, symptoms, areas, startof_problem, sensitivity, smell)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_symptom_description', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_symptom_description', conn, curr), user_id,
                                                                form.Symptoms.data, form.areas.data, form.startof_problem.data,
                                                                form.sensitivity.data, form.smell.data,))
 
@@ -478,7 +459,7 @@ def oral_category_A():
     return render_template('oral_category_A.html', form=form)
 
 
-@app.route('/oral_category_B')
+@app.route('/oral_category_B', methods=['GET', 'POST'])
 @login_required
 def oral_category_B():
     form = Oral_Medical_and_lifestyle_history()
@@ -490,7 +471,7 @@ def oral_category_B():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO oral_medical_lifestyle (oral_medical_id, user_id, dental, chronic, medications, families)
-                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_medical_lifestyle', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_medical_lifestyle', conn, curr), user_id,
                                                                form.dental.data, form.chronic.data, form.medications.data,
                                                                form.family.data,))
 
@@ -501,7 +482,7 @@ def oral_category_B():
     return render_template('oral_category_B.html', form=form)
 
 
-@app.route('/oral_category_C')
+@app.route('/oral_category_C', methods=['GET', 'POST'])
 @login_required
 def oral_category_C():
     form = Oral_Severity_and_progression()
@@ -513,7 +494,7 @@ def oral_category_C():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO oral_severity (oral_severity_id, user_id, scales, pains, conditions, issues)
-                     VALUES (%s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_severity', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_severity', conn, curr), user_id,
                                                                form.scale.data, form.pain.data, form.condition.data,
                                                                form.issues.data,))
 
@@ -525,7 +506,7 @@ def oral_category_C():
     return render_template('oral_category_C.html', form=form)
 
 
-@app.route('/oral_category_D')
+@app.route('/oral_category_D', methods=['GET', 'POST'])
 @login_required
 def oral_category_D():
     form = Oral_habits_and_hygiene()
@@ -537,16 +518,61 @@ def oral_category_D():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO oral_habits_hygiene (oral_habits_id, user_id, brush, floss, sugary, last_checkup)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s,)''', (generate_primary_key_dermat('oral_habits_hygiene', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_habits_hygiene', conn, curr), user_id,
                                                                form.brush.data, form.floss.data, form.sugary.data,
                                                                form.last_checkup.data))
 
         conn.commit()
 
-        return redirect(url_for('generate_medical_report'))
+        return redirect(url_for('take_picture', source='O'))
 
     return render_template('oral_category_D.html', form=form)
 
+
+@app.route("/take_picture", methods=['GET', 'POST'])
+@login_required
+def take_picture():
+    source = request.args.get('source')
+
+    form = UpdateAffectedPhoto()
+    conn, curr = connectDb()
+
+    if current_user.is_authenticated:
+        user_id = current_user.user_id
+
+
+    if form.validate_on_submit():
+        if source == 'D':
+            picture = form.picture.data
+            if picture is not None:
+                binary_image = picture.read()
+                picture.seek(0)
+                prediction = make_predictions('D', picture)
+
+                curr.execute('''INSERT INTO image_db(image_id, user_id, disease_section, prediction, img_binary_blob)
+                             VALUES(%s, %s, %s, %s, %s)''', (generate_primary_key_pictures('image_db', conn, curr), user_id,
+                                                             'Dermatology', prediction, binary_image,))
+
+                conn.commit()
+
+                return redirect(url_for('generate_medical_report', source='D'))
+
+
+        elif source == 'O':
+            picture = form.picture.data
+            if picture is not None:
+                prediction = make_predictions('O', picture)
+                binary_image = picture.read()
+
+                curr.execute('''INSERT INTO image_db(image_id, user_id, disease_section, prediction, img_binary_blob)
+                             VALUES(%s, %s, %s, %s, %s)''', (generate_primary_key_pictures('image_db', conn, curr), user_id,
+                                                             'Oral Health', prediction, psycopg2.Binary(binary_image),))
+
+                conn.commit()
+
+                return redirect(url_for('generate_medical_report', source='O'))
+
+    return render_template('take_picture.html', form = form)
 
 
 @app.route("/generate_medical_report")
@@ -555,19 +581,21 @@ def generate_medical_report():
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
+    source = request.args.get('source')
+
     conn, curr = connectDb()
     db = connectMongoDB()
 
     curr.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
     users = curr.fetchone()
 
-    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at', (user_id,))
+    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
     personal = curr.fetchone()
 
-    curr.execute('SELECT * FROM lifestyle WHERE user_id = %s ORDER BY created_at', (user_id,))
+    curr.execute('SELECT * FROM lifestyle WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
     lifestyle = curr.fetchone()
 
-    curr.execute('SELECT * FROM medical_history WHERE user_id = %s ORDER BY created_at', (user_id,))
+    curr.execute('SELECT * FROM medical_history WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
     medical = curr.fetchone()
 
     allergy_data = db['allergy'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
@@ -579,8 +607,57 @@ def generate_medical_report():
     accidents_data = db['accidents'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
     accidents_data = list(accidents_data)
 
+    if source == 'D':
+        curr.execute('SELECT * FROM dermat_symptom_description WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_A = curr.fetchone()
+
+        curr.execute('SELECT * FROM dermat_medical_lifestyle WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_B = curr.fetchone()
+
+        curr.execute('SELECT * FROM dermat_severity WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_C = curr.fetchone()
+
+        curr.execute('SELECT * FROM dermat_habits_hygiene WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_D = curr.fetchone()
+
+        curr.execute('SELECT * FROM image_db WHERE user_id = %s AND disease_section = %s ORDER BY created_at DESC', (user_id,"Dermatology"))
+        predictions = curr.fetchone()
+
+    elif source == 'O':
+        curr.execute('SELECT * FROM oral_symptom_description WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_A = curr.fetchone()
+
+        curr.execute('SELECT * FROM oral_medical_lifestyle WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_B = curr.fetchone()
+
+        curr.execute('SELECT * FROM oral_severity WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_C = curr.fetchone()
+
+        curr.execute('SELECT * FROM oral_habits_hygiene WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        category_D = curr.fetchone()
+
+        curr.execute('SELECT * FROM image_db WHERE user_id = %s AND disease_section = %s ORDER BY created_at DESC', (user_id,"Oral Health"))
+        predictions = curr.fetchone()
+
+    print(bytes(predictions[4]))
+
+    image_base64 = base64.b64encode(bytes(predictions[4])).decode('utf-8')
+    if image_base64 is None:
+        print(image_base64)
+
+
+    ####################### SUMMARISER CODE ##############################################
+
+
+
+
+    ########################################################################################
+
     html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
-                                   medical=medical, allergies=allergy_data, current_medication=current_medication_data, accidents=accidents_data)
+                                   medical=medical, allergies=allergy_data, current_medication=current_medication_data,
+                                   accidents=accidents_data, source = source, category_A = category_A,
+                                   category_B = category_B, category_C = category_C, category_D = category_D,
+                                   predictions = predictions, image = image_base64)
 
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'
     # path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
@@ -594,11 +671,6 @@ def generate_medical_report():
     conn.commit()
     flash("Check downloads! Your Report is available there.")
     return redirect(url_for('profile'))
-
-
-
-
-
 
 
 @app.route('/profile', methods = ['GET', 'POST'])
@@ -625,20 +697,10 @@ def profile():
             return redirect(url_for('profile'))
 
 
-    # curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at LIMIT 1', (user_id,))
-    # user_details = curr.fetchone()
-
     image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
 
-    # return render_template('new_profile.html', user_details=user_details,
     return render_template('new_profile.html',
                            image_file=image_file, css_file = 'profile.css', form=form)
-
-    return render_template('new_profile.html', )
-
-
-
-
 
 
 @app.route('/generate_report')
@@ -646,10 +708,6 @@ def profile():
 def generate_report():
 
     return redirect(url_for('personal_details'))
-
-
-
-
 
 
 @app.route('/downloads')
@@ -660,14 +718,10 @@ def make_downloads():
 
     conn, curr = connectDb()
 
-    curr.execute('SELECT report_id, file_path, created_at FROM report WHERE user_id = %s ORDER BY created_at', (user_id,))
+    curr.execute('SELECT report_id, file_path, created_at FROM report WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
     file_paths = curr.fetchall()
 
     return render_template('downloads.html', file_paths=file_paths, css_file = 'downloads.css')
-
-
-
-
 
 
 @app.route("/download/<string:report_id>")
@@ -681,19 +735,9 @@ def download(report_id):
     if not row:
         abort(404, "Report not found")
 
-    pdf_bytes = row[0]   # BYTEA column comes as bytes in Python
+    pdf_bytes = row[0]
 
-    # Return as downloadable file
-    return send_file(
-        io.BytesIO(pdf_bytes),
-        as_attachment=True,
-        download_name=f"{report_id}.pdf",
-        mimetype="application/pdf"
-    )
-
-
-
-
+    return send_file(io.BytesIO(pdf_bytes), as_attachment=True, download_name=f"{report_id}.pdf", mimetype="application/pdf")
 
 
 @app.route("/logout")
