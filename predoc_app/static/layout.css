@@ -279,4 +279,15 @@ footer{
         width: 50px;
     }
 
+    .alert p{
+        position: absolute;
+        font-family: "Anek Latin", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        left: 23%;
+        font-size: 17px;
+        text-align: center;
+        padding-top: 2px;
+    }
+
 }

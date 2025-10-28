@@ -125,7 +125,8 @@ input::placeholder {
 }
 
 .form-submit{
-    margin-top: -5%;
+    margin-top: 0%;
+    margin-left: -2%;
 }
 
 .submit-button{
@@ -210,4 +211,9 @@ input::placeholder {
         padding-left: 6px;
         margin-left: 27%;
     }
+
+    .form-submit{
+    margin-top: 3%;
+    margin-left: 6%;
+}
 }

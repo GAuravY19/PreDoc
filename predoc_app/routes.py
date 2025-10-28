@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, abort, send_file
+from flask import render_template, flash, redirect, url_for, request, abort, send_file, current_app
 from .forms import RegistrationForm, LoginForm, PersonalDetailsForm, \
                     LifestyleForm, MedicalHistoryForm, AllergiesForm, \
                     CurrentMedicationForm, UpdateAffectedPhoto, \
@@ -87,6 +87,9 @@ def login():
 @app.route('/personal-details', methods = ['GET', 'POST'])
 @login_required
 def personal_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = PersonalDetailsForm()
 
     conn, curr = connectDb()
@@ -107,12 +110,15 @@ def personal_details():
         conn.commit()
         return redirect(url_for('lifestyle_details'))
 
-    return render_template('personal_details.html', form=form)
+    return render_template('personal_details.html', form=form, is_mobile = is_mobile)
 
 
 @app.route('/lifestyle_details', methods = ['GET', 'POST'])
 @login_required
 def lifestyle_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = LifestyleForm()
 
     conn, curr = connectDb()
@@ -131,12 +137,15 @@ def lifestyle_details():
 
         return redirect(url_for('medical_details'))
 
-    return render_template('lifestyle_details.html', form=form)
+    return render_template('lifestyle_details.html', form=form, is_mobile = is_mobile)
 
 
 @app.route('/medical_details', methods = ['GET', 'POST'])
 @login_required
 def medical_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = MedicalHistoryForm()
 
     conn, curr = connectDb()
@@ -158,13 +167,16 @@ def medical_details():
 
         return redirect(url_for('allergy_details'))
 
-    return render_template('medical_history.html', form = form)
+    return render_template('medical_history.html', form = form, is_mobile = is_mobile)
 
 
 allergies_details = []
 @app.route('/allergy-details', methods = ['GET', 'POST'])
 @login_required
 def allergy_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = AllergiesForm()
     db = connectMongoDB()
 
@@ -205,13 +217,16 @@ def allergy_details():
 
             return redirect(url_for('current_medication_details'))
 
-    return render_template('allergy_details.html', form = form)
+    return render_template('allergy_details.html', form = form, is_mobile = is_mobile)
 
 
 current_medication = []
 @app.route('/current-medication-details', methods = ['GET', 'POST'])
 @login_required
 def current_medication_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = CurrentMedicationForm()
 
     db = connectMongoDB()
@@ -258,13 +273,16 @@ def current_medication_details():
                                 'medicationStatus':False, "created_at": datetime.datetime.now()})
             return redirect(url_for('accident_details'))
 
-    return render_template('current_medication.html', form=form)
+    return render_template('current_medication.html', form=form, is_mobile = is_mobile)
 
 
 accident_details_list = []
 @app.route('/accident-details', methods=['GET', 'POST'])
 @login_required
 def accident_details():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     forms = AccidentsForms()
 
     db = connectMongoDB()
@@ -322,12 +340,15 @@ def accident_details():
 
             return redirect(url_for('choose_disease'))
 
-    return render_template('accident.html', form = forms)
+    return render_template('accident.html', form = forms, is_mobile = is_mobile)
 
 
 @app.route('/disease', methods=['GET', 'POST'])
 @login_required
 def choose_disease():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = ChooseDiseaseForm()
 
     if current_user.is_authenticated:
@@ -340,12 +361,15 @@ def choose_disease():
         elif form.oral:
             return redirect(url_for('oral_category_A'))
 
-    return render_template('disease.html', form=form, css_file = 'disease.css')
+    return render_template('disease.html', form=form, css_file = 'disease.css', is_mobile = is_mobile)
 
 
 @app.route('/dermat_category_A', methods=['GET', 'POST'])
 @login_required
 def dermat_category_A():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = DermatSymptomDescription()
 
     conn, curr = connectDb()
@@ -363,12 +387,15 @@ def dermat_category_A():
 
         return redirect(url_for('dermat_category_B'))
 
-    return render_template('dermat_categoryA.html', form = form)
+    return render_template('dermat_categoryA.html', form = form, is_mobile = is_mobile)
 
 
 @app.route('/dermat_category_B', methods=['GET', 'POST'])
 @login_required
 def dermat_category_B():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Dermat_Medical_and_lifestyle_history()
 
     conn, curr = connectDb()
@@ -386,12 +413,15 @@ def dermat_category_B():
 
         return redirect(url_for('dermat_category_C'))
 
-    return render_template('dermat_categoryB.html', form = form)
+    return render_template('dermat_categoryB.html', form = form, is_mobile = is_mobile)
 
 
 @app.route('/dermat_category_C', methods=['GET', 'POST'])
 @login_required
 def dermat_category_C():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Dermat_Severity_and_progression()
 
     conn, curr = connectDb()
@@ -409,12 +439,15 @@ def dermat_category_C():
 
         return redirect(url_for('dermat_category_D'))
 
-    return render_template('dermat_categoryC.html', form = form)
+    return render_template('dermat_categoryC.html', form = form, is_mobile = is_mobile)
 
 
 @app.route('/dermat_category_D', methods=['GET', 'POST'])
 @login_required
 def dermat_category_D():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Dermat_habits_and_hygiene()
 
     conn, curr = connectDb()
@@ -432,13 +465,16 @@ def dermat_category_D():
 
         return redirect(url_for('take_picture', source = 'D'))
 
-    return render_template('dermat_categoryD.html', form = form)
+    return render_template('dermat_categoryD.html', form = form, is_mobile = is_mobile)
 
 
 
 @app.route('/oral_category_A', methods=['GET', 'POST'])
 @login_required
 def oral_category_A():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = OralSymptomDescription()
 
     conn, curr = connectDb()
@@ -456,12 +492,15 @@ def oral_category_A():
 
         return redirect(url_for('oral_category_B'))
 
-    return render_template('oral_category_A.html', form=form)
+    return render_template('oral_category_A.html', form=form, is_mobile = is_mobile)
 
 
 @app.route('/oral_category_B', methods=['GET', 'POST'])
 @login_required
 def oral_category_B():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Oral_Medical_and_lifestyle_history()
 
     conn, curr = connectDb()
@@ -479,12 +518,15 @@ def oral_category_B():
 
         return redirect(url_for('oral_category_C'))
 
-    return render_template('oral_category_B.html', form=form)
+    return render_template('oral_category_B.html', form=form, is_mobile = is_mobile)
 
 
 @app.route('/oral_category_C', methods=['GET', 'POST'])
 @login_required
 def oral_category_C():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Oral_Severity_and_progression()
 
     conn, curr = connectDb()
@@ -502,13 +544,15 @@ def oral_category_C():
 
         return redirect(url_for('oral_category_D'))
 
-
-    return render_template('oral_category_C.html', form=form)
+    return render_template('oral_category_C.html', form=form, is_mobile = is_mobile)
 
 
 @app.route('/oral_category_D', methods=['GET', 'POST'])
 @login_required
 def oral_category_D():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
     form = Oral_habits_and_hygiene()
 
     conn, curr = connectDb()
@@ -518,7 +562,7 @@ def oral_category_D():
 
     if form.validate_on_submit():
         curr.execute('''INSERT INTO oral_habits_hygiene (oral_habits_id, user_id, brush, floss, sugary, last_checkup)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_habits_hygiene', conn, curr), user_id,
+                     VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_habits_hygiene', conn, curr), user_id,
                                                                form.brush.data, form.floss.data, form.sugary.data,
                                                                form.last_checkup.data))
 
@@ -526,12 +570,16 @@ def oral_category_D():
 
         return redirect(url_for('take_picture', source='O'))
 
-    return render_template('oral_category_D.html', form=form)
+    return render_template('oral_category_D.html', form=form, is_mobile = is_mobile)
 
 
 @app.route("/take_picture", methods=['GET', 'POST'])
 @login_required
 def take_picture():
+    user_agents = request.user_agent.string.lower()
+    is_mobile = any(mobile in user_agents for mobile in ['iphone', 'android', 'ipad', 'mobile'])
+
+    endpoints = 'profile'
     source = request.args.get('source')
 
     form = UpdateAffectedPhoto()
@@ -547,7 +595,8 @@ def take_picture():
             if picture is not None:
                 binary_image = picture.read()
                 picture.seek(0)
-                prediction = make_predictions('D', picture)
+                model_path = os.path.join(current_app.root_path, 'static', 'models', 'efficient_net_dermat_model.pth')
+                prediction = make_predictions('D', picture, model_path)
 
                 curr.execute('''INSERT INTO image_db(image_id, user_id, disease_section, prediction, img_binary_blob)
                              VALUES(%s, %s, %s, %s, %s)''', (generate_primary_key_pictures('image_db', conn, curr), user_id,
@@ -561,8 +610,10 @@ def take_picture():
         elif source == 'O':
             picture = form.picture.data
             if picture is not None:
-                prediction = make_predictions('O', picture)
                 binary_image = picture.read()
+                picture.seek(0)
+                model_path = os.path.join(current_app.root_path, 'static', 'models', 'efficient_net_oral_model.pth')
+                prediction = make_predictions('O', picture, model_path)
 
                 curr.execute('''INSERT INTO image_db(image_id, user_id, disease_section, prediction, img_binary_blob)
                              VALUES(%s, %s, %s, %s, %s)''', (generate_primary_key_pictures('image_db', conn, curr), user_id,
@@ -572,7 +623,7 @@ def take_picture():
 
                 return redirect(url_for('generate_medical_report', source='O'))
 
-    return render_template('take_picture.html', form = form)
+    return render_template('take_picture.html', form = form, is_mobile = is_mobile)
 
 
 @app.route("/generate_medical_report")
@@ -639,19 +690,7 @@ def generate_medical_report():
         curr.execute('SELECT * FROM image_db WHERE user_id = %s AND disease_section = %s ORDER BY created_at DESC', (user_id,"Oral Health"))
         predictions = curr.fetchone()
 
-    print(bytes(predictions[4]))
-
     image_base64 = base64.b64encode(bytes(predictions[4])).decode('utf-8')
-    if image_base64 is None:
-        print(image_base64)
-
-
-    ####################### SUMMARISER CODE ##############################################
-
-
-
-
-    ########################################################################################
 
     html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
                                    medical=medical, allergies=allergy_data, current_medication=current_medication_data,
@@ -682,25 +721,13 @@ def profile():
     if current_user.is_authenticated:
         user_id = current_user.user_id
 
-    form = UpdateProfilePhoto()
-
-    if form.validate_on_submit():
-        if form.picture.data:
-            random_hex = secrets.token_hex(8)
-            _, f_ext = os.path.splitext(form.picture.data.filename)
-            picture_fn = random_hex + f_ext
-            picture_path = os.path.join(app.root_path, 'static/images/profile_pics', picture_fn)
-            form.picture.data.save(picture_path)
-            picture_file = picture_fn
-            current_user.profile_photo = picture_file
-
-            return redirect(url_for('profile'))
-
+    curr.execute('SELECT * FROM personal_details WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+    personal = curr.fetchone()
 
     image_file = url_for('static', filename = 'images/profile_pics/' + current_user.profile_photo)
 
-    return render_template('new_profile.html',
-                           image_file=image_file, css_file = 'profile.css', form=form)
+    return render_template('new_profile.html',image_file = image_file, css_file = 'profile.css',
+                           user_details = personal)
 
 
 @app.route('/generate_report')

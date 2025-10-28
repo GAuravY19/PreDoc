@@ -37,15 +37,21 @@
             </div>
 
             {% if current_user.is_authenticated %}
-            <div class="nav-endsection">
-                <button class="button-white"><a class="button-white-text" href={{url_for('profile')}}> Profile </a></button>
-                <button class="button-black"><a class="button-black-text" href={{url_for('logout')}}> Logout </a></button>
-            </div>
+                {% if is_mobile%}
+                    <div class="nav-endsection blocking">
+                        <button class="button-black"><a class="button-black-text" href={{url_for('profile')}}> Profile </a></button>
+                    </div>
+                {% else %}
+                    <div class="nav-endsection">
+                        <button class="button-white"><a class="button-white-text" href={{url_for('profile')}}> Profile </a></button>
+                        <button class="button-black"><a class="button-black-text" href={{url_for('logout')}}> Logout </a></button>
+                    </div>
+                {% endif%}
             {% else %}
-            <div class="nav-endsection">
-                <button class="button-white"><a class="button-white-text" href={{url_for('login')}}> Sign In </a></button>
-                <button class="button-black"><a class="button-black-text" href={{url_for('register')}}> Register </a></button>
-            </div>
+                <div class="nav-endsection">
+                    <button class="button-white"><a class="button-white-text" href={{url_for('login')}}> Sign In </a></button>
+                    <button class="button-black"><a class="button-black-text" href={{url_for('register')}}> Register </a></button>
+                </div>
             {% endif %}
 
             <button class="hamburger" onclick='ShowingBurger()'>
@@ -57,25 +63,19 @@
         <!-- Navbar ends -->
 
         {% with messages = get_flashed_messages(with_categories = true)%}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class='alert'>
-            <p class={{category}}>{{ message }}</p>
-        </div>
-        {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class='alert'>
+                        <p class={{category}}>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
 
 
         {% block content %}
         {% endblock %}
 
-        <!--<footer class="about-me">
-            <p class="name">Gaurav Yadav</p>
-            <p class="acc-links"><a class='a-color' href="">Email</a></p>
-            <p class="acc-links"><a class='a-color' href="https://www.linkedin.com/in/gaurav-s-yadav/">Linkedin</a></p>
-            <p class="acc-links"><a class='a-color' href="https://github.com/GAuravY19">Github</a></p>
-            </footer>-->
         <script type="text/javascript" src={{url_for('static', filename = 'js/layout.js')}} defer></script>
-        </body>
-        </html>
+    </body>
+</html>

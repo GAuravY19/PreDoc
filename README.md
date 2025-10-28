@@ -57,10 +57,6 @@ Uses **PostgreSQL** for structured data and **MongoDB** for flexible, dynamic in
 
 Displays all user information, symptom summaries, and uploaded images in a clear, organized format — with options to download the preconsultation report.
 
-### 5. Secure Authentication
-
-Google and Microsoft OAuth integration for user login and privacy protection.
-
 ---
 
 ## Tech Stack

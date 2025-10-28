@@ -8,7 +8,7 @@
         <legend class="legend-text"> Add your Allergy Details </legend>
         <hr class="separator">
 
-        <div class="form-content move-left">
+        <div class="form-content move-left left">
             {{ form.allergy_status.label(class='form-header') }} <br>
 
             {% if form.allergy_status.errors %}
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="form-content move-left">
+        <div class="form-content move-left left">
             {{ form.allergy_type.label(class='form-header') }} <br>
 
             {% if form.allergy_type.errors %}
@@ -40,7 +40,7 @@
 
         </div>
 
-        <div class="form-content move-left">
+        <div class="form-content move-left left">
             {{ form.allergy_triggers.label(class='form-header') }} <br>
 
             {% if form.allergy_triggers.errors %}
@@ -56,7 +56,7 @@
 
         </div>
 
-        <div class="form-content move-left">
+        <div class="form-content move-left left">
             {{ form.allergy_reaction.label(class='form-header') }} <br>
 
             {% if form.allergy_reaction.errors %}

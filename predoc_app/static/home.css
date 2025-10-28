@@ -6,8 +6,6 @@
     padding: 0;
 }
 
-
-
 .box{
     height: max-content;
     width: 60%;
@@ -165,33 +163,12 @@ button:hover{
     width: 50px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 500px) {
     .box{
         height: max-content;
         width: 60vw;
         margin-left: 10%;
-        margin-top: 30%;
+        margin-top: 10%;
     }
 
     .title{
@@ -219,6 +196,63 @@ button:hover{
     .login-options{
         margin-left: 9%;
     }
+
+    .represent-img img{
+        height: 250px;
+        width: 250px;
+        margin-left: 18%;
+        margin-top: 7%;
+        border: 3px solid navy;
+    }
+
+    .reduce-font-size{
+        font-size: 20px;
+    }
+
+    .cards{
+        height: max-content;
+        width: 60%;
+        margin-top: -10%;
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        /* background-color: rebeccapurple; */
+    }
+
+    .card1{
+        height: 160px;
+        width: 60vw;
+        background-color: rgba(255, 255, 255, 0.907);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
+        border-radius: 25px;
+    }
+
+    .card1 h3{
+        text-align: center;
+        padding: 10px 15px 0px 15px;
+    }
+
+    .card1 p{
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    .containers{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .containers img{
+        height: 300px;
+        width: 250;
+        padding-bottom: 15px;
+    }
+
+    .links{
+        margin-left: 25%;
+    }
+
 }
 
 

@@ -83,11 +83,11 @@ button:hover{
         height: max-content;
         width: 60vw;
         margin-left: 10%;
-        margin-top: 30%;
+        margin-top: 10%;
     }
 
     .title{
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 600;
         color: rgb(2, 27, 48);
         padding-bottom: 20px;
@@ -95,21 +95,27 @@ button:hover{
     }
 
     .subtitle{
-        font-size: 25px;
+        font-size: 20px;
         padding-bottom: 20px;
     }
 
     .login{
         height: max-content;
-        width: 100px;
+        width: 150px;
         font-size: 18px;
         padding: 15px 25px;
         border-radius: 15px;
         border: 2px solid gray;
+        /* background-color: red; */
     }
 
     .login-options{
         margin-left: 9%;
+    }
+
+    .login-options{
+        margin-left: 20%;
+        margin-top: 2%;
     }
 }
 
