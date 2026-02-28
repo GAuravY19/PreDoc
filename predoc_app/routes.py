@@ -14,6 +14,7 @@ from .utils import generate_primary_key_SQL, gender_code, height_converter, calc
                     clear_country_code_input, connectDb, connectMongoDB, generate_primary_key_Mongo, \
                     generate_primary_key_dermat, generate_primary_key_oral, generate_primary_key_pictures
 from .make_predictions import make_predictions
+from .generate_summary import SummaryPipeLine
 import os
 import io
 import pdfkit
@@ -364,6 +365,9 @@ def choose_disease():
     return render_template('disease.html', form=form, css_file = 'disease.css', is_mobile = is_mobile)
 
 
+patient_details = {}
+
+
 @app.route('/dermat_category_A', methods=['GET', 'POST'])
 @login_required
 def dermat_category_A():
@@ -378,6 +382,13 @@ def dermat_category_A():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+        patient_details['disease_category'] = 'D'
+        patient_details[form.skin_issue.label.text] = form.skin_issue.data
+        patient_details[form.affected_body_parts.label.text] = form.affected_body_parts.data
+        patient_details[form.noticing_time.label.text] = form.noticing_time.data
+        patient_details[form.area_affected.label.text] = form.area_affected.data
+        patient_details[form.fluid.label.text] = form.fluid.data
+
         curr.execute('''INSERT INTO dermat_symptom_description (dermat_symptom_id, user_id, skin_issue, affected_body_parts, noticing_time, area_affected, fluid)
                      VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_symptom_description', conn, curr), user_id,
                                                                form.skin_issue.data, form.affected_body_parts.data, form.noticing_time.data,
@@ -404,6 +415,13 @@ def dermat_category_B():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.condition.label.text] = form.condition.data
+        patient_details[form.allergies.label.text] = form.allergies.data
+        patient_details[form.history.label.text] = form.history.data
+        patient_details[form.family.label.text] = form.family.data
+        patient_details[form.hormonal.label.text] = form.hormonal.data
+
         curr.execute('''INSERT INTO dermat_medical_lifestyle (dermat_medical_id, user_id, conditions, allergies, history, families, hormonal)
                      VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_medical_lifestyle', conn, curr), user_id,
                                                                form.condition.data, form.allergies.data, form.history.data,
@@ -430,6 +448,12 @@ def dermat_category_C():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.scale.label.text] = form.scale.data
+        patient_details[form.situation_worsening.label.text] = form.situation_worsening.data
+        patient_details[form.hormonal.label.text] = form.hormonal.data
+        patient_details[form.conditions.label.text] = form.conditions.data
+
         curr.execute('''INSERT INTO dermat_severity (dermat_severity_id, user_id, scales, situation_worsening, hormonal, conditions)
                      VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_severity', conn, curr), user_id,
                                                                form.scale.data, form.situation_worsening.data, form.hormonal.data,
@@ -456,6 +480,12 @@ def dermat_category_D():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.sunscreen.label.text] = form.sunscreen.data
+        patient_details[form.exposure.label.text] = form.exposure.data
+        patient_details[form.bathing.label.text] = form.bathing.data
+        patient_details[form.medications.label.text] = form.medications.data
+
         curr.execute('''INSERT INTO dermat_habits_hygiene (dermat_habits_id, user_id, sunscreen, exposure, bathing, medications)
                      VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_dermat('dermat_habits_hygiene', conn, curr), user_id,
                                                                form.sunscreen.data, form.exposure.data, form.bathing.data,
@@ -483,6 +513,13 @@ def oral_category_A():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.Symptoms.label.text] = form.Symptoms.data
+        patient_details[form.areas.label.text] = form.areas.data
+        patient_details[form.startof_problem.label.text] = form.startof_problem.data
+        patient_details[form.sensitivity.label.text] = form.sensitivity.data
+        patient_details[form.smell.label.text] = form.smell.data
+
         curr.execute('''INSERT INTO oral_symptom_description (oral_symptom_id, user_id, symptoms, areas, startof_problem, sensitivity, smell)
                      VALUES (%s, %s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_symptom_description', conn, curr), user_id,
                                                                form.Symptoms.data, form.areas.data, form.startof_problem.data,
@@ -509,6 +546,12 @@ def oral_category_B():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.dental.label.text] = form.dental.data
+        patient_details[form.chronic.label.text] = form.chronic.data
+        patient_details[form.medications.label.text] = form.medications.data
+        patient_details[form.family.label.text] = form.family.data
+
         curr.execute('''INSERT INTO oral_medical_lifestyle (oral_medical_id, user_id, dental, chronic, medications, families)
                      VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_medical_lifestyle', conn, curr), user_id,
                                                                form.dental.data, form.chronic.data, form.medications.data,
@@ -535,6 +578,12 @@ def oral_category_C():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.scale.label.text] = form.scale.data
+        patient_details[form.pain.label.text] = form.pain.data
+        patient_details[form.condition.label.text] = form.condition.data
+        patient_details[form.issues.label.text] = form.issues.data
+
         curr.execute('''INSERT INTO oral_severity (oral_severity_id, user_id, scales, pains, conditions, issues)
                      VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_severity', conn, curr), user_id,
                                                                form.scale.data, form.pain.data, form.condition.data,
@@ -561,6 +610,12 @@ def oral_category_D():
         user_id = current_user.user_id
 
     if form.validate_on_submit():
+
+        patient_details[form.brush.label.text] = form.brush.data
+        patient_details[form.floss.label.text] = form.floss.data
+        patient_details[form.sugary.label.text] = form.sugary.data
+        patient_details[form.last_checkup.label.text] = form.last_checkup.data
+
         curr.execute('''INSERT INTO oral_habits_hygiene (oral_habits_id, user_id, brush, floss, sugary, last_checkup)
                      VALUES (%s, %s, %s, %s, %s, %s)''', (generate_primary_key_oral('oral_habits_hygiene', conn, curr), user_id,
                                                                form.brush.data, form.floss.data, form.sugary.data,
@@ -658,44 +713,27 @@ def generate_medical_report():
     accidents_data = db['accidents'].find({'user_id': user_id}).sort({"created_at": -1}).limit(1)
     accidents_data = list(accidents_data)
 
-    if source == 'D':
-        curr.execute('SELECT * FROM dermat_symptom_description WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_A = curr.fetchone()
-
-        curr.execute('SELECT * FROM dermat_medical_lifestyle WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_B = curr.fetchone()
-
-        curr.execute('SELECT * FROM dermat_severity WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_C = curr.fetchone()
-
-        curr.execute('SELECT * FROM dermat_habits_hygiene WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_D = curr.fetchone()
+    if patient_details['disease_category'] == 'D':
 
         curr.execute('SELECT * FROM image_db WHERE user_id = %s AND disease_section = %s ORDER BY created_at DESC', (user_id,"Dermatology"))
         predictions = curr.fetchone()
 
-    elif source == 'O':
-        curr.execute('SELECT * FROM oral_symptom_description WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_A = curr.fetchone()
+        summary = SummaryPipeLine()
+        summary = summary.summarize(patient_details)
 
-        curr.execute('SELECT * FROM oral_medical_lifestyle WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_B = curr.fetchone()
-
-        curr.execute('SELECT * FROM oral_severity WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_C = curr.fetchone()
-
-        curr.execute('SELECT * FROM oral_habits_hygiene WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
-        category_D = curr.fetchone()
+    elif patient_details['disease_category'] == 'O':
 
         curr.execute('SELECT * FROM image_db WHERE user_id = %s AND disease_section = %s ORDER BY created_at DESC', (user_id,"Oral Health"))
         predictions = curr.fetchone()
+
+        summary = SummaryPipeLine()
+        summary = summary.summarize(patient_details)
 
     image_base64 = base64.b64encode(bytes(predictions[4])).decode('utf-8')
 
     html_content = render_template('report.html', users = users, personal=personal, lifestyle=lifestyle,
                                    medical=medical, allergies=allergy_data, current_medication=current_medication_data,
-                                   accidents=accidents_data, source = source, category_A = category_A,
-                                   category_B = category_B, category_C = category_C, category_D = category_D,
+                                   accidents=accidents_data, source = patient_details['disease_category'], summary = summary,
                                    predictions = predictions, image = image_base64)
 
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltox\bin\wkhtmltopdf.exe'

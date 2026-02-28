@@ -14,11 +14,8 @@
         <link rel='stylesheet' href={{url_for('static', filename=css_file)}}>
         <link rel='stylesheet' href={{url_for('static', filename='details.css')}}>
 
-
     </head>
     <body>
-
-
 
         <!-- Navbar starts -->
         <nav class="nav-color nav-box nav-flex">
@@ -71,7 +68,6 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-
 
         {% block content %}
         {% endblock %}
